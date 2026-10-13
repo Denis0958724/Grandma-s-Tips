@@ -1,0 +1,4 @@
+# секретний ключ ШІ — не викладати
+ai-settings.txt
+__pycache__/
+.ipynb_checkpoints/

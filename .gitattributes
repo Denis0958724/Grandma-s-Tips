@@ -1,0 +1,4 @@
+# Windows-файли зберігають рядки CRLF
+*.bat text eol=crlf
+*.txt text eol=crlf
+*.csv -diff

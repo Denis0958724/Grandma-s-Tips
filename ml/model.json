@@ -1,0 +1,86 @@
+{
+ "name": "life-stage-by-age",
+ "algorithm": "multinomial logistic regression (scikit-learn)",
+ "dataset": "UCI Adult (Census Income), 1994, CC BY 4.0",
+ "n_train": 39073,
+ "n_test": 9769,
+ "features": [
+  "a",
+  "a^2",
+  "a^3"
+ ],
+ "age_min": 17,
+ "age_max": 80,
+ "age_mu": 38.655363038415274,
+ "age_sd": 13.67802538177475,
+ "scaler_mean": [
+  0.0,
+  0.99997441,
+  0.52815071
+ ],
+ "scaler_scale": [
+  0.9999872,
+  1.29489987,
+  3.43353437
+ ],
+ "classes": [
+  "divorced",
+  "married",
+  "single",
+  "widowed"
+ ],
+ "coef": [
+  [
+   0.09293094,
+   -0.52135768,
+   0.20761291
+  ],
+  [
+   0.02934909,
+   -0.37896179,
+   0.28717121
+  ],
+  [
+   -1.46323035,
+   0.7192684,
+   -0.24805325
+  ],
+  [
+   1.34095032,
+   0.18105107,
+   -0.24673088
+  ]
+ ],
+ "intercept": [
+  0.36740138,
+  1.33767267,
+  0.77648907,
+  -2.48156313
+ ],
+ "metrics": {
+  "accuracy": 0.622,
+  "macro_f1": 0.348,
+  "log_loss": 0.909,
+  "baseline_accuracy": 0.459,
+  "cv_accuracy_mean": 0.625,
+  "with_sex_accuracy_rejected": 0.684
+ },
+ "topics": {
+  "single": {
+   "relationships": 1.0,
+   "kindness": 0.2
+  },
+  "married": {
+   "family": 1.0,
+   "relationships": 0.4
+  },
+  "divorced": {
+   "support": 1.0,
+   "relationships": 0.3
+  },
+  "widowed": {
+   "support": 0.7,
+   "kindness": 0.8
+  }
+ }
+}

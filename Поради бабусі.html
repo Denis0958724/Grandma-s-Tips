@@ -1,0 +1,2046 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>body{margin:0}</style>
+</head>
+<body>
+<title>Поради бабусі</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Comfortaa:wght@600;700&family=Nunito:wght@400;600;700;800&display=swap">
+<style>
+/* Layout: a phone frame on a blush "tablecloth"; inside — scrolling screen over a fixed 5-tab bar, bottom sheets slide up.
+   On phones (<560px) the frame disappears and the app fills the screen. Granny's voice = handwriting (Caveat) on lined notebook paper,
+   section dividers = cross-stitch (вишивка) in rose and plum. */
+:root{
+  --desk:#F1E1DF; --bg:#FCF5F2; --card:#FFFFFF; --card-2:#F8ECEA; --ink:#3A2838; --ink-2:#776274; --line:#EEDCDB;
+  --rose:#E7A1AC; --rose-deep:#B04C66; --sage:#CFE0C8; --sage-deep:#43683D; --butter:#F8E7B4; --butter-deep:#86650E; --lilac:#E2D8F0;
+  --skin:#F4CDB6; --hair:#E8E3EC; --hair-2:#C9C0D0; --frame:#2F2330; --on-accent:#FFFFFF; --scrim:rgba(40,24,36,.42);
+  --shadow:0 1px 2px rgba(58,40,56,.06), 0 10px 26px rgba(58,40,56,.08);
+  --paper-line:#EADCE4; --margin:#EAA3B0;
+  --st-single:#b04c66; --st-married:#2a78d6; --st-divorced:#1baf7a; --st-widowed:#eda100;
+  --f-display:'Comfortaa','Nunito',system-ui,sans-serif;
+  --f-body:'Nunito',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --f-hand:'Caveat','Segoe Print','Comic Sans MS',cursive;
+  --r-s:12px; --r-m:18px; --r-l:24px;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --desk:#140F14; --bg:#1D161C; --card:#291F27; --card-2:#33272F; --ink:#F6EAEE; --ink-2:#BCA9B8; --line:#3F313B;
+  --rose:#C9798A; --rose-deep:#F1A7B7; --sage:#3E5539; --sage-deep:#A9D09F; --butter:#5C4C22; --butter-deep:#F0D27A; --lilac:#453A57;
+  --skin:#E6BFA8; --hair:#DCD6E0; --hair-2:#ABA2B2; --frame:#0A070A; --on-accent:#2B1520; --scrim:rgba(0,0,0,.6);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 26px rgba(0,0,0,.3); --paper-line:#3A2E37; --margin:#7E4556; --st-single:#d4688a; --st-married:#3987e5; --st-divorced:#199e70; --st-widowed:#c98500; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --desk:#140F14; --bg:#1D161C; --card:#291F27; --card-2:#33272F; --ink:#F6EAEE; --ink-2:#BCA9B8; --line:#3F313B;
+  --rose:#C9798A; --rose-deep:#F1A7B7; --sage:#3E5539; --sage-deep:#A9D09F; --butter:#5C4C22; --butter-deep:#F0D27A; --lilac:#453A57;
+  --skin:#E6BFA8; --hair:#DCD6E0; --hair-2:#ABA2B2; --frame:#0A070A; --on-accent:#2B1520; --scrim:rgba(0,0,0,.6);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 26px rgba(0,0,0,.3); --paper-line:#3A2E37; --margin:#7E4556; --st-single:#d4688a; --st-married:#3987e5; --st-divorced:#199e70; --st-widowed:#c98500; color-scheme:dark }
+
+html,body{min-height:100%}
+body{background:var(--bg); color:var(--ink); font-family:var(--f-body); font-size:15px; line-height:1.45; -webkit-font-smoothing:antialiased}
+html.lock, html.lock body{overflow:hidden}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+svg.ic{width:20px; height:20px; flex:none; display:inline-block; vertical-align:middle}
+button,input,select,textarea{font:inherit; color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--rose); outline-offset:2px; border-radius:10px}
+
+/* Shell. Phone: one column + fixed bottom tabs. Laptop (>=900px): sticky sidebar + wide content with grids. */
+.shell{min-height:100vh}
+.sidebar{display:none}
+.view{display:block; width:100%; max-width:760px; margin:0 auto; padding:14px 18px calc(100px + env(safe-area-inset-bottom, 0px))}
+.tabbar{position:fixed; left:0; right:0; bottom:0; z-index:20; display:grid; grid-template-columns:repeat(6,1fr); background:var(--card); border-top:1px solid var(--line); padding:6px 4px calc(6px + env(safe-area-inset-bottom, 0px))}
+.tab{background:none; border:0; display:flex; flex-direction:column; align-items:center; gap:2px; padding:6px 0; font-size:11px; font-weight:800; color:var(--ink-2); border-radius:14px}
+.tab svg.ic{width:24px; height:24px}
+.tab.on{color:var(--rose-deep)}
+.tab.on svg .fillable, .snav button.on svg .fillable{fill:var(--rose); fill-opacity:.35}
+
+.sidebar .brand{display:flex; gap:12px; align-items:center; padding:0 6px}
+.sidebar .brand b{font-family:var(--f-display); font-size:19px; display:block; line-height:1.2}
+.snav{display:flex; flex-direction:column; gap:4px}
+.snav button{display:flex; align-items:center; gap:12px; border:0; background:none; padding:11px 12px; border-radius:14px; font-weight:800; font-size:15px; color:var(--ink-2); text-align:left}
+.snav button svg.ic{width:22px; height:22px}
+.snav button:hover{background:var(--card-2); color:var(--ink)}
+.snav button.on{background:var(--card-2); color:var(--rose-deep)}
+.sidebar .spacer{flex:1}
+.mini-pro{border-radius:18px; padding:14px; background:var(--butter); display:flex; flex-direction:column; gap:8px}
+.sidebar details{border-top:1px solid var(--line); padding-top:12px}
+.sidebar summary{cursor:pointer; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); padding:4px 6px}
+.tester{display:flex; flex-direction:column; gap:10px; padding:10px 6px 0; font-size:13.5px}
+.tester ol,.tester ul{margin:0; padding-left:18px; display:flex; flex-direction:column; gap:3px; color:var(--ink-2)}
+
+/* content grids */
+.today-grid{display:grid; gap:14px}
+.col{display:flex; flex-direction:column; gap:14px; min-width:0}
+.grid-cards{display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(min(100%, 290px), 1fr))}
+.two-col{display:grid; gap:14px}
+.prof-cols{display:flex; flex-direction:column; gap:14px}
+@media (min-width:720px){
+  .prof-cols{display:block; columns:2; column-gap:16px}
+  .prof-cols > *{break-inside:avoid; margin-bottom:16px}
+  .two-col{grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:20px; align-items:start}
+}
+@media (min-width:900px){
+  .shell{display:grid; grid-template-columns:264px minmax(0,1fr)}
+  .sidebar{display:flex; flex-direction:column; gap:18px; position:sticky; top:0; height:100vh; overflow-y:auto; padding:26px 16px 20px; background:var(--card); border-right:1px solid var(--line)}
+  .tabbar{display:none}
+  .view{max-width:1140px; padding:36px 44px 64px}
+  .today-grid{grid-template-columns:minmax(0,1.45fr) minmax(300px,1fr); gap:24px; align-items:start}
+}
+
+/* type */
+.h1{font-family:var(--f-display); font-weight:700; font-size:23px; line-height:1.25; margin:0; text-wrap:balance; letter-spacing:-.01em}
+.h2{font-family:var(--f-display); font-weight:700; font-size:17px; line-height:1.3; margin:0; text-wrap:balance}
+.hand{font-family:var(--f-hand); font-weight:500; font-size:23px; line-height:1.15}
+.muted{color:var(--ink-2)}
+.small{font-size:13px}
+.eyebrow{font-size:11.5px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2)}
+p{margin:0}
+
+/* building blocks */
+.stack{display:flex; flex-direction:column; gap:14px}
+.row{display:flex; align-items:center; gap:10px}
+.row.between{justify-content:space-between}
+.wrap{flex-wrap:wrap}
+.card{background:var(--card); border-radius:var(--r-l); padding:16px; box-shadow:var(--shadow)}
+.card.flat{box-shadow:none; background:var(--card-2)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:46px; padding:0 18px; border-radius:16px; font-weight:800; font-size:15px; border:0; background:var(--rose-deep); color:var(--on-accent); text-decoration:none}
+.btn svg{width:18px; height:18px}
+.btn.soft{background:var(--card-2); color:var(--ink)}
+.btn.ghost{background:transparent; color:var(--rose-deep); padding:0 8px}
+.btn.sm{min-height:36px; padding:0 13px; font-size:13.5px; border-radius:12px}
+.btn.block{width:100%}
+.btn:disabled{opacity:.5; cursor:not-allowed}
+.icon-btn{width:40px; height:40px; border-radius:50%; border:0; background:var(--card-2); display:grid; place-items:center; flex:none; position:relative}
+.icon-btn svg.ic{width:20px; height:20px}
+.dot{position:absolute; top:8px; right:9px; width:8px; height:8px; border-radius:50%; background:var(--rose-deep); border:2px solid var(--card-2)}
+.chip{display:inline-flex; align-items:center; gap:6px; padding:7px 13px; border-radius:999px; background:var(--card-2); font-weight:700; font-size:13.5px; border:0; color:var(--ink); white-space:nowrap}
+.chip.on{background:var(--rose-deep); color:var(--on-accent)}
+.chip svg{width:14px; height:14px}
+.chips{display:flex; flex-wrap:wrap; gap:8px}
+.chips.scroll{flex-wrap:nowrap; overflow-x:auto; margin:0 -18px; padding:2px 18px 6px; scrollbar-width:none}
+.chips.scroll::-webkit-scrollbar{display:none}
+.tag{display:inline-flex; align-items:center; gap:5px; white-space:nowrap; padding:3px 10px; border-radius:999px; font-size:12px; font-weight:800; background:var(--card-2); color:var(--ink)}
+.cat-care{background:var(--sage)} .cat-conflict{background:var(--lilac)} .cat-attention{background:var(--butter)}
+.cat-words{background:var(--card-2)} .cat-home{background:var(--sage)} .cat-romance{background:var(--rose); color:var(--ink)}
+.tag.ai{background:var(--lilac)}
+.tag.pro{background:var(--butter); color:var(--butter-deep)}
+.field{display:flex; flex-direction:column; gap:6px}
+.field label,.lbl{font-size:13px; font-weight:800; color:var(--ink-2)}
+.input{width:100%; min-height:48px; border:1.5px solid var(--line); background:var(--card); border-radius:14px; padding:10px 14px; font-size:16px; outline:none}
+.input:focus{border-color:var(--rose)}
+textarea.input{min-height:84px; resize:vertical}
+.seg{display:grid; grid-auto-flow:column; grid-auto-columns:1fr; background:var(--card-2); border-radius:14px; padding:4px; gap:4px}
+.seg button{border:0; background:transparent; border-radius:11px; min-height:38px; font-weight:800; font-size:13.5px; color:var(--ink-2); display:inline-flex; align-items:center; justify-content:center; gap:5px}
+.seg button svg.ic{width:15px; height:15px}
+.seg button.on{background:var(--card); color:var(--ink); box-shadow:var(--shadow)}
+.list{display:flex; flex-direction:column}
+.li{display:flex; align-items:center; gap:12px; padding:13px 0; border-bottom:1px solid var(--line)}
+.li:last-child{border-bottom:0}
+.li .grow{flex:1; min-width:0}
+.switch{position:relative; width:50px; height:30px; flex:none; border-radius:999px; border:0; background:var(--line); transition:background .2s}
+.switch::after{content:""; position:absolute; top:3px; left:3px; width:24px; height:24px; border-radius:50%; background:var(--card); box-shadow:0 1px 3px rgba(0,0,0,.2); transition:transform .2s}
+.switch.on{background:var(--sage-deep)}
+.switch.on::after{transform:translateX(20px)}
+.stitch{display:block; width:100%; height:8px}
+.st-a{stroke:var(--rose-deep); stroke-width:1.6; stroke-linecap:round}
+.st-b{stroke:var(--ink); stroke-width:1.6; stroke-linecap:round; opacity:.75}
+.sec-title{display:flex; align-items:baseline; justify-content:space-between; gap:10px; margin-top:6px}
+
+/* granny */
+.granny{display:block; width:100%; height:100%}
+.g-bg{fill:var(--g-bg, var(--butter))} .g-coat{fill:var(--g-coat, var(--rose))} .g-skin{fill:var(--skin)} .g-hair{fill:var(--hair)} .g-hair2{fill:var(--hair-2)}
+.g-scarf{fill:var(--g-scarf, var(--sage))} .g-dots{fill:var(--card); opacity:.75}
+.g-glass{fill:none; stroke:var(--ink); stroke-width:2} .g-line{fill:none; stroke:var(--ink); stroke-width:2; stroke-linecap:round}
+.g-cheek{fill:var(--rose); opacity:.55} .g-x{stroke:var(--rose-deep); stroke-width:1.8; stroke-linecap:round}
+.g-collar{fill:none; stroke:var(--card); stroke-width:3; stroke-linecap:round; stroke-linejoin:round}
+.av{flex:none; border-radius:50%; overflow:hidden; background:var(--butter)}
+.av img{width:100%; height:100%; object-fit:cover; display:block}
+.bubble{position:relative; background:var(--card); border-radius:20px 20px 20px 6px; padding:10px 14px; box-shadow:var(--shadow)}
+
+/* notebook page — granny's advice */
+.page{position:relative; border-radius:var(--r-l); background-color:var(--card); box-shadow:var(--shadow); padding:18px 18px 16px 34px;
+  background-image:linear-gradient(90deg, transparent 22px, var(--margin) 22px, var(--margin) 23.5px, transparent 23.5px),
+                   repeating-linear-gradient(180deg, transparent 0 27px, var(--paper-line) 27px 28px);
+  background-position:0 0, 0 14px}
+.page .hand.title{font-size:30px; font-weight:700; line-height:1.05; color:var(--rose-deep)}
+.task{display:flex; gap:12px; align-items:flex-start; padding:12px; border-radius:16px; background:var(--card-2); border:0; text-align:left; width:100%}
+.check{flex:none; width:26px; height:26px; border-radius:9px; border:2px solid var(--rose-deep); display:grid; place-items:center; background:var(--card)}
+.check svg{width:16px; height:16px; opacity:0}
+.task.done .check{background:var(--rose-deep)}
+.task.done .check svg{opacity:1; stroke:var(--on-accent)}
+.task.done .task-t{text-decoration:line-through; text-decoration-color:var(--rose)}
+
+/* countdown */
+.count{display:flex; gap:14px; align-items:center}
+.count .num{flex:none; width:64px; height:64px; border-radius:20px; background:var(--lilac); display:flex; flex-direction:column; align-items:center; justify-content:center; font-variant-numeric:tabular-nums}
+.count .num b{font-family:var(--f-display); font-size:24px; line-height:1}
+.count .num span{font-size:11px; font-weight:800; color:var(--ink-2)}
+.count.soon .num{background:var(--rose)}
+
+/* advice list */
+.adv{display:flex; gap:12px; align-items:flex-start; text-align:left; width:100%; border:0; background:var(--card); border-radius:var(--r-m); padding:14px; box-shadow:var(--shadow)}
+.adv .day{flex:none; width:42px; text-align:center; font-family:var(--f-hand); font-size:26px; font-weight:700; color:var(--rose-deep); line-height:1}
+.adv .day small{display:block; font-family:var(--f-body); font-size:10px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-2)}
+.adv .grow{flex:1; min-width:0}
+.adv .ex{display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:13.5px; color:var(--ink-2)}
+.adv.locked .ex{filter:blur(3.5px); user-select:none}
+.adv.read .day{color:var(--sage-deep)}
+.lock{width:18px; height:18px; flex:none; color:var(--ink-2); display:inline-grid; place-items:center}
+.lock svg.ic{width:16px; height:16px}
+.progress{height:8px; border-radius:99px; background:var(--card-2); overflow:hidden}
+.progress i{display:block; height:100%; background:var(--sage-deep); border-radius:99px}
+
+/* ideas */
+.idea{background:var(--card); border-radius:var(--r-m); padding:14px; box-shadow:var(--shadow); display:flex; flex-direction:column; gap:8px}
+.idea .t{font-weight:800; font-size:16px; line-height:1.3}
+.idea .why{font-size:14px; color:var(--ink-2)}
+.idea .acts{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:auto}
+.idea.done{opacity:.6}
+.skel{border-radius:var(--r-m); height:112px; background:linear-gradient(90deg, var(--card-2) 0%, var(--card) 50%, var(--card-2) 100%); background-size:200% 100%; animation:sh 1.3s linear infinite}
+@keyframes sh{to{background-position:-200% 0}}
+.ai-box{border-radius:var(--r-l); padding:16px; background:var(--lilac); display:flex; flex-direction:column; gap:10px}
+.focus-banner{display:flex; gap:10px; align-items:center; padding:10px 12px; border-radius:16px; background:var(--butter)}
+.focus-banner > svg{width:22px; height:22px; flex:none}
+.focus-banner .grow{flex:1; min-width:0; font-size:13.5px}
+
+/* profile */
+.ph{display:flex; gap:14px; align-items:center}
+.ph .ini{width:64px; height:64px; border-radius:22px; background:var(--rose); display:grid; place-items:center; font-family:var(--f-display); font-weight:700; font-size:26px; color:var(--ink); flex:none}
+.psec{background:var(--card); border-radius:var(--r-m); box-shadow:var(--shadow); padding:14px 16px}
+.psec .head{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:8px}
+.kv{display:grid; grid-template-columns:auto 1fr; gap:6px 12px; font-size:14px}
+.kv dt{color:var(--ink-2); font-weight:700} .kv dd{margin:0; min-width:0; overflow-wrap:anywhere}
+.empty{color:var(--ink-2); font-size:14px; font-style:italic}
+.pro-card{border-radius:var(--r-l); padding:16px; background:var(--butter); display:flex; flex-direction:column; gap:10px}
+.pro-card .h2{color:var(--ink)}
+
+/* grannies section */
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.link-btn{border:0; background:none; padding:0; color:var(--rose-deep); font:inherit; text-decoration:underline; text-transform:none; letter-spacing:0}
+.role-seg{min-width:260px}
+.fy-grid{display:grid; gap:18px}
+.pbar{display:grid; grid-template-columns:150px minmax(0,1fr) 42px; align-items:center; gap:10px; font-size:13.5px}
+.pbar .pt{height:10px; border-radius:99px; background:var(--card-2); overflow:hidden}
+.pbar .pt i{display:block; height:100%; border-radius:0 4px 4px 0; min-width:2px}
+.pbar .pv{text-align:right; font-weight:800; font-variant-numeric:tabular-nums}
+.how{border-top:1px solid var(--line); margin-top:16px; padding-top:16px}
+.chart-wrap{position:relative; width:100%; min-height:220px}
+.chart-wrap svg{display:block; max-width:100%; height:auto; touch-action:pan-y}
+.ch-grid{stroke:var(--line); stroke-width:1}
+.ch-axis{fill:var(--ink-2); font-size:11px; font-family:var(--f-body)}
+.ch-lbl{fill:var(--ink); font-size:11.5px; font-weight:700; font-family:var(--f-body)}
+.ch-line{fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round}
+.ch-you{stroke:var(--ink-2); stroke-width:1.5; stroke-dasharray:4 4}
+.ch-dot{stroke:var(--card); stroke-width:2}
+.ch-cross{stroke:var(--ink-2); stroke-width:1}
+.tip{position:absolute; pointer-events:none; background:var(--card); box-shadow:var(--shadow); border:1px solid var(--line); border-radius:12px; padding:8px 10px; font-size:12.5px; min-width:190px; display:flex; flex-direction:column; gap:3px; z-index:2}
+.tip .r{display:flex; align-items:center; gap:10px; justify-content:space-between}
+.sw{width:10px; height:10px; border-radius:3px; display:inline-block; flex:none}
+.legend{display:flex; flex-wrap:wrap; gap:6px 14px; font-size:12.5px; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+input[type=range]{width:100%; accent-color:var(--rose-deep)}
+.gcard{background:var(--card); border-radius:var(--r-l); box-shadow:var(--shadow); padding:16px; display:flex; flex-direction:column; gap:10px}
+.gname{font-family:var(--f-display); font-size:16.5px; display:block; line-height:1.25}
+.gq{font-size:21px; color:var(--rose-deep)}
+.t-relationships{background:var(--rose)} .t-family{background:var(--lilac)} .t-kindness{background:var(--butter)} .t-support{background:var(--sage)}
+.match{font-weight:800; color:var(--sage-deep)}
+.gp-head{display:flex; gap:16px; align-items:center}
+.media{display:flex; gap:12px; align-items:flex-start; padding:12px; border-radius:16px; background:var(--card); box-shadow:var(--shadow)}
+.media.on{outline:2px solid var(--rose)}
+.media .grow{flex:1; min-width:0; display:flex; flex-direction:column; gap:6px}
+.play{width:44px; height:44px; border-radius:50%; border:0; background:var(--rose-deep); color:var(--on-accent); display:grid; place-items:center; flex:none}
+.play svg.ic{width:18px; height:18px}
+.vscreen{border-radius:14px; background:var(--lilac); padding:16px; display:flex; flex-direction:column; align-items:center; gap:10px; text-align:center}
+.vsub,.asub{font-size:15px; font-weight:700; min-height:44px}
+.asub{background:var(--card-2); border-radius:12px; padding:8px 10px}
+.media audio,.media video{width:100%; border-radius:12px}
+.stats{display:grid; gap:12px; grid-template-columns:repeat(auto-fit, minmax(min(100%, 180px), 1fr))}
+.stat{background:var(--card); border-radius:var(--r-m); box-shadow:var(--shadow); padding:14px 16px; display:flex; flex-direction:column; gap:2px}
+.stat b{font-family:var(--f-display); font-size:26px; font-variant-numeric:tabular-nums}
+.qcard{background:var(--card); border-radius:var(--r-m); box-shadow:var(--shadow); padding:14px; display:flex; flex-direction:column; gap:8px}
+.answer{background:var(--card-2); border-radius:14px; padding:10px 12px}
+.rec-dot{width:12px; height:12px; border-radius:50%; background:var(--rose-deep); animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.rec-preview{width:100%; border-radius:14px; background:var(--ink); aspect-ratio:4/3; object-fit:cover; max-height:280px}
+.slots{display:flex; flex-wrap:wrap; gap:8px}
+.chip:disabled{opacity:.4; text-decoration:line-through; cursor:not-allowed}
+@media (max-width:420px){ .pbar{grid-template-columns:116px minmax(0,1fr) 38px; font-size:12.5px} .role-seg{min-width:0; width:100%} }
+@media (min-width:900px){ .fy-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:30px} }
+
+/* smart search */
+.search-card{gap:14px}
+.k-gift{background:var(--rose)} .k-service{background:var(--sage)} .k-experience{background:var(--lilac)}
+.tag.price{background:var(--butter); color:var(--ink)}
+.idea.shop .store{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:60%}
+.idea .acts a.btn svg.ic{width:16px; height:16px}
+@media (max-width:420px){ .hide-xs{display:none} .seg button{font-size:12.5px} }
+
+/* sheets, overlays */
+.scrim{position:fixed; inset:0; background:var(--scrim); opacity:0; pointer-events:none; transition:opacity .25s; z-index:40}
+.scrim.on{opacity:1; pointer-events:auto}
+.sheet{position:fixed; left:0; right:0; bottom:0; max-height:92%; background:var(--bg); border-radius:28px 28px 0 0; z-index:41; transform:translateY(105%); transition:transform .3s cubic-bezier(.2,.8,.2,1); display:flex; flex-direction:column}
+.sheet.on{transform:none}
+.sheet.tall{height:92%}
+.sheet-h{flex:none; padding:8px 18px 6px; display:flex; flex-direction:column; gap:6px}
+.grab{width:42px; height:5px; border-radius:3px; background:var(--line); align-self:center}
+.sheet-b{flex:1; min-height:0; overflow-y:auto; padding:6px 18px 24px}
+.sheet-f{flex:none; padding:10px 18px calc(18px + env(safe-area-inset-bottom, 0px)); border-top:1px solid var(--line); background:var(--bg)}
+.plan{display:flex; gap:12px; align-items:center; text-align:left; width:100%; padding:14px; border-radius:18px; border:2px solid var(--line); background:var(--card)}
+.plan.on{border-color:var(--rose-deep)}
+.plan .radio{width:22px; height:22px; border-radius:50%; border:2px solid var(--ink-2); flex:none; display:grid; place-items:center}
+.plan.on .radio{border-color:var(--rose-deep)}
+.plan.on .radio::after{content:""; width:11px; height:11px; border-radius:50%; background:var(--rose-deep)}
+.plan .grow{flex:1; min-width:0}
+.plan .price{font-family:var(--f-display); font-weight:700; font-size:18px; font-variant-numeric:tabular-nums; text-align:right}
+.feat{display:flex; gap:10px; align-items:flex-start; font-size:14.5px}
+.feat svg{flex:none; width:20px; height:20px; color:var(--sage-deep); margin-top:1px}
+.treats{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.treat{border:2px solid var(--line); background:var(--card); border-radius:18px; padding:12px; text-align:left; display:flex; flex-direction:column; gap:2px}
+.treat.on{border-color:var(--rose-deep)}
+.treat b{font-size:14.5px} .treat span{font-family:var(--f-display); font-weight:700; font-variant-numeric:tabular-nums}
+.treat .em{font-family:var(--f-hand); font-size:20px; color:var(--rose-deep); line-height:1}
+.demo-note{font-size:12.5px; color:var(--ink-2); text-align:center}
+.sum{display:grid; grid-template-columns:1fr auto; gap:8px; font-size:15px; font-variant-numeric:tabular-nums}
+.sum .tot{font-weight:800; font-size:17px; border-top:1px solid var(--line); padding-top:8px}
+.pm{display:flex; align-items:center; gap:12px; padding:13px 14px; border-radius:16px; border:2px solid var(--line); background:var(--card); width:100%; text-align:left; font-weight:800}
+.pm.on{border-color:var(--rose-deep)}
+.pm .ico{width:38px; height:26px; border-radius:6px; background:var(--card-2); display:grid; place-items:center; font-size:11px; font-weight:800}
+.spinner{width:44px; height:44px; border-radius:50%; border:4px solid var(--card-2); border-top-color:var(--rose-deep); animation:spin .9s linear infinite; margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* chat */
+.msgs{display:flex; flex-direction:column; gap:12px}
+.msg{max-width:86%; padding:10px 14px; border-radius:20px; font-size:15px; white-space:pre-wrap; overflow-wrap:anywhere}
+.msg.me{align-self:flex-end; background:var(--rose-deep); color:var(--on-accent); border-bottom-right-radius:6px}
+.msg.gr{align-self:flex-start; background:var(--card); box-shadow:var(--shadow); border-bottom-left-radius:6px}
+.msg-row{display:flex; gap:8px; align-items:flex-end}
+.chat-in{display:flex; gap:8px; align-items:flex-end}
+.chat-in textarea{flex:1; min-height:46px; max-height:120px; resize:none}
+
+/* push, toast, system alert */
+.push{position:fixed; left:10px; right:10px; top:calc(10px + env(safe-area-inset-top, 0px)); max-width:440px; margin:0 auto; z-index:60; background:var(--card); border-radius:22px; padding:12px 14px; box-shadow:0 12px 30px rgba(0,0,0,.18); display:flex; gap:12px; align-items:flex-start; transform:translateY(calc(-100% - 80px)); opacity:0; visibility:hidden; transition:transform .45s cubic-bezier(.2,.9,.2,1.05), opacity .3s, visibility 0s linear .45s; border:0; text-align:left; width:auto}
+.push.on{transform:none; opacity:1; visibility:visible; transition:transform .45s cubic-bezier(.2,.9,.2,1.05), opacity .3s}
+.push .grow{flex:1; min-width:0}
+.push .app-n{font-size:12px; font-weight:800; color:var(--ink-2); display:flex; justify-content:space-between}
+.push .pt{font-weight:800; font-size:14.5px}
+.push .pb{font-size:14px}
+.toast{position:fixed; left:50%; bottom:calc(88px + env(safe-area-inset-bottom, 0px)); z-index:70; width:max-content; max-width:calc(100% - 32px); background:var(--ink); color:var(--bg); padding:12px 18px; border-radius:16px; font-weight:700; font-size:14px; opacity:0; transform:translate(-50%,10px); transition:opacity .25s, transform .25s; pointer-events:none; text-align:center}
+.toast.on{opacity:1; transform:translate(-50%,0)}
+html.lock .toast{bottom:auto; top:calc(16px + env(safe-area-inset-top, 0px))}
+.sysalert{position:fixed; inset:0; z-index:80; background:var(--scrim); display:grid; place-items:center; padding:24px}
+.sysalert .box{width:270px; background:var(--card); border-radius:16px; overflow:hidden; text-align:center}
+.sysalert .box .tx{padding:18px 16px 14px; display:flex; flex-direction:column; gap:4px}
+.sysalert .box .bt{display:grid; grid-template-columns:1fr 1fr; border-top:1px solid var(--line)}
+.sysalert .box .bt button{border:0; background:none; min-height:46px; color:var(--rose-deep); font-weight:700}
+.sysalert .box .bt button+button{border-left:1px solid var(--line); font-weight:800}
+
+/* onboarding */
+.onb{position:fixed; inset:0; z-index:30; background:var(--bg); display:flex; justify-content:center; padding-top:env(safe-area-inset-top, 0px); padding-bottom:env(safe-area-inset-bottom, 0px)}
+.onb-inner{width:100%; max-width:640px; height:100%; display:flex; flex-direction:column; overflow:hidden}
+.onb-top{flex:none; padding:10px 18px 0; display:flex; align-items:center; gap:10px}
+.onb-steps{flex:1; display:flex; gap:5px}
+.onb-steps i{flex:1; height:5px; border-radius:3px; background:var(--line)}
+.onb-steps i.on{background:var(--rose-deep)}
+.onb-b{flex:1; min-height:0; overflow-y:auto; padding:16px 18px 18px; display:flex; flex-direction:column; gap:18px}
+.onb-f{flex:none; padding:10px 18px 18px; display:flex; gap:10px}
+.onb-hero{display:flex; flex-direction:column; align-items:center; text-align:center; gap:14px; padding-top:10px}
+.say{display:flex; gap:12px; align-items:flex-end}
+.say .bubble{flex:1; min-width:0}
+.pick{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.pick button{min-height:52px; border-radius:16px; border:2px solid var(--line); background:var(--card); font-weight:800}
+.pick button.on{border-color:var(--rose-deep); background:var(--card-2)}
+.ll{display:flex; flex-direction:column; gap:8px}
+.ll button{display:flex; gap:12px; align-items:center; text-align:left; padding:12px 14px; border-radius:16px; border:2px solid var(--line); background:var(--card)}
+.ll button.on{border-color:var(--rose-deep); background:var(--card-2)}
+.ll b{display:block} .ll span{font-size:13px; color:var(--ink-2)}
+
+.vis-mobile{display:block}
+.more{align-self:stretch}
+.ai-act{display:flex; flex-direction:column; gap:6px}
+
+@media (min-width:700px){
+  .sheet{left:50%; right:auto; top:50%; bottom:auto; width:min(560px, calc(100% - 48px)); max-height:min(86%, 820px); border-radius:26px; box-shadow:0 30px 70px rgba(0,0,0,.25);
+    opacity:0; visibility:hidden; transform:translate(-50%,-46%); transition:opacity .2s, transform .25s, visibility 0s linear .25s}
+  .sheet.on{opacity:1; visibility:visible; transform:translate(-50%,-50%); transition:opacity .2s, transform .25s}
+  .sheet .grab{display:none}
+  .sheet-h{padding-top:16px}
+  .sheet-f{padding-bottom:18px; border-radius:0 0 26px 26px}
+  .sheet.tall{left:auto; right:0; top:0; bottom:0; width:min(460px,100%); height:100%; max-height:none; border-radius:26px 0 0 26px; transform:translateX(100%)}
+  .sheet.tall.on{transform:none}
+  .sheet.tall .sheet-f{border-radius:0 0 0 26px}
+  .push{left:auto; right:24px; top:24px; width:380px; margin:0}
+  .onb{background:var(--desk); align-items:center; padding:24px}
+  .onb-inner{background:var(--bg); border-radius:28px; box-shadow:var(--shadow); height:auto; min-height:min(620px, 100%); max-height:min(860px, 100%)}
+  .onb-b{flex:1 1 auto; padding:22px 28px}
+  .onb-top{padding:18px 28px 0}
+  .onb-f{padding:12px 28px 24px}
+}
+@media (min-width:900px){
+  .h1{font-size:30px}
+  .chips.scroll{flex-wrap:wrap; overflow:visible; margin:0; padding:0}
+  .ai-box{flex-direction:row; align-items:center; justify-content:space-between; gap:24px; padding:20px 22px}
+  .ai-box .ai-act{flex:none; width:280px}
+  .seg{max-width:620px}
+  .more{align-self:flex-start; padding:0 26px}
+  .vis-mobile{display:none!important}
+  .toast{bottom:28px; margin-left:132px; max-width:460px}
+  .view .page{padding:24px 28px 22px 46px}
+  .view .page .hand.title{font-size:38px}
+}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important; scroll-behavior:auto!important} }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <pattern id="stitchPat" width="18" height="8" patternUnits="userSpaceOnUse">
+      <path d="M2 1 L8 7 M8 1 L2 7" class="st-a"/><path d="M11 1 L17 7 M17 1 L11 7" class="st-b"/>
+    </pattern>
+  </defs>
+</svg>
+
+<div class="shell">
+  <aside class="sidebar" id="sidebar" aria-label="Меню"></aside>
+  <main class="view" id="view"></main>
+</div>
+<nav class="tabbar" id="tabbar" aria-label="Розділи"></nav>
+<div class="onb" id="onb" hidden></div>
+<div class="scrim" id="scrim" data-act="closeSheet"></div>
+<section class="sheet" id="sheet" role="dialog" aria-modal="true"></section>
+<button class="push" id="push" type="button"></button>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="sysalert" id="sysalert" hidden></div>
+<input type="file" id="photoInput" accept="image/*" hidden>
+
+<script>
+/* =========================================================
+   Поради бабусі — клікабельний прототип
+   Дані зберігаються лише в цьому браузері (localStorage).
+   ШІ: у Claude — через можливість `sample`; на комп’ютері — через server.py (Claude API або Ollama); без ШІ — підбір за правилами.
+   ========================================================= */
+
+// ---------- Контент ----------
+const GRANNY = { name:'Бабуся Ганна', short:'бабуся Ганна', age:74, husband:'дід Петро', years:52 };
+
+const CATS = { care:'Турбота', conflict:'Сварки', attention:'Увага', words:'Слова', home:'Побут', romance:'Романтика' };
+
+const ADVICE = [
+ {c:'attention', t:'Слухай очима', x:'Коли кохана людина розповідає про свій день, поклади телефон екраном донизу. Дід Петро п’ятдесят років слухав мене, дивлячись в очі, навіть коли я переказувала, що сказала сусідка. Отак любов і тримається.', k:'Під час вечірньої розмови прибери телефон на 15 хвилин.'},
+ {c:'conflict', t:'Сварка — не війна', x:'Сперечаєтеся — то сперечайтеся про справу, а не про людину. «Ти завжди…» і «ти ніколи…» — то не аргументи, то камінці в город. Кажи інакше: «Мені прикро, коли…».', k:'Згадай останню суперечку й перекажи свою думку через «мені».'},
+ {c:'care', t:'Чай без прохання', x:'Найкраща турбота — та, про яку не просили. Бачиш, що твоя людина втомилася, — постав чайник. Не питай «тобі щось треба?», просто зроби.', k:'Зроби одну маленьку річ, про яку тебе не просили.'},
+ {c:'words', t:'Дякую за дрібниці', x:'За великі справи дякують усі. А ти подякуй за помитий кухоль, за те, що зачекали, за теплу ковдру. Від маленьких «дякую» в хаті стає світліше.', k:'Скажи сьогодні три «дякую» за дрібниці.'},
+ {c:'romance', t:'Записка в кишені', x:'Я дідові в кишеню піджака клала записочки. Він знаходив їх через тиждень і цілий день ходив усміхнений. Кілька слів від руки важать більше за десяток повідомлень.', k:'Сховай коротку записку там, де її знайдуть завтра.'},
+ {c:'home', t:'Хата — спільне гніздо', x:'Хатні справи — не чиясь робота, а спільна. Домовтеся, хто що робить, і не рахуйте, хто більше. Рахунок у коханні — то вже бухгалтерія.', k:'Візьми на себе справу, яку зазвичай робить твоя половинка.'},
+ {c:'conflict', t:'Не лягайте спати в сварці', x:'Не обов’язково все вирішити до ночі. Але скажи: «Я тебе люблю, завтра договоримо». Тоді й сон спокійніший, і ранок добріший.', k:'Якщо є недомовленість — домовтеся про час для розмови.'},
+ {c:'attention', t:'Запам’ятай дрібницю', x:'Яку каву п’є, яку пісню наспівує, як звали першого собаку. Хто пам’ятає дрібниці, той каже без слів: «Ти мені важлива людина». Запиши в мій зошит, я нагадаю.', k:'Дізнайся одну нову дрібницю й додай її в профіль.'},
+ {c:'care', t:'Коли нездужає', x:'Коли кохана людина хворіє, героїзму не треба. Бульйон, тиша, тепла ковдра і «я поруч». І терпіння: хворі всі трохи вередливі, навіть дід Петро.', k:'Запиши, що допомагає твоїй половинці, коли їй зле.'},
+ {c:'romance', t:'Побачення, як уперше', x:'Скільки б років не минуло, ходіть на побачення. Не «кудись разом», а саме побачення: причепуритися, запросити, чекати, хвилюватися.', k:'Запроси на побачення так, ніби вперше.'},
+ {c:'words', t:'Хвали при людях', x:'Сварити — наодинці, хвалити — при людях. Скажи при друзях чи рідних, чим ти пишаєшся у своїй половинці. Це гріє довше за будь-яку шубу.', k:'Похвали кохану людину при комусь іще.'},
+ {c:'conflict', t:'Пауза — не втеча', x:'Коли кипить, скажи: «Мені треба двадцять хвилин» — і пройдися. Тільки обов’язково повернися й договори. Пауза, з якої не повертаються, — то вже двері.', k:'Домовтеся про слово-сигнал для паузи в суперечці.'},
+ {c:'attention', t:'Спитай про мрію', x:'Ми часто питаємо «що на вечерю?» і забуваємо спитати «про що мрієш?». Мрії змінюються, і за ними треба встигати.', k:'Спитай сьогодні: «Про що ти зараз мрієш?»'},
+ {c:'care', t:'Ранок починається з тебе', x:'Прокинься на десять хвилин раніше й приготуй сніданок. Не щодня — тоді це свято, а не обов’язок.', k:'Приготуй сніданок до того, як твоя половинка прокинеться.'},
+ {c:'home', t:'Гроші люблять тишу', x:'Про гроші говоріть спокійно й заздалегідь, а не тоді, коли гаманець уже порожній. Гроші, про які мовчать, потім кричать.', k:'Обговоріть одну спільну фінансову ціль на місяць.'},
+ {c:'romance', t:'Ваша пісня', x:'У нас із дідом була своя пісня — «Ніч яка місячна». Знайдіть свою. Увімкни її несподівано й запроси до танцю просто на кухні.', k:'Потанцюйте сьогодні під вашу пісню.'},
+ {c:'words', t:'Мова любові', x:'Хтось любить слова, хтось — обійми, хтось — допомогу, хтось — подарунки, а хтось — час разом. Дізнайся, якою мовою любить твоя людина, і говори нею щодня.', k:'Перевір у профілі мову любові й зроби щось саме нею.'},
+ {c:'conflict', t:'Вибачитися — не програти', x:'«Вибач, я помилився» чи «вибач, я помилилася» — три слова, від яких ще ніхто не вмер. А от через гордість багато пар розійшлося. Вибачайся щиро і без «але».', k:'Якщо є за що — вибачся без «але».'},
+ {c:'attention', t:'Вечір без екранів', x:'Один вечір на тиждень — без телевізора й телефонів. Настільна гра, прогулянка, розмова при свічці. Спершу буде незвично, а потім чекатимете цього вечора.', k:'Призначте свій вечір без екранів.'},
+ {c:'care', t:'Підтримай мрію', x:'Хоче на курси гончарства чи бігти марафон — не смійся, а питай, чим допомогти. Крила виростають, коли поруч хтось вірить.', k:'Спитай, чим ти можеш допомогти в її чи його задумі.'},
+ {c:'home', t:'Три важливі речі', x:'Хтось розкидає шкарпетки, хтось не закриває пасту. Вибери три речі, які справді важливі, а на решту махни рукою. Ідеальних людей немає, {voc}, є терплячі.', k:'Запиши три звички, на які ти більше не зважатимеш.'},
+ {c:'romance', t:'Згадайте початок', x:'Розкажіть одне одному, що кожен відчував на першому побаченні. Спогади — то дрова для вашого вогнища.', k:'Згадайте разом ваше перше побачення.'},
+ {c:'words', t:'Комплімент без приводу', x:'Найкращий комплімент — несподіваний. Не на свято, а у звичайний вівторок: «Мені з тобою так спокійно».', k:'Скажи комплімент без жодного приводу.'},
+ {c:'conflict', t:'Не при свідках', x:'Не з’ясовуйте стосунків при друзях, дітях і в коментарях. Ваша сварка — то ваша справа, вирішуйте її вдвох.', k:'Домовтеся: суперечки — тільки наодинці.'},
+ {c:'care', t:'Знай рідних', x:'Пам’ятай імена й дні народження батьків своєї половинки. Подзвони просто так, без приводу, — повір, це помітять і оцінять.', k:'Додай у дати дні народження рідних партнера.'},
+ {c:'attention', t:'Обійми на двадцять секунд', x:'Коротке «цьом» на бігу — добре, а обійми на двадцять секунд — краще. Тіло заспокоюється, серце теплішає. Перевірено п’ятдесятьма роками.', k:'Обійміться сьогодні й порахуйте до двадцяти.'},
+ {c:'home', t:'Спільна справа', x:'Пара, яка щось робить разом — садить квіти, ліпить вареники, фарбує паркан, — стає командою. Знайдіть свою спільну справу.', k:'Зробіть сьогодні щось руками разом.'},
+ {c:'romance', t:'Маленька традиція', x:'Неділя з млинцями, прогулянка першим снігом, листівка на кожну річницю. Традиції — то нитки, якими вишивається спільне життя.', k:'Придумайте одну вашу традицію.'},
+ {c:'words', t:'Питай, а не вгадуй', x:'Думки читати не вміє ніхто, навіть бабуся. Не ображайся, що не здогадалися, — скажи прямо, чого тобі хочеться.', k:'Скажи прямо про одне своє бажання.'},
+ {c:'conflict', t:'Згадай хороше', x:'Коли сердишся, згадай три речі, за які полюбив чи полюбила. Злість минає, а любов, якщо її берегти, лишається.', k:'Запиши три речі, за які ти любиш свою людину.'},
+ {c:'care', t:'Час для себе', x:'Любити — не означає бути разом щохвилини. Дай коханій людині час на себе, на друзів, на тишу. Пташка, яку не тримають, повертається сама.', k:'Запропонуй своїй половинці вечір для себе.'},
+].map((a,i)=>({...a, id:i}));
+const FREE_ADVICE = 10; // перші 10 порад відкриті без підписки (+ порада дня завжди)
+
+const GREETINGS = [
+ 'Сідай, {voc}, чай уже налитий.',
+ 'Ну що, {voc}, як там твоє серденько?',
+ 'Дід Петро передає привіт і просить не забувати про квіти.',
+ 'Любов — як тісто: не місиш — не підходить.',
+ 'Сьогодні гарний день, щоб когось обійняти.',
+ 'Я тут нову пораду для тебе приберегла.',
+ 'Тепло роблять руками, {voc}, а не тільки словами.',
+];
+const PRAISE = ['Ой, молодець, {voc}! Бабуся пишається.', 'Отак і треба. Дід Петро б похвалив.', 'Ну золото, а не дитина!', 'Записала в зошит: ще один добрий день.'];
+
+const INTERESTS = {
+ 'Книги':      {acc:'книги', gift:['Книга улюбленого автора з запискою між сторінками','300–600 ₴'], act:['Почитайте вголос одне одному перед сном','20 хв'], date:['Книгарня з кавою','Виберіть одне одному по книзі за 15 хвилин','вечір · до 600 ₴']},
+ 'Кава':       {acc:'каву', gift:['Зерно від місцевої обсмажки й гарна чашка','400–800 ₴'], act:['Кава в ліжко — саме така, як любить','10 хв'], date:['Кавовий маршрут','Три кав’ярні за вечір, по напою в кожній','вечір · до 500 ₴']},
+ 'Чай':        {acc:'чай', gift:['Набір трав’яних чаїв і заварник','350–700 ₴'], act:['Чайна церемонія вдома з пледом','40 хв'], date:['Чайна з дегустацією','Спробуйте сорти, яких ще не пили','день · до 500 ₴']},
+ 'Кулінарія':  {acc:'готувати', gift:['Кулінарний майстер-клас для двох','1200–2000 ₴'], act:['Приготуйте разом страву з дитинства партнера','1,5 год'], date:['Кулінарна студія','Готувати разом — смачно й весело','вечір · 1000–2000 ₴']},
+ 'Подорожі':   {acc:'подорожувати', gift:['Скретч-мапа світу','400–800 ₴'], act:['Сплануйте разом подорож мрії','1 год'], date:['Поїздка на один день','Електричка до найближчого містечка','цілий день · до 1500 ₴']},
+ 'Музика':     {acc:'музику', gift:['Квитки на концерт улюбленого гурту','від 600 ₴'], act:['Плейлист «Наші пісні» з підписами','30 хв'], date:['Вечір живої музики','Джаз-клуб або камерний концерт','вечір · до 1000 ₴']},
+ 'Кіно':       {acc:'кіно', gift:['Сертифікат у кінотеатр з попкорном','400 ₴'], act:['Кіновечір удома з пледом і улюбленим фільмом','2 год'], date:['Ретропоказ або кіно просто неба','Старе кіно на великому екрані','вечір · до 600 ₴']},
+ 'Спорт':      {acc:'спорт', gift:['Пляшка для води з гравіюванням','400–700 ₴'], act:['Спільне тренування чи пробіжка','45 хв'], date:['Скеледром або каток','Трохи адреналіну на двох','день · до 800 ₴']},
+ 'Природа':    {acc:'природу', gift:['Термос і плед для пікніка','700–1200 ₴'], act:['Ранкова прогулянка до світанку','1 год'], date:['Пікнік у парку чи ботсаду','Термос, бутерброди, ковдра','день · до 400 ₴']},
+ 'Тварини':    {acc:'тварин', gift:['Фотосесія з улюбленцем','від 1000 ₴'], act:['Разом сходіть волонтерити до притулку','2 год'], date:['Котокафе','Чай у компанії муркотунів','день · до 400 ₴']},
+ 'Мистецтво':  {acc:'мистецтво', gift:['Набір акварелі й гарний скетчбук','500–900 ₴'], act:['Намалюйте портрети одне одного','40 хв'], date:['Виставка або галерея','А після — обговорення за десертом','день · до 500 ₴']},
+ 'Ігри':       {acc:'ігри', gift:['Настільна гра для двох','500–1000 ₴'], act:['Турнір у гру з призом-бажанням','1 год'], date:['Антикафе з настільними іграми','Гра, чай і сміх','вечір · до 500 ₴']},
+ 'Технології': {acc:'технології', gift:['Гаджет зі списку бажань','від 800 ₴'], act:['Налаштуй те, що давно відкладається','30 хв'], date:['Науковий музей або планетарій','Зорі для двох','день · до 500 ₴']},
+ 'Мода':       {acc:'гарно вдягатися', gift:['Шовкова хустка чи аксесуар в улюбленому кольорі','500–1500 ₴'], act:['Шопінг, де ти тільки підтримуєш і хвалиш','2 год'], date:['Вінтажний ринок','Шукайте скарби одне для одного','день · до 800 ₴']},
+ 'Квіти й сад':{acc:'квіти', gift:['Кімнатна рослина в гарному горщику','300–700 ₴'], act:['Посадіть щось разом на балконі','40 хв'], date:['Ботанічний сад або оранжерея','Квіти в будь-яку погоду','день · до 200 ₴']},
+ 'Фотографія': {acc:'фотографувати', gift:['Фотокнига ваших спільних кадрів','700–1200 ₴'], act:['Надрукуй 10 спільних фото й склади альбом','1 год'], date:['Фотопрогулянка старим містом','Ловіть світло і одне одного','вечір · безкоштовно']},
+ 'Танці':      {acc:'танцювати', gift:['Пробне заняття з танців для двох','400–800 ₴'], act:['Танець на кухні під вашу пісню','5 хв'], date:['Вечір свінгу чи сальси','Навіть якщо ніхто не вміє','вечір · до 600 ₴']},
+ 'Театр':      {acc:'театр', gift:['Квитки на виставу','від 400 ₴'], act:['Вечеря-обговорення після вистави','1 год'], date:['Театр і вечеря після','Класичне, але працює','вечір · 800–1500 ₴']},
+ 'Солодощі':   {acc:'солодке', gift:['Коробка цукерок ручної роботи','300–600 ₴'], act:['Спечи щось солодке й залиш записку','1,5 год'], date:['Кондитерська з десертом на двох','Одна ложка — дві половинки','день · до 400 ₴']},
+ 'Йога':       {acc:'йогу', gift:['Килимок для йоги','800–1500 ₴'], act:['Ранкова розтяжка разом','20 хв'], date:['Йога в парку','А потім смузі','ранок · до 300 ₴']},
+};
+const LOVE = [
+ {id:'words', t:'Слова підтримки', d:'компліменти, «я пишаюся тобою»'},
+ {id:'time',  t:'Час разом', d:'увага без телефонів, спільні справи'},
+ {id:'gifts', t:'Подарунки', d:'маленькі знаки «я про тебе думав»'},
+ {id:'help',  t:'Допомога ділом', d:'зробити, полагодити, підхопити'},
+ {id:'touch', t:'Дотики й обійми', d:'обійми, тримання за руку'},
+];
+const HOLIDAYS = [{title:'День закоханих', md:'02-14'}, {title:'Новий рік', md:'12-31'}];
+const DATE_TYPES = {bday:'День народження', anniv:'Річниця', other:'Інша подія'};
+
+// ---------- Стан ----------
+const LS_KEY = 'porady-babusi-proto-v1';
+function freshState(){ return {
+  onboarded:false, obStep:0,
+  user:{name:'', kind:'f', age:''}, role:'seeker', asGranny:'hanna', topicPick:null, questions:[], bookings:[], myGrannies:[], exAnswers:{},
+  partner:{name:'', pron:'she', city:'', interests:[], fav:{food:'', flowers:'', drink:'', sweets:'', color:'', music:'', films:'', books:''}, dates:[], habits:[], love:'', dislikes:''},
+  premium:null, premiumSince:null, donations:[],
+  savedAdvice:[], readAdvice:[], tasksDone:{},
+  savedIdeas:[], doneIdeas:[], ideas:null, ideasAt:null,
+  ai:{day:'', used:0}, chat:{day:'', used:0, turns:[]},
+  notif:{allowed:false, daily:true, time:'09:00', dates:true, lead:3, weekend:true, holidays:true},
+  photo:'', tab:'today'
+};}
+function loadState(){
+  const b = freshState(); let s = null;
+  try{ const raw = localStorage.getItem(LS_KEY); s = raw ? JSON.parse(raw) : null; }catch(e){ s = null; }
+  if(!s || typeof s !== 'object') return b;
+  return {...b, ...s, user:{...b.user, ...(s.user||{})},
+    partner:{...b.partner, ...(s.partner||{}), fav:{...b.partner.fav, ...((s.partner||{}).fav||{})}},
+    ai:{...b.ai, ...(s.ai||{})}, exAnswers:{...(s.exAnswers||{})}, chat:{...b.chat, ...(s.chat||{})}, notif:{...b.notif, ...(s.notif||{})}};
+}
+let S = loadState();
+S.doneIdeas = (S.doneIdeas||[]).map(d => typeof d==='string' ? {id:d, kind:'', title:''} : d);
+let saveT = null;
+function save(){ clearTimeout(saveT); saveT = setTimeout(()=>{ try{ localStorage.setItem(LS_KEY, JSON.stringify(S)); }catch(e){} }, 150); }
+
+const UI = { sq:'', sKinds:['gift','service','experience'], sBudget:'до 1500 ₴', sProfile:true, sBusy:false, sErr:'', sLine:0, sCtl:null, gTopic:'all', how:false, howAge:null, media:{}, playing:null, rec:null, join:null, aiQ:null, sheet:null, arg:null, ideasTab:'gifts', adviceCat:'all', loading:false, loadMsg:0, ctl:null, chatCtl:null, chatBusy:false,
+  plan:'year', treat:1, custom:'', pay:null, paying:false, payDone:false, method:'apple', showSaved:false, offset:{gifts:0, acts:0, dates:0}, focus:null, pushed:false, aiNote:'' };
+
+// ---------- Утиліти ----------
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const MONTHS = ['січня','лютого','березня','квітня','травня','червня','липня','серпня','вересня','жовтня','листопада','грудня'];
+const WDAYS = ['неділя','понеділок','вівторок','середа','четвер','п’ятниця','субота'];
+function today(){ const d = new Date(); d.setHours(0,0,0,0); return d; }
+function dkey(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+const TODAY = dkey(today());
+function plural(n, f){ const a=Math.abs(n)%100, b=a%10; if(a>10&&a<20) return f[2]; if(b>1&&b<5) return f[1]; if(b===1) return f[0]; return f[2]; }
+const DAYS = ['день','дні','днів'];
+function fmtDM(d){ return d.getDate()+' '+MONTHS[d.getMonth()]; }
+function dayOfYear(){ const n=today(); return Math.floor((n - new Date(n.getFullYear(),0,0))/864e5); }
+function todayAdvice(){ return ADVICE[dayOfYear() % ADVICE.length]; }
+function adviceDayNo(a){ return a.id + 1; }
+const VOC = () => S.user.kind === 'm' ? 'онучку' : 'онученько';
+const fillVoc = s => s.replaceAll('{voc}', VOC());
+const pName = () => S.partner.name.trim() || 'твоя людина';
+const P = () => S.partner.pron === 'he' ? {nom:'він', acc:'його', dat:'йому', glad:'радий'} : {nom:'вона', acc:'її', dat:'їй', glad:'рада'};
+const isPro = () => !!S.premium;
+const G = (m,f) => S.user.kind==='m' ? m : f;
+function uid(){ return Math.random().toString(36).slice(2,9); }
+function hash(s){ let h=0; for(const c of s) h=(h*31+c.charCodeAt(0))|0; return 'i'+(h>>>0).toString(36); }
+
+function nextOcc(iso){ // iso YYYY-MM-DD або MM-DD
+  const parts = iso.split('-').map(Number); const [y,m,d] = parts.length===3 ? parts : [null, parts[0], parts[1]];
+  const t = today(); let c = new Date(t.getFullYear(), m-1, d);
+  if(c < t) c = new Date(t.getFullYear()+1, m-1, d);
+  return {date:c, days:Math.round((c - t)/864e5), years: y ? c.getFullYear()-y : null};
+}
+function events(){
+  const list = S.partner.dates.filter(x=>x.date).map(x=>({...x, ...nextOcc(x.date), own:true}));
+  if(S.notif.holidays) HOLIDAYS.forEach(h=>list.push({id:'h'+h.md, title:h.title, type:'holiday', ...nextOcc(h.md), own:false}));
+  return list.sort((a,b)=>a.days-b.days);
+}
+function evSub(e){
+  let s = fmtDM(e.date);
+  if(e.type==='bday' && e.years) s += ' · виповнюється '+e.years;
+  if(e.type==='anniv' && e.years) s += ' · '+e.years+' '+plural(e.years,['рік','роки','років'])+' разом';
+  return s;
+}
+function whenTxt(n){ return n===0 ? 'сьогодні' : n===1 ? 'завтра' : 'через '+n+' '+plural(n,DAYS); }
+
+// ---------- Іконки ----------
+const I = {
+ home:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path class="fillable" d="M3.5 10.5 12 4l8.5 6.5V20h-5.5v-5.5h-6V20H3.5z"/></svg>',
+ book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path class="fillable" d="M4 5h5.5A2.5 2.5 0 0 1 12 7.5V20a2 2 0 0 0-2-2H4zM20 5h-5.5A2.5 2.5 0 0 0 12 7.5V20a2 2 0 0 1 2-2h6z"/></svg>',
+ gift:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path class="fillable" d="M4.5 11h15v9h-15z"/><path d="M3 7.5h18V11H3zM12 7.5V20M12 7.5c-1.5-3.5-6-4-6-1.5 0 1.5 2.5 1.5 6 1.5zM12 7.5c1.5-3.5 6-4 6-1.5 0 1.5-2.5 1.5-6 1.5z"/></svg>',
+ bell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path class="fillable" d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z"/><path d="M10 21h4"/></svg>',
+ heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path class="fillable" d="M12 20C5.5 15.6 3 12 3 8.8A4.6 4.6 0 0 1 12 6.6a4.6 4.6 0 0 1 9 2.2C21 12 18.5 15.6 12 20z"/></svg>',
+ lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>',
+ check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>',
+ close:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+ spark:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5l2 6.2 6.2 2-6.2 2.1L12 19l-2-6.2-6.2-2.1 6.2-2z"/><path d="M19 15l.8 2.3 2.2.7-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.7z"/></svg>',
+ plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+ send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg>',
+ bookmark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6.5 4h11v16.5L12 16.5l-5.5 4z"/></svg>',
+ bookmarkF:'<svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M6.5 4h11v16.5L12 16.5l-5.5 4z"/></svg>',
+ copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.5"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/></svg>',
+ cup:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H17M8 3.5c0 1.5 1.5 1.5 1.5 3M12 3.5c0 1.5 1.5 1.5 1.5 3"/></svg>',
+ chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 5.5h16v11H10l-4.5 3.5v-3.5H4z"/></svg>',
+ chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+ trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 7h15M9.5 7V4.5h5V7M6.5 7l1 13h9l1-13"/></svg>',
+ edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
+ cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 8h3.5L9 5.5h6L16.5 8H20v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>',
+};
+Object.assign(I, {
+ users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle class="fillable" cx="9" cy="8" r="3.5"/><path class="fillable" d="M2.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5z"/><path d="M15.5 4.8a3.5 3.5 0 0 1 0 6.4M18 14.8c1.9.8 3.1 2.5 3.5 5.2"/></svg>',
+ play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l10.5-6.5z"/></svg>',
+ stop:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="6.5" width="11" height="11" rx="2"/></svg>',
+ mic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3.5" width="6" height="11" rx="3"/><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v2.5"/></svg>',
+ search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>',
+ ext:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4.5h5.5V10M19.5 4.5L11 13M18 14v5.5H4.5V6H10"/></svg>',
+ video:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="6.5" width="12.5" height="11" rx="2.5"/><path d="M15.5 10.5l5-3v9l-5-3z"/></svg>',
+});
+for(const k in I) I[k] = I[k].replace('<svg ', '<svg class="ic" width="20" height="20" aria-hidden="true" ');
+const stitch = () => '<svg class="stitch" aria-hidden="true"><rect width="100%" height="8" fill="url(#stitchPat)"/></svg>';
+
+function grannySVG(L={}, label=GRANNY.name){ return `<svg viewBox="0 0 120 120" class="granny" role="img" aria-label="${esc(label)}">
+<circle cx="60" cy="60" r="60" class="g-bg"/>
+<ellipse cx="60" cy="126" rx="46" ry="36" class="g-coat"/>
+<path d="M42 97 L60 110 L78 97" class="g-collar"/>
+<path d="M33 106l4 4M37 106l-4 4M83 106l4 4M87 106l-4 4M40 113l4 4M44 113l-4 4M76 113l4 4M80 113l-4 4" class="g-x"/>
+<rect x="53" y="80" width="14" height="14" rx="6" class="g-skin"/>
+${L.scarf ? '' : '<circle cx="60" cy="23" r="11" class="g-hair2"/>'}
+<ellipse cx="60" cy="55" rx="29" ry="30" class="g-hair"/>
+<ellipse cx="60" cy="62" rx="24" ry="24.5" class="g-skin"/>
+<path d="M36 55 Q42 38 60 38 Q78 38 84 55 Q74 44 60 46 Q46 44 36 55 Z" class="g-hair"/>
+${L.scarf ? `<path d="M29 70 Q26 26 60 24 Q94 26 91 70 Q88 54 84 50 Q78 41 60 41 Q42 41 36 50 Q32 54 29 70 Z" class="g-scarf"/><circle cx="46" cy="32" r="2.2" class="g-dots"/><circle cx="60" cy="29" r="2.2" class="g-dots"/><circle cx="74" cy="32" r="2.2" class="g-dots"/><circle cx="38" cy="44" r="2" class="g-dots"/><circle cx="82" cy="44" r="2" class="g-dots"/>` : ''}
+<circle cx="49" cy="61" r="7.5" class="g-glass"/><circle cx="71" cy="61" r="7.5" class="g-glass"/><path d="M56.5 61h7" class="g-line"/>
+<path d="M45.5 62.5q3.5-3 7 0M67.5 62.5q3.5-3 7 0" class="g-line"/>
+<circle cx="43" cy="72" r="4.6" class="g-cheek"/><circle cx="77" cy="72" r="4.6" class="g-cheek"/>
+<path d="M60 65q1.8 3.6-1 5" class="g-line"/>
+<path d="M52 76q8 7 16 0" class="g-line"/>
+</svg>`; }
+function avatar(size){ return `<div class="av" style="width:${size}px;height:${size}px">${S.photo ? `<img src="${S.photo}" alt="${GRANNY.name}">` : grannySVG()}</div>`; }
+
+// ---------- Ідеї: правила (резерв) ----------
+function ruleIdeas(focus){
+  const p = S.partner, n = pName(), pr = P();
+  const g=[], a=[], d=[];
+  const add = (arr, it) => { if(!arr.some(x=>x.title===it.title)) arr.push(it); };
+  if(focus){
+    if(focus.type==='bday') add(g, {title:'Святковий сніданок і подарунок біля чашки', why:`${focus.title} — ${whenTxt(focus.days)}. День, що починається з турботи, запам’ятовується.`, meta:'залежить від подарунка'});
+    if(focus.type==='anniv') add(d, {title:'Повторіть ваше перше побачення', why:`${focus.title}: те саме місце або схожий настрій. Спогади гріють найкраще.`, meta:'вечір · як тоді'});
+  }
+  if(p.fav.flowers) add(g, {title:`Букет: ${p.fav.flowers}`, why:'Улюблені квіти без жодного приводу — найцінніші.', meta:'300–900 ₴'});
+  if(p.fav.sweets) add(g, {title:`Смаколик: ${p.fav.sweets}`, why:`${n} любить саме це. Поклади поруч записку.`, meta:'100–400 ₴'});
+  if(p.fav.food) add(a, {title:`Приготуй: ${p.fav.food}`, why:'Улюблена страва — найкоротший шлях до серця. Бабуся перевірила.', meta:'1–1,5 год'});
+  if(p.fav.drink) add(a, {title:`Принеси без нагоди: ${p.fav.drink}`, why:'Маленька несподіванка посеред звичайного дня.', meta:'15 хв'});
+  const lv = p.love;
+  if(lv==='words') add(a, {title:'Лист від руки: за що ти вдячний', why:'Слова підтримки — мова любові, якою говорить твоя людина.', meta:'30 хв'});
+  if(lv==='time') add(d, {title:'Вечір тільки для вас двох', why:'Час разом — найважливіше для твоєї людини. Телефони — в шухляду.', meta:'вечір · будь-який бюджет'});
+  if(lv==='gifts') add(g, {title:'Дрібничка «я про тебе подумав»', why:'Для твоєї людини подарунок — це знак уваги, а не ціна.', meta:'до 300 ₴'});
+  if(lv==='help') add(a, {title:'Зроби справу, яку довго відкладали', why:'Допомога ділом — так твоя людина відчуває любов.', meta:'1 год'});
+  if(lv==='touch') add(a, {title:'Масаж плечей після важкого дня', why:'Дотики — мова любові твоєї людини.', meta:'15 хв'});
+  p.interests.forEach(k=>{ const m = INTERESTS[k]; if(!m) return;
+    add(g, {title:m.gift[0], why:`${n} любить ${m.acc}.`, meta:m.gift[1]});
+    add(a, {title:m.act[0], why:`Бо ${pr.nom} любить ${m.acc}.`, meta:m.act[1]});
+    add(d, {title:m.date[0], why:m.date[1], meta:(p.city? p.city+' · ' : '')+m.date[2]});
+  });
+  [ {title:'Фотокнига ваших спільних моментів', why:'Ваша історія, яку можна погортати.', meta:'700–1200 ₴'},
+    {title:'Листівка «10 причин, чому я тебе люблю»', why:'Коштує копійки, зберігається роками.', meta:'50 ₴'},
+    {title:'Теплий плед і книжка на вечір', why:'Осінь — час затишку.', meta:'600–1000 ₴'} ].forEach(x=>add(g,x));
+  [ {title:'Сніданок у ліжко', why:'Ранок, який починається з турботи.', meta:'30 хв'},
+    {title:'Записка в кишені', why:'Знайдуть — і цілий день усміхатимуться.', meta:'2 хв'},
+    {title:'Прогулянка без мети', why:'Тільки ви, вечір і розмова.', meta:'1 год'} ].forEach(x=>add(a,x));
+  [ {title:'Захід сонця на найвищій точці міста', why:'Красиво, безкоштовно і дуже романтично.', meta:(p.city? p.city+' · ':'')+'вечір · безкоштовно'},
+    {title:'Пікнік у парку', why:'Плед, термос і бутерброди.', meta:'день · до 300 ₴'},
+    {title:'Кіно під пледом удома', why:'Іноді найкраще побачення — на дивані.', meta:'вечір · до 200 ₴'} ].forEach(x=>add(d,x));
+  return {gifts:g, acts:a, dates:d};
+}
+function isDone(kind, title){ const id = hash(kind+title); return S.doneIdeas.some(d=>d.id===id); }
+function doneTitles(kind){ return S.doneIdeas.filter(d=>d.title && (!kind || d.kind===kind)).slice(-40).map(d=>d.title); }
+// Нові ідеї за правилами: без уже виконаних і, якщо можна, без тих, що зараз на екрані
+function freshRules(kind, exclude=[]){
+  const pool = ruleIdeas(UI.focus)[kind].filter(x=>!isDone(kind, x.title));
+  const fresh = pool.filter(x=>!exclude.includes(x.title));
+  const out = fresh.slice(0,4);
+  for(const x of pool){ if(out.length>=4) break; if(!out.includes(x)) out.push(x); }
+  return {items:out, exhausted:fresh.length===0};
+}
+function currentIdeas(){
+  if(!S.ideas){ S.ideas = {src:'rules', gifts:freshRules('gifts').items, acts:freshRules('acts').items, dates:freshRules('dates').items, granny:''}; save(); }
+  return S.ideas;
+}
+
+// ---------- ШІ: Claude у браузері → локальний сервер (server.py) → без ШІ ----------
+let SAMPLE = null, AI_STATE = 'checking'; // checking | ready | off
+let AI_SOURCE = 'none';                    // claude | local | local-unconfigured | none
+let AI_MODEL = '', AI_HINT = '';
+(async ()=>{
+  await null; // дочекатися, поки скрипт повністю визначиться
+  try{ SAMPLE = (window.claude && typeof window.claude.use === 'function') ? await window.claude.use('sample') : null; }catch(e){ SAMPLE = null; }
+  if(SAMPLE) AI_SOURCE = 'claude';
+  else SAMPLE = await connectLocalAI();
+  AI_STATE = SAMPLE ? 'ready' : 'off'; render();
+})();
+
+// Локальний сервер (server.py) має той самий інтерфейс, що й Claude: sample(input, opts) і sample.json(...)
+async function connectLocalAI(){
+  if(!/^https?:$/.test(location.protocol)) return null;
+  try{
+    const ctl = new AbortController(); const t = setTimeout(() => ctl.abort(), 2500);
+    const r = await fetch('/api/health', {signal: ctl.signal, cache: 'no-store'}); clearTimeout(t);
+    if(!r.ok) return null;
+    const h = await r.json(); if(!h || !h.ok) return null;
+    if(h.search === 'claude' || h.search === 'ollama') SEARCH_MODE = h.search; else SEARCH_HINT = h.search === 'none' ? 'Щоб шукати прямо в інтернеті, впиши безкоштовний ключ OLLAMA_API_KEY (ollama.com/settings/keys) або ключ Claude API в ai-settings.txt.' : '';
+    if(!h.configured){ AI_SOURCE = 'local-unconfigured'; AI_HINT = h.message || ''; return null; }
+    AI_SOURCE = 'local'; AI_MODEL = h.model || ''; return makeLocalSample();
+  }catch(e){ return null; }
+}
+function makeLocalSample(){
+  async function call(input, opts = {}, asJson = false){
+    const list = typeof input === 'string' ? [{role:'user', content:input}] : input.map(m => ({role:m.role, content:String(m.content)}));
+    const messages = [];
+    for(const m of list){ const last = messages[messages.length-1]; if(last && last.role === m.role) last.content += '\n\n' + m.content; else messages.push({...m}); }
+    let res;
+    try{
+      res = await fetch('/api/ai', {method:'POST', headers:{'Content-Type':'application/json', 'X-Babusya':'1'},
+        body: JSON.stringify({messages, tier: opts.modelTier || 'default', json: asJson}), signal: opts.signal});
+    }catch(e){ throw {code: opts.signal && opts.signal.aborted ? 'cancelled' : 'upstream_error', message: 'Сервер ШІ не відповідає. Чи відкрите вікно «Запустити з ШІ»?', local: true}; }
+    if(!res.ok){
+      let j = {}; try{ j = await res.json(); }catch(_){}
+      const code = j.code === 'rate_limited' ? 'rate_limited' : (j.code === 'not_configured' || j.code === 'bad_key') ? 'not_granted' : 'upstream_error';
+      throw {code, message: j.message || ('Помилка сервера ' + res.status), local: true};
+    }
+    const reader = res.body.getReader(), dec = new TextDecoder(); let text = '';
+    try{
+      for(;;){ const {done, value} = await reader.read(); if(done) break; const d = dec.decode(value, {stream:true});
+        if(d){ text += d; if(opts.onText && !asJson){ try{ opts.onText({text, delta:d}); }catch(_){} } } }
+    }catch(e){ throw {code: opts.signal && opts.signal.aborted ? 'cancelled' : 'upstream_error', message: 'Відповідь обірвалася.', text, local: true}; }
+    if(!text.trim()) throw {code:'empty_completion', message:'Модель нічого не відповіла.', local: true};
+    return {text, truncated:false, modelTierApplied: opts.modelTier || 'default'};
+  }
+  const sample = (input, opts) => call(input, opts, false);
+  sample.json = async (input, opts = {}) => {
+    const {text} = await call(input, opts, true); const v = parseLooseJSON(text);
+    if(v === undefined) throw {code:'invalid_json', message:'Модель відповіла не у форматі JSON. Спробуй ще раз.', text, local: true};
+    return v;
+  };
+  return sample;
+}
+function parseLooseJSON(t){
+  try{ return JSON.parse(t); }catch(e){}
+  const f = t.match(/```(?:json)?\s*([\s\S]*?)```/); if(f){ try{ return JSON.parse(f[1]); }catch(e){} }
+  const a = t.search(/[\[{]/), b = Math.max(t.lastIndexOf('}'), t.lastIndexOf(']'));
+  if(a >= 0 && b > a){ try{ return JSON.parse(t.slice(a, b+1)); }catch(e){} }
+  return undefined;
+}
+// Підказка, як увімкнути ШІ, залежно від того, як відкрито сайт
+function aiHowTo(){
+  if(AI_SOURCE === 'local-unconfigured') return (AI_HINT || 'Сервер запущено, але ШІ ще не налаштовано (див. ai-settings.txt).') + ' Потім онови сторінку.';
+  if(location.protocol === 'file:') return 'Щоб увімкнути ШІ на комп’ютері, запусти файл «Запустити з ШІ.bat» із папки проєкту.';
+  return 'ШІ працює, коли сайт відкрито в Claude або запущено через «Запустити з ШІ.bat».';
+}
+function aiErrText(e, fallback){ return (e && e.local && e.message) ? e.message : fallback; }
+const AI_FREE = 3, CHAT_FREE = 2;
+function aiLeft(){ if(isPro()) return Infinity; return Math.max(0, AI_FREE - (S.ai.day===TODAY ? S.ai.used : 0)); }
+function chatLeft(){ if(isPro()) return Infinity; return Math.max(0, CHAT_FREE - (S.chat.day===TODAY ? S.chat.used : 0)); }
+function useAI(){ if(S.ai.day!==TODAY){ S.ai.day=TODAY; S.ai.used=0; } S.ai.used++; save(); }
+function useChat(){ if(S.chat.day!==TODAY){ S.chat.day=TODAY; S.chat.used=0; } S.chat.used++; save(); }
+
+function profileForAI(){
+  const p = S.partner;
+  return {
+    "хто_питає": {"ім’я": S.user.name || 'користувач', "стать": S.user.kind==='m' ? 'чоловіча' : 'жіноча'},
+    "кохана_людина": {"ім’я": p.name || 'не вказано', "займенник": p.pron==='he' ? 'він' : 'вона', "місто": p.city || 'не вказано',
+      "інтереси": p.interests, "улюблене": Object.fromEntries(Object.entries(p.fav).filter(([,v])=>v)),
+      "мова_любові": (LOVE.find(l=>l.id===p.love)||{}).t || 'не вказано', "звички_й_деталі": p.habits, "не_любить_або_алергії": p.dislikes || 'не вказано',
+      "важливі_дати": events().filter(e=>e.own).slice(0,4).map(e=>`${e.title}: ${fmtDM(e.date)} (${whenTxt(e.days)})`) },
+    "сьогодні": `${WDAYS[today().getDay()]}, ${fmtDM(today())} ${today().getFullYear()}`
+  };
+}
+const AI_RULES = `Ти — бабуся Ганна з застосунку «Поради бабусі»: мудра, тепла, з легким гумором, 52 роки в шлюбі з дідом Петром. Допомагаєш людям робити стосунки теплішими.
+Пиши лише українською, конкретно й по-доброму, без кліше. Кожна ідея має спиратися на щось із профілю (інтерес, улюблену річ, звичку, мову любові, дату) і пояснювати, чому саме вона.
+Не вигадуй назв конкретних кафе, ресторанів чи магазинів. Для місць описуй тип місця («тихе кафе з книжковими полицями»); загальновідомі публічні місця міста (великі парки, набережні) можна називати, лише якщо ти впевнена, що вони існують.
+Враховуй те, що людина не любить, і алергії. Ціни — реалістичні діапазони в гривнях.`;
+
+async function runAI(kind){ // kind: undefined = всі списки, або 'gifts'|'acts'|'dates'
+  if(AI_STATE!=='ready' || UI.loading) return;
+  if(aiLeft()<=0){ openSheet('sub', {reason:'ai'}); return; }
+  UI.loading = kind || 'all'; UI.aiNote=''; render(); loadTicker();
+  const ctl = new AbortController(); UI.ctl = ctl;
+  const focus = UI.focus ? `\nОсобливий привід: ${UI.focus.title}, ${fmtDM(UI.focus.date)} (${whenTxt(UI.focus.days)}). Зроби ідеї саме до цієї події.` : '';
+  const prof = JSON.stringify(profileForAI(), null, 1);
+  const LBL = {gifts:'подарунки', acts:'вчинки (що зробити своїми руками чи увагою)', dates:'місця й формати для побачень'};
+  let prompt;
+  if(!kind){
+    prompt = `${AI_RULES}\n\nПрофіль (JSON):\n${prof}${focus}\n\nПідбери по 4 НОВІ ідеї у кожному розділі: подарунки, вчинки, побачення.
+Ідеї, які вже зараз на екрані (запропонуй інші): ${['gifts','acts','dates'].flatMap(k=>(currentIdeas()[k]||[]).map(x=>x.title)).join('; ') || '—'}.
+Уже виконані (не пропонуй їх і дуже схожі): ${doneTitles().join('; ') || '—'}.
+Поверни лише JSON:
+{"granny":"одне тепле речення від бабусі до ${S.user.name||'онуки'} (до 20 слів)","gifts":[{"title":"до 7 слів","why":"чому саме це, до 22 слів","meta":"ціна, напр. 400–700 ₴"}],"acts":[{"title":"...","why":"...","meta":"скільки часу, напр. 30 хв"}],"dates":[{"title":"...","why":"...","meta":"коли і бюджет, напр. вечір · до 800 ₴"}]}`;
+  } else {
+    const have = (currentIdeas()[kind]||[]).map(x=>x.title).join('; ');
+    prompt = `${AI_RULES}\n\nПрофіль (JSON):\n${prof}${focus}\n\nПідбери 4 НОВІ ідеї в розділі: ${LBL[kind]}. Не повторюй: ${have || '—'}. Уже виконані (не пропонуй їх і дуже схожі): ${doneTitles(kind).join('; ') || '—'}.
+Поверни лише JSON: {"items":[{"title":"до 7 слів","why":"чому саме це, до 22 слів","meta":"ціна або час"}]}`;
+  }
+  try{
+    const res = await SAMPLE.json(prompt, {modelTier:'quick', signal:ctl.signal, cache:false});
+    const clean = (arr, k) => (Array.isArray(arr)?arr:[]).filter(x=>x && typeof x.title==='string' && !isDone(k, String(x.title))).slice(0,6).map(x=>({title:String(x.title), why:String(x.why||''), meta:String(x.meta||'')}));
+    if(!kind){
+      const out = {src:'ai', gifts:clean(res.gifts,'gifts'), acts:clean(res.acts,'acts'), dates:clean(res.dates,'dates'), granny:String(res.granny||'')};
+      if(!out.gifts.length && !out.acts.length && !out.dates.length) throw {code:'invalid_json'};
+      S.ideas = out;
+    } else {
+      const items = clean(res.items, kind); if(!items.length) throw {code:'invalid_json'};
+      const base = (S.ideas && S.ideas.src==='ai') ? S.ideas : {...currentIdeas(), src:'ai'};
+      base[kind] = items; S.ideas = base;
+    }
+    S.ideasAt = Date.now(); useAI();
+    toast(`Бабуся підібрала ідеї${aiLeft()!==Infinity ? ' · сьогодні залишилось '+aiLeft() : ''}`);
+  }catch(e){
+    const c = e && e.code;
+    if(c==='cancelled'){}
+    else if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(c)){ AI_STATE='off'; UI.aiNote=aiErrText(e, 'ШІ недоступний у цьому перегляді, тож показую ідеї за профілем.'); }
+    else if(c==='rate_limited'){ UI.aiNote='Бабуся трохи втомилася від запитань. Спробуй за кілька хвилин.'; }
+    else if(c==='session_expired'){ UI.aiNote='Потрібно знову увійти в акаунт Claude.'; }
+    else { UI.aiNote=aiErrText(e, 'Бабуся задумалась і збилась із думки. Спробуй ще раз.'); }
+  }finally{ UI.loading=false; UI.ctl=null; save(); render(); }
+}
+const LOAD_LINES = ['Гортаю свій зошит…','Згадую, що любить {name}…','Раджуся з дідом Петром…','Перебираю, що підійде саме вам…','Ще хвилинку, окуляри шукаю…'];
+let loadTimer=null;
+function loadTicker(){ clearInterval(loadTimer); UI.loadMsg=0; loadTimer=setInterval(()=>{ if(!UI.loading){ clearInterval(loadTimer); return; } UI.loadMsg=(UI.loadMsg+1)%LOAD_LINES.length; const el=$('#loadline'); if(el) el.textContent = LOAD_LINES[UI.loadMsg].replace('{name}', pName()); }, 2200); }
+
+function chatRules(){
+  return `${AI_RULES}
+Зараз ти розмовляєш у чаті. Звертайся до співрозмовника «${VOC()}»${S.user.name? ' або на ім’я '+S.user.name : ''}. Відповідай коротко: 3–6 речень, наприкінці — одна конкретна маленька дія.
+Не моралізуй, не звинувачуй жодну зі сторін, не став діагнозів. Можеш згадати діда Петра чи прислів’я, але не в кожній відповіді.
+Якщо в розповіді є ознаки насильства, погроз, приниження чи контролю — м’яко, але чітко скажи, що так не має бути, і порадь звернутися на Національну гарячу лінію з питань домашнього насильства 116 123 (безкоштовно), а якщо є небезпека зараз — дзвонити 102.
+Профіль коханої людини (JSON): ${JSON.stringify(profileForAI())}`;
+}
+async function sendChat(text){
+  text = (text||'').trim(); if(!text || UI.chatBusy) return;
+  if(AI_STATE!=='ready'){ toast(aiHowTo()); return; }
+  if(chatLeft()<=0){ openSheet('sub', {reason:'chat'}); return; }
+  if(S.chat.day!==TODAY){ S.chat.turns = S.chat.turns.slice(-6); }
+  S.chat.turns.push({role:'user', content:text}); S.chat.turns.push({role:'assistant', content:'', pending:true});
+  UI.chatBusy = true; renderSheet(); scrollChat();
+  const ctl = new AbortController(); UI.chatCtl = ctl;
+  const hist = S.chat.turns.filter(t=>!t.pending && t.content).slice(-12).map(t=>({role:t.role, content:t.content}));
+  const last = S.chat.turns[S.chat.turns.length-1];
+  try{
+    const {text:ans} = await SAMPLE([{role:'user', content:chatRules()}, ...hist], {modelTier:'quick', cache:false, signal:ctl.signal,
+      onText:({text})=>{ last.content=text; const b=$('#pending-msg'); if(b){ b.textContent=text; scrollChat(); } }});
+    last.content = ans; delete last.pending; useChat();
+  }catch(e){
+    delete last.pending;
+    const c = e && e.code;
+    if(e && e.text){ last.content = e.text + (c==='cancelled' ? '' : ' …'); }
+    else if(c==='cancelled'){ last.content = '('+G('ти зупинив','ти зупинила')+' відповідь)'; }
+    else if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(c)){ AI_STATE='off'; last.content=aiErrText(e, 'Не можу зараз відповісти: ШІ недоступний у цьому перегляді.'); }
+    else if(c==='rate_limited'){ last.content='Ох, забагато питань за раз. Дай бабусі кілька хвилин.'; }
+    else if(c==='refused'){ last.content='Про це я говорити не буду, а от про стосунки — завжди будь ласка.'; }
+    else { last.content=aiErrText(e, 'Щось зв’язок перервався. Спробуй ще раз.'); }
+  }finally{ UI.chatBusy=false; UI.chatCtl=null; save(); renderSheet(); scrollChat(); }
+}
+function scrollChat(){ const b=$('#sheet .sheet-b'); if(b) b.scrollTop=b.scrollHeight; }
+
+// ---------- Екрани ----------
+const TABS = [['today','Сьогодні',I.home],['advice','Поради',I.book],['grannies','Бабусі',I.users],['ideas','Ідеї',I.gift],['dates','Дати',I.bell],['profile','Профіль',I.heart]];
+function renderTabs(){
+  $('#tabbar').innerHTML = TABS.map(([id,l,ic])=>`<button class="tab ${S.tab===id?'on':''}" data-act="tab" data-v="${id}" aria-current="${S.tab===id?'page':'false'}">${ic}<span>${l}</span></button>`).join('');
+}
+function greetWord(){ const h=new Date().getHours(); return h<5?'Доброї ночі':h<12?'Доброго ранку':h<18?'Добрий день':'Добрий вечір'; }
+
+function vToday(){
+  const a = todayAdvice(), done = S.tasksDone[TODAY]===a.id, saved = S.savedAdvice.includes(a.id);
+  const ev = events()[0];
+  const idea = currentIdeas().acts.find(x=>!isDone('acts', x.title));
+  const streak = (()=>{ let n=0; const d=today(); for(let i=0;i<60;i++){ const k=dkey(new Date(d.getFullYear(), d.getMonth(), d.getDate()-i)); if(S.tasksDone[k]!==undefined) n++; else if(i>0) break; } return n; })();
+  return `<div class="stack">
+  <div class="row between" style="padding-top:6px">
+    <div><div class="eyebrow">${WDAYS[today().getDay()]}, ${fmtDM(today())}</div><h1 class="h1">${greetWord()}${S.user.name? ', '+esc(S.user.name):''}</h1></div>
+    <button class="icon-btn" data-act="tab" data-v="dates" aria-label="Нагадування">${I.bell}${S.notif.allowed?'':'<span class="dot"></span>'}</button>
+  </div>
+  <div class="today-grid"><div class="col">
+  <div class="say">${avatar(58)}<div class="bubble hand">${esc(fillVoc(GREETINGS[dayOfYear()%GREETINGS.length]))}</div></div>
+
+  <article class="page stack" style="gap:10px">
+    <div class="row between"><span class="eyebrow">Порада дня · день ${adviceDayNo(a)} з ${ADVICE.length}</span><span class="tag cat-${a.c}">${CATS[a.c]}</span></div>
+    <div class="hand title">${esc(a.t)}</div>
+    <p>${esc(fillVoc(a.x))}</p>
+    <button class="task ${done?'done':''}" data-act="taskDone" data-v="${a.id}" aria-pressed="${done}">
+      <span class="check">${I.check}</span><span><span class="eyebrow">Завдання на сьогодні</span><br><span class="task-t">${esc(a.k)}</span></span>
+    </button>
+    <div class="row wrap" style="gap:8px">
+      <button class="btn sm soft" data-act="saveAdvice" data-v="${a.id}">${saved?I.bookmarkF:I.bookmark}${saved?'Збережено':'Зберегти'}</button>
+      <button class="btn sm soft" data-act="share" data-v="${a.id}">${I.copy}Скопіювати</button>
+      <button class="btn sm" data-act="openDonate">${I.cup}Дякую, бабусю</button>
+    </div>
+  </article>
+  ${streak>1?`<p class="small muted" style="text-align:center">Завдання виконано ${streak} ${plural(streak,DAYS)} поспіль. Бабуся тішиться.</p>`:''}
+  </div><div class="col">
+
+  ${ev?`<div class="card stack" style="gap:12px">
+    <div class="count ${ev.days<=7?'soon':''}"><div class="num"><b>${ev.days}</b><span>${plural(ev.days,DAYS)}</span></div>
+      <div style="min-width:0"><div class="eyebrow">Найближча дата</div><div class="h2">${esc(ev.title)}</div><div class="small muted">${esc(evSub(ev))}</div></div></div>
+    <button class="btn soft block" data-act="focusEvent" data-v="${esc(ev.id)}">${I.gift}Підготуватися з бабусею</button>
+  </div>`:`<div class="card flat stack" style="gap:8px"><div class="h2">Додай важливі дати</div><p class="small muted">День народження, річниця, перше побачення. Бабуся нагадає заздалегідь.</p><button class="btn sm soft" data-act="openAddDate">${I.plus}Додати дату</button></div>`}
+
+  ${idea?`<div class="card stack" style="gap:8px">
+    <div class="row between"><span class="eyebrow">Ідея на сьогодні</span>${currentIdeas().src==='ai'?'<span class="tag ai">ШІ</span>':''}</div>
+    <div class="h2">${esc(idea.title)}</div><p class="small muted">${esc(idea.why)}</p>
+    <button class="btn ghost sm" style="align-self:flex-start" data-act="tab" data-v="ideas">Більше ідей ${I.chev}</button>
+  </div>`:''}
+
+  ${(()=>{ const a=userAge(); const w=activeWeights(); const tt=topTopic(); const g=allGrannies().slice().sort((x,y)=>matchScore(y,w)-matchScore(x,w))[0];
+    return `<div class="card stack" style="gap:10px"><div class="eyebrow">Бабусі радять тобі</div>
+      <div class="row" style="gap:12px">${grannyAvatar(g,52)}<div style="min-width:0"><b>${esc(g.name)}</b><div class="small muted">${a?'Тема для тебе: '+TOPIC_UA[tt]:'Вкажи вік, і я підберу бабусю саме тобі'}</div></div></div>
+      <button class="btn soft block" data-act="tab" data-v="grannies">${I.users}До бабусь-порадниць</button></div>`; })()}
+  <button class="card row" style="border:0; text-align:left; width:100%" data-act="openChat">
+    ${avatar(44)}<div style="flex:1; min-width:0"><div class="h2">Спитати бабусю</div><div class="small muted">Посварились? Не знаєте, що подарувати? Напиши.</div></div>${I.chev}
+  </button>
+  ${!isPro()?`<div class="pro-card vis-mobile"><div class="row between"><div class="h2">Бабусина скриня</div><span class="tag pro">7 днів безкоштовно</span></div><p class="small">Усі ${ADVICE.length} порад, безліміт ідей від ШІ, розмови з бабусею і нагадування за два тижні.</p><button class="btn" data-act="openSub">Відкрити скриню</button></div>`:''}
+  </div></div>
+  </div>`;
+}
+
+function vAdvice(){
+  const read = S.readAdvice.length, td = todayAdvice();
+  const cats = [['all','Усі'],['saved','Збережені'],...Object.entries(CATS)];
+  let list = ADVICE;
+  if(UI.adviceCat==='saved') list = ADVICE.filter(a=>S.savedAdvice.includes(a.id));
+  else if(UI.adviceCat!=='all') list = ADVICE.filter(a=>a.c===UI.adviceCat);
+  return `<div class="stack">
+  <div style="padding-top:6px"><div class="eyebrow">Бабусин зошит</div><h1 class="h1">Скриня порад</h1></div>
+  <div class="card flat stack" style="gap:8px">
+    <div class="row between small"><b>Прочитано ${read} з ${ADVICE.length}</b><span class="muted">${isPro()?'Усе відкрито':'Відкрито '+FREE_ADVICE+' + порада дня'}</span></div>
+    <div class="progress"><i style="width:${Math.round(read/ADVICE.length*100)}%"></i></div>
+  </div>
+  <div class="chips scroll" role="tablist">${cats.map(([k,l])=>`<button class="chip ${UI.adviceCat===k?'on':''}" data-act="adviceCat" data-v="${k}">${l}</button>`).join('')}</div>
+  ${list.length? '<div class="grid-cards">'+list.map(a=>{ const locked = !isPro() && a.id>=FREE_ADVICE && a.id!==td.id; const isRead=S.readAdvice.includes(a.id);
+    return `<button class="adv ${locked?'locked':''} ${isRead?'read':''}" data-act="openAdvice" data-v="${a.id}">
+      <div class="day"><small>день</small>${adviceDayNo(a)}</div>
+      <div class="grow"><div class="row between" style="gap:6px"><b>${esc(a.t)}</b>${locked?`<span class="lock">${I.lock}</span>`: a.id===td.id?'<span class="tag cat-attention">сьогодні</span>':''}</div>
+      <div class="ex">${esc(fillVoc(a.x))}</div></div></button>`; }).join('')+'</div>'
+   : `<p class="empty">Тут поки порожньо. Збережи пораду, і вона з’явиться тут.</p>`}
+  </div>`;
+}
+
+function ideaCard(it, kind){
+  const id = it.id || hash(kind+it.title), saved = S.savedIdeas.some(s=>s.id===id), done = S.doneIdeas.some(d=>d.id===id);
+  const link = it.url ? `<a class="btn sm soft" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">Відкрити ${I.ext}</a>`
+    : it.query ? `<a class="btn sm soft" href="${esc(storeLinks(it.query,'gift',S.partner.city)[0][1])}" target="_blank" rel="noopener noreferrer">Шукати ${I.ext}</a>`
+    : (kind==='gifts' || kind==='dates') ? `<button class="btn sm soft" data-act="findIdea" data-v="${esc(it.title)}" data-k="${kind}" aria-label="Знайти в інтернеті">${I.search}</button>` : '';
+  return `<article class="idea ${done?'done':''}">
+    <div class="t">${esc(it.title)}</div>
+    ${it.why?`<div class="why">${esc(it.why)}</div>`:''}
+    <div class="acts">${it.meta?`<span class="tag">${esc(it.meta)}</span>`:''}<span style="flex:1"></span>
+      ${link}<button class="btn sm soft" data-act="saveIdea" data-v="${id}" data-k="${kind}" aria-label="${saved?'Прибрати зі збережених':'Зберегти'}">${saved?I.bookmarkF:I.bookmark}</button>
+      <button class="btn sm ${done?'soft':''}" data-act="doneIdea" data-v="${id}" data-k="${kind}">${done?I.check+'Зроблено':G('Зробив','Зробила')}</button></div>
+  </article>`;
+}
+function vIdeas(){
+  const ideas = currentIdeas(), tab = UI.ideasTab;
+  const tabs = [['gifts','Подарунки'],['acts','Вчинки'],['dates','Побачення'],['find','Знайти']];
+  const left = aiLeft();
+  let body;
+  if(UI.showSaved){
+    const sv = S.savedIdeas;
+    const dn = S.doneIdeas.filter(d=>d.title).slice().reverse();
+    body = (sv.length ? '<div class="grid-cards">'+sv.map(s=>ideaCard(s, s.kind)).join('')+'</div>' : '<p class="empty">Збережених ідей поки немає. Натисни закладку на картці, щоб відкласти ідею на потім.</p>')
+      + (dn.length ? `<div class="h2" style="margin-top:8px">Уже зроблено · ${dn.length}</div><p class="small muted">Ці ідеї бабуся більше не пропонуватиме.</p>` + '<div class="grid-cards">'+dn.map(d=>ideaCard(d, d.kind)).join('')+'</div>' : '');
+  } else if(tab==='find'){
+    body = searchView();
+  } else if(UI.loading && (UI.loading==='all' || UI.loading===tab)){
+    body = `<div class="say">${avatar(44)}<div class="bubble hand" id="loadline">${esc(LOAD_LINES[UI.loadMsg].replace('{name}', pName()))}</div></div>
+      <div class="grid-cards"><div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      <button class="btn soft more" data-act="stopAI">Зупинити</button>`;
+  } else {
+    const arr = ideas[tab] || [];
+    body = (ideas.granny?`<div class="say">${avatar(44)}<div class="bubble hand">${esc(ideas.granny)}</div></div>`:'')
+      + (arr.length ? '<div class="grid-cards">'+arr.map(it=>ideaCard(it, tab)).join('')+'</div>' : '<p class="empty">Тут поки порожньо. Спробуй підібрати ще раз.</p>')
+      + `<button class="btn soft more" data-act="moreIdeas">${I.spark}Ще ідеї</button>`;
+  }
+  const aiBox = AI_STATE==='ready'
+    ? `<div class="ai-box">
+        <div class="row" style="gap:12px">${avatar(46)}<div style="min-width:0"><div class="h2">Підбір з бабусею</div><div class="small">Ідеї з урахуванням усього, що ти ${G('розповів','розповіла')} про ${esc(pName())}.</div></div></div>
+        <div class="ai-act"><button class="btn block" data-act="runAI" ${UI.loading?'disabled':''}>${I.spark}${ideas.src==='ai'?'Підібрати заново':'Підібрати з ШІ'}</button>
+        <div class="small muted" style="text-align:center">${left===Infinity?'Безліміт у Бабусиній скрині':`Безкоштовно сьогодні: ${left} з ${AI_FREE}`}</div></div>
+      </div>`
+    : AI_STATE==='checking' ? `<div class="ai-box"><div class="small">Перевіряю, чи доступний ШІ…</div></div>`
+    : `<div class="card flat small">Зараз показую ідеї за профілем. ${esc(aiHowTo())}</div>`;
+  return `<div class="stack">
+    <div style="padding-top:6px" class="row between"><div><div class="eyebrow">Для: ${esc(pName())}</div><h1 class="h1">Ідеї, що зігріють</h1></div>
+      <button class="chip ${UI.showSaved?'on':''}" data-act="toggleSaved">${I.bookmark} ${S.savedIdeas.length}</button></div>
+    ${UI.focus?`<div class="focus-banner">${I.gift}<div class="grow"><b>Готуємось: ${esc(UI.focus.title)}</b><br>${esc(fmtDM(UI.focus.date))}, ${whenTxt(UI.focus.days)}</div><button class="icon-btn" style="width:32px;height:32px" data-act="clearFocus" aria-label="Прибрати привід">${I.close}</button></div>`:''}
+    ${UI.showSaved?'<div class="h2">Збережені ідеї</div>':`<div class="seg" role="tablist">${tabs.map(([k,l])=>`<button class="${tab===k?'on':''}" data-act="ideasTab" data-v="${k}" role="tab" aria-selected="${tab===k}">${k==='find'?I.search:''}${l}</button>`).join('')}</div>`}
+    ${UI.showSaved || tab==='find' ? '' : aiBox}
+    ${UI.aiNote && tab!=='find' ?`<p class="small" style="color:var(--rose-deep)">${esc(UI.aiNote)}</p>`:''}
+    ${UI.showSaved || tab==='find' ? '' : `<div class="small muted">${ideas.src==='ai'?'<span class="tag ai">ШІ</span> Підібрано бабусею персонально':'Швидкі ідеї за інтересами й улюбленими речами'}</div>`}
+    ${body}
+  </div>`;
+}
+
+function sampleNotifs(){
+  const a = todayAdvice(), ev = events()[0], i = currentIdeas();
+  const out = [];
+  if(S.notif.daily) out.push({when:'Сьогодні, '+S.notif.time, t:'Порада дня', b:`«${a.t}». ${a.k}`});
+  if(S.notif.dates && ev && ev.days<=Math.max(S.notif.lead,14)) out.push({when:'Сьогодні, 10:00', t:ev.title+' '+whenTxt(ev.days), b:'Я вже маю кілька ідей. Заглянь, поки є час.'});
+  if(S.notif.weekend && i.dates[0]) out.push({when:'Пт, 18:00', t:'Ідея на вихідні', b:i.dates[0].title});
+  return out;
+}
+function vDates(){
+  const evs = events();
+  const leads = [1,3,7,14];
+  const n = S.notif;
+  return `<div class="stack">
+    <div style="padding-top:6px" class="row between"><div><div class="eyebrow">Календар серця</div><h1 class="h1">Дати й нагадування</h1></div>
+      <button class="icon-btn" data-act="openAddDate" aria-label="Додати дату">${I.plus}</button></div>
+    <div class="two-col"><div class="col">
+    ${!n.allowed?`<div class="card flat stack" style="gap:8px"><div class="h2">Сповіщення вимкнені</div><p class="small muted">Без них бабуся не зможе нагадати про важливе.</p><button class="btn sm" data-act="askNotif">Увімкнути сповіщення</button></div>`:''}
+    <div class="h2">Найближчі дати</div>
+    <div class="stack" style="gap:10px">
+      ${evs.length? evs.map(e=>`<div class="card count ${e.days<=7?'soon':''}" style="padding:12px">
+        <div class="num"><b>${e.days}</b><span>${plural(e.days,DAYS)}</span></div>
+        <div style="flex:1;min-width:0"><b>${esc(e.title)}</b><div class="small muted">${esc(evSub(e))}${e.own?'':' · свято'}</div></div>
+        <button class="btn sm soft" data-act="focusEvent" data-v="${esc(e.id)}" aria-label="Ідеї до цієї дати">${I.gift}</button>
+      </div>`).join('') : '<p class="empty">Дат поки немає. Додай день народження чи річницю.</p>'}
+    </div>
+    </div><div class="col">
+    <div class="h2">Що й коли нагадувати</div>
+    <div class="card list" style="padding:4px 16px">
+      <div class="li"><div class="grow"><b>Порада дня</b><div class="small muted">Щодня о ${n.time}</div></div>
+        <select class="input" style="width:96px;min-height:38px;padding:4px 8px" id="notifTime" data-bind="notif.time" aria-label="Час поради">${['08:00','09:00','12:00','20:00'].map(t=>`<option ${n.time===t?'selected':''}>${t}</option>`).join('')}</select>
+        <button class="switch ${n.daily?'on':''}" data-act="toggleNotif" data-v="daily" aria-label="Порада дня" aria-pressed="${n.daily}"></button></div>
+      <div class="li"><div class="grow"><b>Важливі дати</b><div class="small muted">Нагадаю заздалегідь</div></div><button class="switch ${n.dates?'on':''}" data-act="toggleNotif" data-v="dates" aria-label="Важливі дати" aria-pressed="${n.dates}"></button></div>
+      <div class="li" style="display:block"><div class="lbl" style="margin-bottom:8px">За скільки днів</div>
+        <div class="chips">${leads.map(l=>{ const lock=!isPro() && l>3; return `<button class="chip ${n.lead===l?'on':''}" data-act="setLead" data-v="${l}">${lock?I.lock:''}за ${l} ${plural(l,DAYS)}</button>`; }).join('')}</div></div>
+      <div class="li"><div class="grow"><b>Ідеї на вихідні</b><div class="small muted">П’ятниця, 18:00</div></div><button class="switch ${n.weekend?'on':''}" data-act="toggleNotif" data-v="weekend" aria-label="Ідеї на вихідні" aria-pressed="${n.weekend}"></button></div>
+      <div class="li"><div class="grow"><b>Свята</b><div class="small muted">День закоханих, Новий рік</div></div><button class="switch ${n.holidays?'on':''}" data-act="toggleNotif" data-v="holidays" aria-label="Свята" aria-pressed="${n.holidays}"></button></div>
+    </div>
+    <div class="row between"><div class="h2">Останні сповіщення</div><button class="btn ghost sm" data-act="testPush">Показати приклад</button></div>
+    <div class="card list" style="padding:4px 16px">${sampleNotifs().map(x=>`<div class="li">${avatar(34)}<div class="grow"><div class="small muted">${esc(x.when)}</div><b>${esc(x.t)}</b><div class="small">${esc(x.b)}</div></div></div>`).join('') || '<p class="empty" style="padding:12px 0">Усі сповіщення вимкнено.</p>'}</div>
+    </div></div>
+  </div>`;
+}
+
+function completeness(){
+  const p=S.partner; const parts=[!!p.name, !!p.city, p.interests.length>0, Object.values(p.fav).filter(Boolean).length>=3, p.dates.length>0, p.habits.length>0, !!p.love, !!p.dislikes];
+  return Math.round(parts.filter(Boolean).length/parts.length*100);
+}
+function vProfile(){
+  const p = S.partner, pc = completeness(), lv = LOVE.find(l=>l.id===p.love);
+  const favL = {food:'Страва', flowers:'Квіти', drink:'Напій', sweets:'Солодке', color:'Колір', music:'Музика', films:'Фільми', books:'Книги'};
+  const favs = Object.entries(p.fav).filter(([,v])=>v);
+  const sec = (key, title, inner) => `<section class="psec"><div class="head"><div class="h2">${title}</div><button class="btn ghost sm" data-act="edit" data-v="${key}">${I.edit}Змінити</button></div>${inner}</section>`;
+  return `<div class="stack">
+    <div class="ph" style="padding-top:8px"><div class="ini">${esc((p.name||'?').trim().charAt(0).toUpperCase()||'?')}</div>
+      <div style="min-width:0"><div class="eyebrow">Кохана людина</div><h1 class="h1">${esc(p.name||'Без імені')}</h1><div class="small muted">${p.city?esc(p.city)+' · ':''}${p.pron==='he'?'він':'вона'}</div></div></div>
+    <div class="card flat stack" style="gap:8px">
+      <div class="row between small"><b>Бабусин зошит заповнено на ${pc}%</b><span class="muted">${pc<100?'Що більше деталей, то точніші ідеї':'Бабуся знає все'}</span></div>
+      <div class="progress"><i style="width:${pc}%"></i></div>
+    </div>
+    <div class="prof-cols">
+    ${sec('basic','Основне', `<dl class="kv"><dt>Ім’я</dt><dd>${esc(p.name)||'<span class="empty">не вказано</span>'}</dd><dt>Місто</dt><dd>${esc(p.city)||'<span class="empty">не вказано</span>'}</dd><dt>Займенник</dt><dd>${p.pron==='he'?'він':'вона'}</dd></dl>`)}
+    ${sec('interests','Інтереси', p.interests.length?`<div class="chips">${p.interests.map(i=>`<span class="chip">${esc(i)}</span>`).join('')}</div>`:'<p class="empty">Що любить робити у вільний час?</p>')}
+    ${sec('fav','Улюблене', favs.length?`<dl class="kv">${favs.map(([k,v])=>`<dt>${favL[k]}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`:'<p class="empty">Улюблені страви, квіти, музика…</p>')}
+    <section class="psec"><div class="head"><div class="h2">Важливі дати</div><button class="btn ghost sm" data-act="openAddDate">${I.plus}Додати</button></div>
+      ${p.dates.length?`<div class="list">${p.dates.map(d=>{ const o=nextOcc(d.date); return `<div class="li"><div class="grow"><b>${esc(d.title)}</b><div class="small muted">${esc(fmtDM(o.date))} · ${whenTxt(o.days)}</div></div><button class="icon-btn" style="width:34px;height:34px" data-act="delDate" data-v="${d.id}" aria-label="Видалити">${I.trash}</button></div>`; }).join('')}</div>`:'<p class="empty">День народження, річниця, перше побачення.</p>'}</section>
+    ${sec('habits','Звички й деталі', p.habits.length?`<ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px">${p.habits.map(h=>`<li>${esc(h)}</li>`).join('')}</ul>`:'<p class="empty">Наприклад: «мерзне, завжди бере плед».</p>')}
+    ${sec('love','Мова любові', lv?`<b>${lv.t}</b><div class="small muted">${lv.d}</div>`:'<p class="empty">Як найкраще відчуває любов?</p>')}
+    ${sec('dislikes','Не любить і алергії', p.dislikes?`<p>${esc(p.dislikes)}</p>`:'<p class="empty">Щоб бабуся не порадила лілії алергику.</p>')}
+    </div>
+    ${stitch()}
+    <div class="h2">Ти і бабуся</div>
+    <div class="two-col">
+    <div class="card list" style="padding:4px 16px">
+      <button class="li" style="border-left:0;border-right:0;border-top:0;background:none;width:100%;text-align:left" data-act="edit" data-v="me"><div class="grow"><b>${esc(S.user.name||'Твоє ім’я')}</b><div class="small muted">${userAge()? userAge()+' '+yearsWord(userAge())+' · ':''}бабуся кличе тебе «${VOC()}»</div></div>${I.chev}</button>
+      <button class="li" style="border-left:0;border-right:0;border-top:0;background:none;width:100%;text-align:left" data-act="openSub"><div class="grow"><b>${isPro()?'Бабусина скриня активна':'Бабусина скриня'}</b><div class="small muted">${isPro()?(S.premium==='year'?'Річна підписка':'Місячна підписка')+' · керувати':'Від 66 ₴ на місяць'}</div></div>${isPro()?'<span class="tag pro">активна</span>':I.chev}</button>
+      <button class="li" style="border:0;background:none;width:100%;text-align:left" data-act="openDonate"><div class="grow"><b>Пригостити бабусю</b><div class="small muted">${S.donations.length?G('Ти вже пригощав ','Ти вже пригощала ')+S.donations.length+' '+plural(S.donations.length,['раз','рази','разів']):'Підтримати донатом'}</div></div>${I.cup}</button>
+    </div>
+    <div class="card row" style="gap:14px">${avatar(56)}<div style="flex:1;min-width:0"><b>Фото бабусі</b><div class="small muted">${S.photo?'Завантажено (видно лише тобі)':'Зараз намальована бабуся'}</div></div>
+      <div class="stack" style="gap:6px"><button class="btn sm soft" data-act="photoPick">${I.cam}${S.photo?'Змінити':'Завантажити'}</button>${S.photo?'<button class="btn ghost sm" data-act="photoReset">Прибрати</button>':''}</div></div>
+    </div>
+    <div class="vis-mobile">${testTools()}</div>
+  </div>`;
+}
+function testTools(){
+  return `<div class="card flat stack" style="gap:10px"><div class="eyebrow">Для тестувальників</div>
+    <div class="row wrap" style="gap:8px">
+      <button class="btn sm soft" data-act="fillExample">Заповнити прикладом</button>
+      <button class="btn sm soft" data-act="togglePro">${isPro()?'Вимкнути скриню':'Увімкнути скриню'}</button>
+      <button class="btn sm soft" data-act="testPush">Сповіщення</button>
+      <button class="btn sm soft" data-act="restartOnb">Онбординг заново</button>
+      <button class="btn sm soft" data-act="resetAll">Стерти все</button>
+    </div></div>`;
+}
+
+// ---------- Онбординг ----------
+const OB_STEPS = 9;
+function vOnb(){
+  const st = S.obStep, p = S.partner, n = p.name.trim() || 'твоя людина';
+  const say = t => `<div class="say">${avatar(64)}<div class="bubble hand">${esc(t)}</div></div>`;
+  let body = '', next = 'Далі', canNext = true;
+  if(st===0){
+    body = `<div class="onb-hero">${avatar(150)}<div class="eyebrow">Поради бабусі</div><h1 class="h1" style="font-size:27px">Добрий день! Я бабуся Ганна</h1>
+      <p class="hand" style="font-size:25px">52 роки в шлюбі з дідом Петром. Дещо про любов таки знаю.</p>
+      <p class="muted">Щодня даватиму пораду, нагадуватиму про важливі дати й підказуватиму, чим потішити кохану людину.</p>${stitch()}</div>`;
+    next = 'Познайомитися';
+  } else if(st===1){
+    body = say('Спершу скажи, як тебе звати. Бо «гей, ти» — то не до бабусі.') + `
+      <div class="field"><label for="ob-uname">Твоє ім’я</label><input class="input" id="ob-uname" data-bind="user.name" value="${esc(S.user.name)}" placeholder="Наприклад, Андрій" autocomplete="given-name"></div>
+      <div class="field"><label for="ob-age">Скільки тобі років?</label><input class="input" id="ob-age" type="number" min="16" max="100" inputmode="numeric" data-bind="user.age" value="${esc(S.user.age||'')}" placeholder="Наприклад, 27" style="max-width:200px"><span class="small muted">Щоб підібрати бабусю-порадницю й теми. Можна пропустити.</span></div>
+      <div class="field"><span class="lbl">Як бабусі до тебе звертатися?</span><div class="pick">
+        <button class="${S.user.kind==='f'?'on':''}" data-act="set" data-v="user.kind=f">онученько</button><button class="${S.user.kind==='m'?'on':''}" data-act="set" data-v="user.kind=m">онучку</button></div></div>`;
+  } else if(st===2){
+    body = say('А тепер про найголовніше. Хто ж це в тебе така гарна людина?') + `
+      <div class="field"><label for="ob-pname">Ім’я коханої людини</label><input class="input" id="ob-pname" data-bind="partner.name" value="${esc(p.name)}" placeholder="Наприклад, Олена"></div>
+      <div class="field"><span class="lbl">Як про неї чи нього казати?</span><div class="pick">
+        <button class="${p.pron==='she'?'on':''}" data-act="set" data-v="partner.pron=she">вона</button><button class="${p.pron==='he'?'on':''}" data-act="set" data-v="partner.pron=he">він</button></div></div>
+      <div class="field"><label for="ob-city">Місто</label><input class="input" id="ob-city" data-bind="partner.city" value="${esc(p.city)}" placeholder="Щоб радити місця для побачень"></div>`;
+  } else if(st===3){
+    body = say(`Що ${n} любить? Обирай сміливо, хоч і все підряд.`) + interestsPicker();
+    canNext = p.interests.length>0;
+  } else if(st===4){
+    body = say(`Розкажи, чим ${n} можна потішити. Я про такі речі завжди пам’ятаю.`) + `
+      ${favField('food','Улюблена страва','сирники з родзинками')}${favField('flowers','Улюблені квіти','півонії')}${favField('drink','Улюблений напій','капучино на вівсяному')}${favField('sweets','Солодке','чорний шоколад')}
+      <p class="small muted">Решту (музику, фільми, книги) можна додати потім у профілі.</p>`;
+  } else if(st===5){
+    const b = p.dates.find(d=>d.type==='bday'), an = p.dates.find(d=>d.type==='anniv');
+    body = say('Дати — то святе. Нагадаю заздалегідь, щоб не бігати в останню хвилину за квітами на заправці.') + `
+      <div class="field"><label for="ob-bday">День народження</label><input class="input" type="date" id="ob-bday" data-obdate="bday" value="${b?esc(b.date):''}"></div>
+      <div class="field"><label for="ob-anniv">Річниця стосунків</label><input class="input" type="date" id="ob-anniv" data-obdate="anniv" value="${an?esc(an.date):''}"></div>
+      <p class="small muted">Інші дати (знайомство, весілля, дні народження рідних) додаси потім.</p>`;
+  } else if(st===6){
+    body = say(`Кожен любить по-своєму. Як ${n} найбільше відчуває любов?`) + `<div class="ll">${LOVE.map(l=>`<button class="${p.love===l.id?'on':''}" data-act="set" data-v="partner.love=${l.id}"><div><b>${l.t}</b><span>${l.d}</span></div></button>`).join('')}</div>
+      <div class="field"><label for="ob-dis">Чого не любить або на що алергія?</label><input class="input" id="ob-dis" data-bind="partner.dislikes" value="${esc(p.dislikes)}" placeholder="Наприклад, лілії, гучні вечірки"></div>`;
+  } else if(st===7){
+    body = say('Можна я іноді писатиму? Порада зранку і нагадування перед важливими днями.') + `
+      <div class="card stack" style="gap:10px">
+        <div class="li"><div class="grow"><b>Порада дня</b><div class="small muted">Щодня о ${S.notif.time}</div></div></div>
+        <div class="li"><div class="grow"><b>Важливі дати</b><div class="small muted">За ${S.notif.lead} ${plural(S.notif.lead,DAYS)} до події</div></div></div>
+        <div class="li"><div class="grow"><b>Ідеї на вихідні</b><div class="small muted">У п’ятницю ввечері</div></div></div>
+      </div>
+      ${S.notif.allowed?'<p class="small" style="color:var(--sage-deep);font-weight:800">Сповіщення увімкнено</p>':''}`;
+    next = S.notif.allowed ? 'Далі' : 'Дозволити сповіщення';
+  } else {
+    body = `<div class="onb-hero">${avatar(130)}<h1 class="h1">Усе записала у свій зошит</h1>
+      <p class="hand" style="font-size:25px">Ну от, ${esc(S.user.name||VOC())}, тепер я знаю про ${esc(p.name||'твою людину')} трошки більше, ніж ти думаєш. Ходімо, покажу першу пораду.</p>${stitch()}</div>`;
+    next = 'Почати';
+  }
+  return `<div class="onb-top">${st>0?`<button class="icon-btn" data-act="obBack" aria-label="Назад" style="transform:scaleX(-1)">${I.chev}</button>`:''}
+      <div class="onb-steps">${Array.from({length:OB_STEPS},(_,i)=>`<i class="${i<=st?'on':''}"></i>`).join('')}</div>
+      ${st>0&&st<OB_STEPS-1?'<button class="btn ghost sm" data-act="obNext" data-v="skip">Пропустити</button>':''}</div>
+    <div class="onb-b">${body}</div>
+    <div class="onb-f" style="flex-direction:column">
+      <button class="btn block" data-act="obNext" ${canNext?'':'disabled'}>${next}</button>
+      ${st===0?'<button class="btn ghost block" data-act="fillExample">Заповнити прикладом (для тесту)</button>':''}
+    </div>`;
+}
+function favField(k, label, ph){ return `<div class="field"><label for="fav-${k}">${label}</label><input class="input" id="fav-${k}" data-bind="partner.fav.${k}" value="${esc(S.partner.fav[k])}" placeholder="${esc(ph)}"></div>`; }
+function interestsPicker(){
+  const all = [...new Set([...Object.keys(INTERESTS), ...S.partner.interests])];
+  return `<div class="chips">${all.map(k=>`<button class="chip ${S.partner.interests.includes(k)?'on':''}" data-act="toggleInterest" data-v="${esc(k)}">${esc(k)}</button>`).join('')}</div>
+    <div class="row"><input class="input" id="customInterest" placeholder="Свій варіант, напр. риболовля" style="flex:1"><button class="btn soft" data-act="addInterest" aria-label="Додати інтерес">${I.plus}</button></div>`;
+}
+
+// ---------- Бабусі: модель за віком і спільнота порадниць ----------
+// Модель навчено в ml/life_stage_classifier.ipynb (логістична регресія, UCI Adult). Тут лише її коефіцієнти.
+const MODEL = {"name":"life-stage-by-age","algorithm":"multinomial logistic regression (scikit-learn)","dataset":"UCI Adult (Census Income), 1994, CC BY 4.0","n_train":39073,"n_test":9769,"features":["a","a^2","a^3"],"age_min":17,"age_max":80,"age_mu":38.655363038415274,"age_sd":13.67802538177475,"scaler_mean":[0.0,0.99997441,0.52815071],"scaler_scale":[0.9999872,1.29489987,3.43353437],"classes":["divorced","married","single","widowed"],"coef":[[0.09293094,-0.52135768,0.20761291],[0.02934909,-0.37896179,0.28717121],[-1.46323035,0.7192684,-0.24805325],[1.34095032,0.18105107,-0.24673088]],"intercept":[0.36740138,1.33767267,0.77648907,-2.48156313],"metrics":{"accuracy":0.622,"macro_f1":0.348,"log_loss":0.909,"baseline_accuracy":0.459,"cv_accuracy_mean":0.625,"with_sex_accuracy_rejected":0.684},"topics":{"single":{"relationships":1.0,"kindness":0.2},"married":{"family":1.0,"relationships":0.4},"divorced":{"support":1.0,"relationships":0.3},"widowed":{"support":0.7,"kindness":0.8}}};
+const STAGES = ['single','married','divorced','widowed'];
+const STAGE_UA = {single:'Ще не в шлюбі', married:'У шлюбі', divorced:'Розлучення / окремо', widowed:'Вдівство'};
+const STAGE_SHORT = {single:'Не в шлюбі', married:'У шлюбі', divorced:'Розлучення', widowed:'Вдівство'};
+const TOPIC_UA = {relationships:'Стосунки', family:'Сім’я', kindness:'Доброта', support:'Підтримка'};
+const TOPIC_D = {relationships:'Кохання, побачення, сварки й примирення', family:'Шлюб, діти, рідня і побут', kindness:'Як бути добрішими одне до одного й до себе', support:'Як пережити розрив, втрату чи важкий час'};
+const GRANNY_SHARE = 0.8; // частка оплати, яку отримує бабуся
+
+function predictStages(age){
+  const M = MODEL, x = Math.min(M.age_max, Math.max(M.age_min, +age));
+  const a = (x - M.age_mu) / M.age_sd;
+  const f = [a, a*a, a*a*a].map((v,j) => (v - M.scaler_mean[j]) / M.scaler_scale[j]);
+  const z = M.coef.map((w,k) => M.intercept[k] + w.reduce((s,wj,j) => s + wj*f[j], 0));
+  const mx = Math.max(...z), e = z.map(v => Math.exp(v - mx)), sum = e.reduce((p,q) => p+q, 0);
+  const out = {}; M.classes.forEach((c,k) => out[c] = e[k]/sum); return out;
+}
+function topicWeights(age){
+  const p = predictStages(age), w = {relationships:0, family:0, kindness:0, support:0};
+  for(const s in p){ const tt = MODEL.topics[s]; for(const t in tt) w[t] += p[s]*tt[t]; }
+  return w;
+}
+function userAge(){ const a = parseInt(S.user.age, 10); return a >= 14 && a <= 110 ? a : null; }
+function activeWeights(){
+  const a = userAge();
+  const w = a ? topicWeights(a) : {relationships:.5, family:.5, kindness:.5, support:.5};
+  if(S.topicPick && w[S.topicPick] !== undefined){ for(const t in w) w[t] = t===S.topicPick ? 1.5 : w[t]*0.3; }
+  return w;
+}
+function topTopic(){ const w = activeWeights(); return Object.keys(w).sort((x,y) => w[y]-w[x])[0]; }
+function matchScore(g, w){
+  const vals = Object.values(w).sort((x,y) => y-x), best = vals[0] + (vals[1]||0);
+  return Math.round(Math.min(1, g.topics.reduce((s,t) => s + (w[t]||0), 0) / best) * 100);
+}
+
+const GRANNIES = [
+ {id:'hanna', name:'Ганна Петрівна', short:'бабуся Ганна', age:74, city:'Полтава', years:'52 роки в шлюбі з дідом Петром', topics:['relationships','family'], price:300, reply:'протягом дня',
+  look:{}, quote:'Любов — як тісто: не місиш — не підходить.',
+  bio:'Пекла найкращі в селі пироги й мирила всіх сусідів. Вірить, що більшість сварок — від утоми, а не від нелюбові.',
+  media:[
+   {id:'h1', type:'audio', title:'Як помиритися після сварки', dur:'1:10', topic:'relationships', text:'Посварилися — то не біда. Біда, коли мовчите тиждень. Перший крок робить не той, хто винен, а той, хто мудріший. Підійди, обійми й скажи: мені шкода, що ми так. Не з’ясовуй, хто почав. А ввечері спечіть щось разом: руки зайняті, а серце відтає.'},
+   {id:'h2', type:'video', title:'Три слова, які тримають шлюб', dur:'0:58', topic:'family', text:'Дякую, вибач і люблю. Ось і вся наука. Дід Петро щоранку казав мені «дякую» за чай, навіть коли чай був холодний. П’ятдесят два роки разом. Кажіть ці слова частіше, ніж здається потрібним.'},
+  ]},
+ {id:'nina', name:'Ніна Іванівна', short:'бабуся Ніна', age:68, city:'Львів', years:'23 роки в другому шлюбі', topics:['support','relationships'], price:350, reply:'за кілька годин',
+  look:{bg:'lilac', coat:'sage'}, quote:'Після розлучення життя не закінчується. Воно починає новий розділ.',
+  bio:'Сорок років учила дітей української літератури. Сама пережила розлучення в сорок і знайшла своє щастя в сорок п’ять. Допомагає тим, кому зараз боляче.',
+  media:[
+   {id:'n1', type:'audio', title:'Як пережити розрив', dur:'1:20', topic:'support', text:'Спершу дозволь собі поплакати. Сльози — то не слабкість, то душа прибирає. Не поспішай шукати нове кохання і не пиши колишньому вночі. Склади список того, що любиш робити сам, і щодня роби хоч одну річ звідти. Через пів року озирнешся й здивуєшся, скільки в тобі сили.'},
+   {id:'n2', type:'video', title:'Чи можна покохати вдруге', dur:'1:05', topic:'relationships', text:'Можна, і ще як. Тільки не неси в нове кохання старі образи, як валізу. Розкажи новій людині про свої страхи чесно. Мій Богдан узяв мене з двома дітьми й з усіма моїми страхами. І ось ми вже двадцять три роки разом.'},
+  ]},
+ {id:'valia', name:'Валентина Степанівна', short:'бабуся Валя', age:79, city:'Одеса', years:'30 років медсестрою, вдова', topics:['kindness','support'], price:250, reply:'протягом дня',
+  look:{bg:'sage', coat:'lilac', scarf:'rose'}, quote:'Доброта — це коли робиш тепло, навіть якщо ніхто не бачить.',
+  bio:'Тридцять років працювала медсестрою в дитячій лікарні. Знає, як підтримати людину, коли їй страшно чи самотньо. Після смерті чоловіка навчилася жити далі й тепер учить цього інших.',
+  media:[
+   {id:'v1', type:'audio', title:'Коли самотньо', dur:'1:15', topic:'support', text:'Самотність лікується не тільки людьми, а й турботою. Почни з малого: подзвони комусь, кого давно не чув. Нагодуй пташок на підвіконні. Запишися в хор чи на спільні прогулянки. Коли ти комусь потрібен, хоч пташці, серцю стає легше.'},
+   {id:'v2', type:'video', title:'Маленька доброта щодня', dur:'0:50', topic:'kindness', text:'Усміхнися продавчині. Подякуй водієві. Допоможи сусідці з сумками. Здається, дрібниці, а з них і складається світ. У лікарні я бачила: добре слово лікує не гірше за ліки.'},
+  ]},
+ {id:'maria', name:'Марія Олексіївна', short:'бабуся Марія', age:71, city:'Київ', years:'четверо дітей, дев’ять онуків', topics:['family','kindness'], price:300, reply:'протягом дня',
+  look:{bg:'rose', coat:'butter'}, quote:'Сім’я — це не де всі однакові, а де всіх приймають.',
+  bio:'Виростила четверо дітей і досі щонеділі збирає всю родину за столом. Знає, як помирити свекруху з невісткою і як говорити з підлітками.',
+  media:[
+   {id:'m1', type:'audio', title:'Свекруха і невістка', dur:'1:30', topic:'family', text:'Дві господині на одній кухні — завжди іспит. Невістко, не змагайся, а питай поради, навіть якщо знаєш краще. Свекрухо, більше хвали, ніж повчай. А синові скажіть: ти між нами не суддя, а міст. І готуйте разом хоч раз на місяць.'},
+   {id:'m2', type:'audio', title:'Як говорити з підлітком', dur:'1:05', topic:'family', text:'Підліток не слухає порад, він дивиться на приклад. Не допитуйся, а будь поруч: підвези, нагодуй, посидь поруч мовчки. Розповідай про свої помилки в його віці. Колись він сам прийде й розкаже. Тоді просто слухай і не перебивай.'},
+  ]},
+ {id:'olha', name:'Ольга Миколаївна', short:'бабуся Оля', age:66, city:'Харків', years:'25 років сімейною психологинею', topics:['relationships','support'], price:450, reply:'за кілька годин',
+  look:{bg:'butter', coat:'lilac'}, quote:'Почуйте одне одного раніше, ніж почнете доводити.',
+  bio:'Двадцять п’ять років працювала сімейною психологинею. Тепер говорить без кабінету, по-бабусиному: просто, тепло й по суті.',
+  media:[
+   {id:'o1', type:'video', title:'Як сперечатися без образ', dur:'1:12', topic:'relationships', text:'Правило просте: говоріть про себе, а не про партнера. Не «ти ніколи не допомагаєш», а «я втомилася, і мені потрібна допомога». Домовтеся про стоп-слово: хто його скаже, той бере паузу на двадцять хвилин. А потім обов’язково повертайтеся й договорюйте.'},
+   {id:'o2', type:'audio', title:'Тривога в стосунках', dur:'1:00', topic:'support', text:'Якщо весь час боїтеся, що вас покинуть, це не означає, що вас мало люблять. Часто це давні страхи з дитинства. Говоріть про них відкрито й просіть про конкретне: напиши, коли доїдеш. Це не слабкість, а турбота про себе.'},
+  ]},
+ {id:'katia', name:'Катерина Василівна', short:'бабуся Катя', age:82, city:'Чернігів', years:'60 років у шлюбі', topics:['family','relationships'], price:300, reply:'за день-два',
+  look:{bg:'lilac', coat:'rose', scarf:'butter'}, quote:'Шістдесят років разом — це щоденний вибір одне одного.',
+  bio:'Разом із чоловіком Іваном пережила і бідність, і переїзди, і хвороби. Їхня таємниця: ніколи не лягати спати, не помирившись, і щонеділі гуляти під руку.',
+  media:[
+   {id:'k1', type:'audio', title:'Таємниця довгого шлюбу', dur:'1:08', topic:'family', text:'Нема ніякої таємниці. Є щоденний вибір. Щоранку я вибираю свого Івана, а він мене. Навіть коли сердимося. Не чекайте, що любов сама все зробить. Любов — це дієслово.'},
+   {id:'k2', type:'video', title:'Недільна прогулянка', dur:'0:45', topic:'relationships', text:'Шістдесят років щонеділі ми гуляємо під руку. Навіть у дощ, навіть коли ноги болять. Заведіть собі маленьку традицію, тільки вашу. Вона триматиме вас, коли все інше хитається.'},
+  ]},
+];
+const EXAMPLE_Q = [
+ {id:'ex1', from:'Ірина, 29', topic:'family', text:'Ми з чоловіком постійно сперечаємося, хто має мити посуд. Дрібниця, а псує вечори. Що робити?'},
+ {id:'ex2', from:'Максим, 21', topic:'relationships', text:'Моя дівчина поїхала вчитися в інше місто. Як нам не віддалитися?'},
+];
+const C_FORMATS = [{id:'video', t:'Відеодзвінок', d:'30 хвилин', k:1}, {id:'audio', t:'Аудіодзвінок', d:'30 хвилин', k:0.8}, {id:'chat', t:'Листування', d:'3 дні питань і відповідей', k:0.6}];
+const C_TIMES = ['10:00','12:00','15:00','18:00','19:30'];
+const WD_SHORT = ['нд','пн','вт','ср','чт','пт','сб'];
+
+function allGrannies(){ return [...GRANNIES, ...(S.myGrannies||[])]; }
+function grannyById(id){ return allGrannies().find(g => g.id===id); }
+function mediaOf(g){ return [...(g.media||[]), ...((UI.media||{})[g.id]||[])]; }
+function cPrice(g, f){ return Math.round(g.price * (C_FORMATS.find(x => x.id===f)||C_FORMATS[0]).k / 10) * 10; }
+function yearsWord(n){ return plural(n, ['рік','роки','років']); }
+
+function grannyAvatar(g, size){
+  if(g.id==='hanna') return avatar(size);
+  const L = g.look||{};
+  const st = `width:${size}px;height:${size}px;--g-bg:var(--${L.bg||'butter'});--g-coat:var(--${L.coat||'rose'});${L.scarf?`--g-scarf:var(--${L.scarf});`:''}`;
+  return `<div class="av" style="${st}">${grannySVG(L, g.name)}</div>`;
+}
+
+// ---- графік: ймовірність етапу за віком ----
+function chartGeo(){
+  const box = $('#chartBox'); const w = box ? box.clientWidth : 600;
+  const W = Math.max(300, Math.min(1100, Math.round(w||600))), narrow = W < 480;
+  return {W, H: narrow ? 220 : 250, L: 38, R: narrow ? 80 : 132, T: 14, B: 28, x0: 17, x1: 80, narrow};
+}
+function stageChartSVG(age, G0){
+  const {W,H,L,R,T,B,x0,x1,narrow} = G0;
+  const X = a => L + (a-x0)/(x1-x0)*(W-L-R), Y = v => T + (1-v)*(H-T-B);
+  const ages = []; for(let a=x0; a<=x1; a++) ages.push(a);
+  const P = ages.map(a => predictStages(a));
+  let s = '';
+  for(const v of [0,.25,.5,.75,1]) s += `<line class="ch-grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text class="ch-axis" x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v*100}%</text>`;
+  for(let a=20; a<=80; a+=10) s += `<text class="ch-axis" x="${X(a)}" y="${H-8}" text-anchor="middle">${a}</text>`;
+  for(const st of STAGES) s += `<path class="ch-line" style="stroke:var(--st-${st})" d="${P.map((p,i) => (i?'L':'M') + X(ages[i]).toFixed(1) + ' ' + Y(p[st]).toFixed(1)).join(' ')}"/>`;
+  const ends = STAGES.map(st => ({st, y: Y(P[P.length-1][st])})).sort((p,q) => p.y-q.y);
+  for(let i=1; i<ends.length; i++) if(ends[i].y - ends[i-1].y < 16) ends[i].y = ends[i-1].y + 16;
+  ends.forEach(e => s += `<text class="ch-lbl" x="${W-R+8}" y="${e.y+4}">${(narrow?STAGE_SHORT:STAGE_UA)[e.st]}</text>`);
+  const ya = Math.min(x1, Math.max(x0, age)), pa = predictStages(ya);
+  s += `<line class="ch-you" x1="${X(ya)}" x2="${X(ya)}" y1="${T}" y2="${H-B}"/><text class="ch-axis" x="${X(ya) + (X(ya) > W-R-50 ? -6 : 6)}" y="${T+10}" text-anchor="${X(ya) > W-R-50 ? 'end' : 'start'}">${age} ${yearsWord(age)}</text>`;
+  for(const st of STAGES) s += `<circle class="ch-dot" cx="${X(ya)}" cy="${Y(pa[st])}" r="4.5" style="fill:var(--st-${st})"/>`;
+  s += `<line id="chCross" class="ch-cross" x1="0" x2="0" y1="${T}" y2="${H-B}" visibility="hidden"/>`;
+  s += `<rect id="chHit" x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent"/>`;
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Ймовірність кожного життєвого етапу залежно від віку">${s}</svg>`;
+}
+function mountChart(){
+  const box = $('#chartBox'); if(!box) return;
+  const g = chartGeo(), age = UI.howAge || userAge() || 30;
+  box.innerHTML = stageChartSVG(age, g) + '<div class="tip" id="chartTip" hidden></div>';
+  const svg = box.querySelector('svg'), hit = box.querySelector('#chHit'), cross = box.querySelector('#chCross'), tip = box.querySelector('#chartTip');
+  const X = a => g.L + (a-g.x0)/(g.x1-g.x0)*(g.W-g.L-g.R);
+  const move = ev => {
+    const r = svg.getBoundingClientRect(); const px = (ev.clientX - r.left) * g.W / r.width;
+    const a = Math.round(g.x0 + (px - g.L) / (g.W - g.L - g.R) * (g.x1 - g.x0)); if(a < g.x0 || a > g.x1) return;
+    const p = predictStages(a);
+    cross.setAttribute('x1', X(a)); cross.setAttribute('x2', X(a)); cross.setAttribute('visibility', 'visible');
+    tip.innerHTML = `<b>${a} ${yearsWord(a)}</b>` + STAGES.slice().sort((x,y) => p[y]-p[x]).map(st => `<div class="r"><span class="row" style="gap:6px"><i class="sw" style="background:var(--st-${st})"></i>${STAGE_UA[st]}</span><b>${Math.round(p[st]*100)}%</b></div>`).join('');
+    tip.hidden = false;
+    const left = X(a) / g.W * r.width; const tw = tip.offsetWidth;
+    tip.style.left = (left + 14 + tw > r.width ? left - tw - 14 : left + 14) + 'px'; tip.style.top = '8px';
+  };
+  hit.addEventListener('pointermove', move); hit.addEventListener('pointerdown', move);
+  hit.addEventListener('pointerleave', () => { cross.setAttribute('visibility', 'hidden'); tip.hidden = true; });
+}
+
+// ---- відтворення аудіо/відео-порад (демо: синтез мовлення + субтитри) ----
+let playTok = 0;
+function stopPlay(){ playTok++; try{ if(window.speechSynthesis) speechSynthesis.cancel(); }catch(e){} UI.playing = null; }
+function findMedia(id){ for(const g of allGrannies()) for(const m of mediaOf(g)) if(m.id===id) return {g, m}; return null; }
+function playMedia(id){
+  if(UI.playing===id){ stopPlay(); renderSheet(); return; }
+  stopPlay(); const f = findMedia(id); if(!f || !f.m.text) return;
+  let voice = null; try{ voice = (window.speechSynthesis ? speechSynthesis.getVoices() : []).find(v => /^uk/i.test(v.lang)) || null; }catch(e){}
+  UI.playing = id; UI.voiceNote = voice ? '' : 'Українського голосу в цьому браузері немає, тож показую субтитри.';
+  renderSheet();
+  const tok = ++playTok, parts = f.m.text.split(/(?<=[.!?…])\s+/).filter(Boolean);
+  const step = i => {
+    if(tok !== playTok) return;
+    if(i >= parts.length){ UI.playing = null; renderSheet(); return; }
+    const el = $('#sub-' + id); if(el) el.textContent = parts[i];
+    if(voice){ try{ const u = new SpeechSynthesisUtterance(parts[i]); u.voice = voice; u.lang = voice.lang; u.rate = .95; u.onend = () => step(i+1); u.onerror = () => setTimeout(() => step(i+1), 1500); speechSynthesis.speak(u); return; }catch(e){} }
+    setTimeout(() => step(i+1), Math.max(1900, parts[i].length * 55));
+  };
+  step(0);
+}
+function mediaCard(m, g){
+  const playing = UI.playing===m.id;
+  if(m.url) return `<div class="media"><div class="grow"><div class="row between"><b>${esc(m.title)}</b><span class="tag">${m.type==='video'?'Відео':'Аудіо'} · нове</span></div>
+    ${m.type==='video' ? `<video src="${m.url}" controls playsinline></video>` : `<audio src="${m.url}" controls></audio>`}<div class="small muted">${TOPIC_UA[m.topic]||''}</div></div></div>`;
+  return `<div class="media ${playing?'on':''}">
+    <button class="play" data-act="playMedia" data-v="${m.id}" aria-label="${playing?'Зупинити':'Відтворити'}">${playing ? I.stop : I.play}</button>
+    <div class="grow"><div class="row between" style="gap:8px"><b>${esc(m.title)}</b><span class="tag">${m.type==='video'?'Відео':'Аудіо'} · ${m.dur}</span></div>
+      ${playing ? (m.type==='video' ? `<div class="vscreen">${grannyAvatar(g, 84)}<div class="vsub" id="sub-${m.id}">…</div></div>` : `<div class="asub" id="sub-${m.id}">…</div>`)
+        + (UI.voiceNote ? `<div class="small muted">${UI.voiceNote}</div>` : '') : `<div class="small muted">${TOPIC_UA[m.topic]||''}</div>`}
+    </div></div>`;
+}
+
+// ---- екран «Бабусі» ----
+function vGrannies(){
+  return `<div class="stack">
+    <div class="row between wrap" style="padding-top:6px"><div><div class="eyebrow">Спільнота порадниць</div><h1 class="h1">Бабусі</h1></div>
+      <div class="seg role-seg" role="tablist">${[['seeker','Шукаю пораду'],['granny','Я бабуся']].map(([k,l]) => `<button class="${S.role===k?'on':''}" data-act="setRole" data-v="${k}" role="tab" aria-selected="${S.role===k}">${l}</button>`).join('')}</div></div>
+    ${S.role==='granny' ? vCabinet() : vSeeker()}
+  </div>`;
+}
+function forYouCard(){
+  const a = userAge();
+  if(!a) return `<div class="card fy stack">
+    <div class="say">${avatar(52)}<div class="bubble hand">Скажи, скільки тобі років, і я підкажу, з якою бабусею тобі буде найлегше говорити.</div></div>
+    <div class="row wrap"><label class="sr" for="ageQuick">Твій вік</label><input class="input" type="number" id="ageQuick" min="16" max="100" inputmode="numeric" placeholder="Твій вік" style="max-width:160px"><button class="btn" data-act="ageQuick">Підібрати</button></div>
+    <p class="small muted">Вік потрібен лише для підбору тем і залишається в цьому браузері.</p></div>`;
+  const p = predictStages(a), tt = topTopic();
+  return `<div class="card fy">
+    <div class="fy-grid">
+      <div class="stack" style="gap:10px">
+        <div class="eyebrow">Підібрано для тебе · ${a} ${yearsWord(a)} <button class="link-btn" data-act="edit" data-v="me">змінити</button></div>
+        <div class="h2" style="font-size:20px">Почни з теми «${TOPIC_UA[tt]}»</div>
+        <p class="small muted">${TOPIC_D[tt]}. ${S.topicPick ? 'Цю тему ти '+G('обрав','обрала')+' сам'+G('','а')+'.' : 'Так радить модель за твоїм віком. Можна обрати іншу тему.'}</p>
+        <div class="chips">${Object.keys(TOPIC_UA).map(t => `<button class="chip ${tt===t?'on':''}" data-act="pickTopic" data-v="${t}">${TOPIC_UA[t]}</button>`).join('')}${S.topicPick ? '<button class="chip" data-act="pickTopic" data-v="">Як радить модель</button>' : ''}</div>
+      </div>
+      <div class="stack" style="gap:8px">
+        <div class="lbl">Серед людей твого віку у відкритих даних</div>
+        ${STAGES.map(s => `<div class="pbar"><span class="pl">${STAGE_UA[s]}</span><span class="pt"><i style="width:${(p[s]*100).toFixed(1)}%;background:var(--st-${s})"></i></span><span class="pv">${Math.round(p[s]*100)}%</span></div>`).join('')}
+        <button class="btn ghost sm" data-act="toggleHow" style="align-self:flex-start">${UI.how ? 'Сховати пояснення' : 'Як це працює'}</button>
+      </div>
+    </div>
+    ${UI.how ? howItWorks(a) : ''}
+  </div>`;
+}
+function howItWorks(a){
+  const m = MODEL.metrics, pct = v => Math.round(v*100) + '%';
+  const age = UI.howAge || a;
+  return `<div class="how stack">
+    <p class="small">Це <b>навчання з учителем</b>. Логістичну регресію навчили на ${MODEL.n_train.toLocaleString('uk-UA')} записах відкритого набору <b>UCI Adult</b> (перепис США 1994 року), де для кожної людини відомі вік і сімейний стан. Модель бачить лише вік і видає ймовірність кожного з чотирьох етапів. На ${MODEL.n_test.toLocaleString('uk-UA')} тестових записах вона вгадує етап у <b>${pct(m.accuracy)}</b> випадків. Якби завжди казати «у шлюбі», було б ${pct(m.baseline_accuracy)}.</p>
+    <div class="legend">${STAGES.map(s => `<span><i class="sw" style="background:var(--st-${s})"></i>${STAGE_UA[s]}</span>`).join('')}</div>
+    <div class="chart-wrap" id="chartBox"></div>
+    <div class="field"><label for="howAge">Спробуй інший вік: <b id="howAgeV">${age} ${yearsWord(age)}</b></label><input type="range" id="howAge" min="17" max="80" value="${Math.min(80, Math.max(17, age))}"></div>
+    <p class="small muted">Етапи перетворюються на теми так: «не в шлюбі» → стосунки, «у шлюбі» → сім’я, «розлучення» → підтримка, «вдівство» → доброта й підтримка. Дані зі США 1994 року, тож це навчальна демонстрація. Стать модель свідомо не враховує: у наборі заміжніми записано лише 15% жінок проти 61% чоловіків, і модель перейняла б цей перекіс. Прогноз — лише підказка.</p>
+  </div>`;
+}
+function grannyCard(g, m, showMatch){
+  return `<article class="gcard">
+    <div class="row" style="gap:12px">${grannyAvatar(g, 64)}<div style="min-width:0"><b class="gname">${esc(g.name)}</b><div class="small muted">${g.age} ${yearsWord(g.age)} · ${esc(g.city)}</div>${g.years?`<div class="small muted">${esc(g.years)}</div>`:''}</div></div>
+    ${g.quote ? `<p class="hand gq">«${esc(g.quote)}»</p>` : ''}
+    <div class="chips">${g.topics.map(t => `<span class="tag t-${t}">${TOPIC_UA[t]}</span>`).join('')}${g.own?'<span class="tag">твій профіль</span>':''}</div>
+    <div class="row between small">${showMatch ? `<span class="match">Збіг ${m}%</span>` : '<span></span>'}<span class="muted">${mediaOf(g).length} ${plural(mediaOf(g).length,['порада','поради','порад'])} · від ${cPrice(g,'chat')} ₴</span></div>
+    <div class="row" style="gap:8px;margin-top:auto"><button class="btn sm soft" style="flex:1" data-act="openGranny" data-v="${g.id}">Профіль</button><button class="btn sm" style="flex:1" data-act="openAsk" data-v="${g.id}">Запитати</button></div>
+  </article>`;
+}
+function vSeeker(){
+  const a = userAge(), w = activeWeights();
+  const list = allGrannies().filter(g => UI.gTopic==='all' || g.topics.includes(UI.gTopic)).map(g => ({g, m: matchScore(g, w)})).sort((x,y) => (a||S.topicPick) ? y.m-x.m : 0);
+  const qs = S.questions, bk = S.bookings;
+  return `${forYouCard()}
+    <div class="row between wrap"><div class="h2">Порадниці ${(a||S.topicPick)?'<span class="small muted" style="font-family:var(--f-body);font-weight:600">· спершу ті, що тобі підходять</span>':''}</div>
+      <div class="chips">${[['all','Усі'], ...Object.entries(TOPIC_UA)].map(([k,l]) => `<button class="chip ${UI.gTopic===k?'on':''}" data-act="gTopic" data-v="${k}">${l}</button>`).join('')}</div></div>
+    <div class="grid-cards">${list.map(({g,m}) => grannyCard(g, m, !!(a||S.topicPick))).join('') || '<p class="empty">У цій темі поки немає порадниць.</p>'}</div>
+    <p class="small muted">Демо: профілі бабусь вигадані для прототипу.</p>
+    ${(qs.length || bk.length) ? `<div class="two-col">
+      <div class="col"><div class="h2">Мої питання</div>${qs.length ? qs.map(questionCard).join('') : '<p class="empty">Питань поки немає.</p>'}</div>
+      <div class="col"><div class="h2">Мої консультації</div>${bk.length ? bk.map(bookingCard).join('') : '<p class="empty">Консультацій поки немає.</p>'}</div>
+    </div>` : ''}
+    <div class="card flat row wrap" style="gap:14px">${grannyAvatar(GRANNIES[3], 52)}<div style="flex:1;min-width:200px"><b>Твоя бабуся теж може радити</b><div class="small muted">Записує короткі поради, відповідає на питання й отримує ${Math.round(GRANNY_SHARE*100)}% від кожної консультації.</div></div><button class="btn sm" data-act="openJoin">Стати порадницею</button></div>`;
+}
+function questionCard(q){
+  const g = grannyById(q.grannyId) || GRANNIES[0], busy = UI.aiQ===q.id;
+  return `<div class="qcard">
+    <div class="row between" style="gap:8px"><span class="row" style="gap:8px">${grannyAvatar(g, 30)}<b class="small">${esc(g.short)}</b></span><span class="tag ${q.status==='answered'?'t-support':''}">${q.status==='answered'?'Є відповідь':'Очікує'}</span></div>
+    <p>${esc(q.text)}</p>
+    ${q.answer || busy ? `<div class="answer"><div class="small muted">${q.by==='ai' || busy ? 'Демо: відповідь ШІ від імені вигаданої бабусі' : esc(g.short)+' відповідає'}</div><p class="hand" style="font-size:20px" id="ans-${q.id}">${esc(q.answer||'Бабуся пише…')}</p></div>`
+      : `<div class="small muted">Бабуся зазвичай відповідає ${esc(g.reply)}.</div>${AI_STATE==='ready' ? `<button class="btn ghost sm" style="align-self:flex-start" data-act="aiAnswer" data-v="${q.id}">${I.spark}Показати демо-відповідь</button>` : ''}`}
+  </div>`;
+}
+function bookingCard(b){
+  const g = grannyById(b.grannyId) || GRANNIES[0];
+  return `<div class="qcard"><div class="row" style="gap:10px">${grannyAvatar(g, 40)}<div style="min-width:0"><b>${esc(b.formatLabel)} · ${esc(g.short)}</b><div class="small muted">${esc(b.dateLabel)}, ${esc(b.time)} · ${b.price} ₴</div></div></div>
+    ${b.note ? `<p class="small">${esc(b.note)}</p>` : ''}<span class="tag t-support" style="align-self:flex-start">Заплановано</span></div>`;
+}
+
+// ---- кабінет бабусі ----
+function vCabinet(){
+  const g = grannyById(S.asGranny) || GRANNIES[0];
+  const myQ = S.questions.filter(q => q.grannyId===g.id);
+  const exQ = EXAMPLE_Q;
+  const waiting = myQ.filter(q => q.status!=='answered').length + exQ.filter(q => !S.exAnswers[q.id]).length;
+  const bk = S.bookings.filter(b => b.grannyId===g.id);
+  const earned = bk.reduce((s,b) => s + Math.round(b.price*GRANNY_SHARE), 0);
+  return `<div class="card row wrap" style="gap:14px">${grannyAvatar(g, 64)}
+      <div style="flex:1;min-width:180px"><div class="eyebrow">Кабінет порадниці</div><div class="h2" style="font-size:20px">${esc(g.name)}</div><div class="small muted">${g.age} ${yearsWord(g.age)} · ${esc(g.city)}</div></div>
+      <div class="field" style="min-width:200px"><label for="asGranny">Увійти як</label><select class="input" id="asGranny">${allGrannies().map(x => `<option value="${x.id}" ${x.id===g.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select></div></div>
+    <div class="stats">
+      <div class="stat"><span class="small muted">Заробіток цього місяця</span><b>${earned.toLocaleString('uk-UA')} ₴</b><span class="small muted">${Math.round(GRANNY_SHARE*100)}% від консультацій</span></div>
+      <div class="stat"><span class="small muted">Питання чекають</span><b>${waiting}</b><span class="small muted">відповідай текстом</span></div>
+      <div class="stat"><span class="small muted">Записи на консультацію</span><b>${bk.length}</b><span class="small muted">${bk[0] ? 'найближча: '+esc(bk[0].dateLabel)+', '+bk[0].time : 'поки немає'}</span></div>
+    </div>
+    <div class="two-col">
+      <div class="col">
+        <div class="h2">Мої поради</div>
+        <div class="row wrap" style="gap:8px"><button class="btn" data-act="openRecord" data-v="audio">${I.mic}Записати аудіо</button><button class="btn soft" data-act="openRecord" data-v="video">${I.video}Записати відео</button></div>
+        <p class="small muted">Короткі поради до хвилини. Їх побачать усі, хто відкриє твій профіль.</p>
+        <div class="stack" style="gap:8px">${mediaOf(g).map(m => mediaCard(m, g)).join('') || '<p class="empty">Ще немає записаних порад.</p>'}</div>
+      </div>
+      <div class="col">
+        <div class="h2">Питання до тебе</div>
+        ${myQ.map(q => cabinetQ(q, false)).join('')}
+        ${exQ.map(q => cabinetQ(q, true)).join('')}
+        ${bk.length ? `<div class="h2">Консультації</div>${bk.map(b => `<div class="qcard"><b>${esc(b.formatLabel)} · ${esc(b.dateLabel)}, ${b.time}</b><div class="small muted">${b.note ? esc(b.note) : 'Без опису'} · тобі ${Math.round(b.price*GRANNY_SHARE)} ₴</div></div>`).join('')}` : ''}
+        <p class="small muted">Виплати щопонеділка на картку (демо).</p>
+      </div>
+    </div>`;
+}
+function cabinetQ(q, ex){
+  const ans = ex ? S.exAnswers[q.id] : q.answer;
+  return `<div class="qcard"><div class="row between"><b class="small">${ex ? esc(q.from) : (q.anon ? 'Анонімно' : esc(S.user.name||'Користувач'))}</b><span class="tag t-${q.topic}">${TOPIC_UA[q.topic]}</span>${ex?'<span class="tag">приклад</span>':''}</div>
+    <p>${esc(q.text)}</p>
+    ${ans ? `<div class="answer"><div class="small muted">Твоя відповідь</div><p class="hand" style="font-size:20px">${esc(ans)}</p></div>`
+      : `<label class="sr" for="aq-${q.id}">Відповідь</label><textarea class="input" id="aq-${q.id}" placeholder="Напиши відповідь від серця…"></textarea><button class="btn sm" style="align-self:flex-start" data-act="answerQ" data-v="${q.id}">Надіслати відповідь</button>`}
+  </div>`;
+}
+
+// ---- аркуші бабусь ----
+function shGranny(id){
+  const g = grannyById(id); if(!g) return sheetWrap('Профіль', '<p class="empty">Профіль не знайдено.</p>', '');
+  return sheetWrap(esc(g.short), `<div class="stack">
+      <div class="gp-head">${grannyAvatar(g, 92)}<div style="min-width:0"><div class="h1" style="font-size:24px">${esc(g.name)}</div><div class="muted">${g.age} ${yearsWord(g.age)} · ${esc(g.city)}</div>${g.years?`<div class="small muted">${esc(g.years)}</div>`:''}</div></div>
+      ${g.quote ? `<p class="hand" style="font-size:24px;color:var(--rose-deep)">«${esc(g.quote)}»</p>` : ''}
+      ${g.bio ? `<p>${esc(g.bio)}</p>` : ''}
+      <div class="chips">${g.topics.map(t => `<span class="tag t-${t}">${TOPIC_UA[t]}</span>`).join('')}</div>
+      <div class="h2">Аудіо й відео-поради</div>
+      <div class="stack" style="gap:8px">${mediaOf(g).map(m => mediaCard(m, g)).join('') || '<p class="empty">Бабуся ще не записала порад.</p>'}</div>
+      <div class="card flat small">Відповідає зазвичай ${esc(g.reply)}. Консультація від ${cPrice(g,'chat')} ₴, з них бабуся отримує ${Math.round(GRANNY_SHARE*100)}%.</div>
+    </div>`,
+    `<div class="row" style="gap:8px"><button class="btn soft" style="flex:1" data-act="openAsk" data-v="${g.id}">Поставити питання</button><button class="btn" style="flex:1" data-act="openConsult" data-v="${g.id}">Консультація</button></div>`);
+}
+function shAsk(id){
+  const g = grannyById(id);
+  return sheetWrap('Питання бабусі', `<div class="stack">
+      <div class="row" style="gap:12px">${grannyAvatar(g, 48)}<div><b>${esc(g.name)}</b><div class="small muted">Відповідає ${esc(g.reply)}, текстом, аудіо чи відео</div></div></div>
+      <div class="field"><span class="lbl">Тема</span><div class="chips">${Object.keys(TOPIC_UA).map(t => `<button class="chip ${UI.askTopic===t?'on':''}" data-act="askTopic" data-v="${t}">${TOPIC_UA[t]}</button>`).join('')}</div></div>
+      <div class="field"><label for="askText">Твоє питання</label><textarea class="input" id="askText" data-ui="askText" maxlength="800" placeholder="Розкажи, що сталося і що хочеш змінити">${esc(UI.askText||'')}</textarea></div>
+      <button class="row" style="gap:10px;border:0;background:none;padding:0;text-align:left" data-act="toggleAnon"><span class="switch ${UI.askAnon?'on':''}" aria-hidden="true"></span><span><b>Анонімно</b><br><span class="small muted">Бабуся не побачить твого імені</span></span></button>
+    </div>`,
+    `<button class="btn block" data-act="sendQuestion" data-v="${g.id}">Надіслати питання</button><p class="demo-note" style="margin-top:8px">Питання безкоштовні. Демо: питання зберігається лише в цьому браузері.</p>`);
+}
+function nextDays(n){ const out = []; const t = today(); for(let i=1; i<=n; i++){ const d = new Date(t.getFullYear(), t.getMonth(), t.getDate()+i); out.push({iso: dkey(d), label: WD_SHORT[d.getDay()]+', '+d.getDate()+' '+MONTHS[d.getMonth()]}); } return out; }
+function slotBusy(g, date, time){ return parseInt(hash(g.id+date+time).slice(1), 36) % 3 === 0; }
+function shConsult(id){
+  const g = grannyById(id), days = nextDays(7), f = UI.cFormat || 'video', price = cPrice(g, f);
+  return sheetWrap('Консультація', `<div class="stack">
+      <div class="row" style="gap:12px">${grannyAvatar(g, 48)}<div><b>${esc(g.name)}</b><div class="small muted">Особиста розмова про те, що болить</div></div></div>
+      <div class="field"><span class="lbl">Формат</span><div class="stack" style="gap:8px">${C_FORMATS.map(x => `<button class="plan ${f===x.id?'on':''}" data-act="cFormat" data-v="${x.id}"><span class="radio"></span><span class="grow"><b>${x.t}</b><br><span class="small muted">${x.d}</span></span><span class="price">${cPrice(g, x.id)} ₴</span></button>`).join('')}</div></div>
+      <div class="field"><span class="lbl">День</span><div class="slots">${days.map(d => `<button class="chip ${UI.cDate===d.iso?'on':''}" data-act="cDate" data-v="${d.iso}">${d.label}</button>`).join('')}</div></div>
+      ${f!=='chat' ? `<div class="field"><span class="lbl">Час</span><div class="slots">${UI.cDate ? C_TIMES.map(t => { const busy = slotBusy(g, UI.cDate, t); return `<button class="chip ${UI.cTime===t?'on':''}" data-act="cTime" data-v="${t}" ${busy?'disabled aria-label="'+t+', зайнято"':''}>${t}</button>`; }).join('') : '<span class="small muted">Спершу обери день</span>'}</div></div>` : ''}
+      <div class="field"><label for="cNote">Про що хочеш поговорити? (необов’язково)</label><textarea class="input" id="cNote" data-ui="cNote" maxlength="400" placeholder="Кілька слів, щоб бабуся підготувалася">${esc(UI.cNote||'')}</textarea></div>
+      <div class="card"><div class="sum"><span>До сплати</span><span>${price} ₴</span><span class="muted small">Бабуся отримає</span><span class="muted small">${Math.round(price*GRANNY_SHARE)} ₴</span></div></div>
+    </div>`,
+    `<button class="btn block" data-act="goPay" data-v="consult">Записатися й оплатити ${price} ₴</button><p class="demo-note" style="margin-top:8px">Демо-режим: оплата імітується.</p>`);
+}
+function shRecord(){
+  const r = UI.rec || {}, g = grannyById(S.asGranny) || GRANNIES[0], isV = r.kind==='video';
+  let body = '';
+  if(r.state==='rec') body = `<div class="stack" style="align-items:center;text-align:center">${isV ? '<video id="recLive" class="rec-preview" autoplay muted playsinline></video>' : grannyAvatar(g, 96)}
+      <div class="row" style="gap:8px"><span class="rec-dot"></span><b id="recTime">0:00</b><span class="muted small">/ 1:00</span></div></div>`;
+  else if(r.state==='done') body = `<div class="stack">${isV ? `<video src="${r.url}" controls playsinline class="rec-preview"></video>` : `<audio src="${r.url}" controls style="width:100%"></audio>`}
+      <div class="field"><label for="recTitle">Назва поради</label><input class="input" id="recTitle" data-ui="recTitle" value="${esc(UI.recTitle||'')}" placeholder="Наприклад, Як помиритися з сестрою"></div>
+      <div class="field"><span class="lbl">Тема</span><div class="chips">${Object.keys(TOPIC_UA).map(t => `<button class="chip ${UI.recTopic===t?'on':''}" data-act="recTopic" data-v="${t}">${TOPIC_UA[t]}</button>`).join('')}</div></div></div>`;
+  else body = `<div class="stack">
+      <div class="say">${grannyAvatar(g, 52)}<div class="bubble small">Натисни «Почати запис» і розкажи одну пораду до хвилини. Говори так, ніби поруч онука.</div></div>
+      ${r.err ? `<p class="small" style="color:var(--rose-deep)">${esc(r.err)}</p>` : ''}
+      <label class="btn soft block" for="recFile" style="cursor:pointer">Завантажити готовий файл</label>
+      <input type="file" id="recFile" accept="${isV?'video/*':'audio/*'}" hidden>
+    </div>`;
+  const foot = r.state==='rec' ? `<button class="btn block" data-act="recStop">${I.stop}Зупинити</button>`
+    : r.state==='done' ? `<div class="row" style="gap:8px"><button class="btn soft" style="flex:1" data-act="recReset">Перезаписати</button><button class="btn" style="flex:1" data-act="recSave">Опублікувати</button></div><p class="demo-note" style="margin-top:8px">Демо: запис живе до перезавантаження сторінки.</p>`
+    : `<button class="btn block" data-act="recStart">${isV?I.video:I.mic}Почати запис</button>`;
+  return sheetWrap(isV ? 'Відео-порада' : 'Аудіо-порада', body, foot);
+}
+function shJoin(){
+  const J = UI.join || {};
+  return sheetWrap('Стати порадницею', `<div class="stack">
+      <p class="small muted">Профіль побачать усі, хто шукає пораду. Ти сама обираєш теми й ціну, а платформа бере ${Math.round((1-GRANNY_SHARE)*100)}% за організацію.</p>
+      <div class="field"><label for="jName">Ім’я та по батькові</label><input class="input" id="jName" data-join="name" value="${esc(J.name||'')}" placeholder="Наприклад, Леся Андріївна"></div>
+      <div class="row" style="gap:10px"><div class="field" style="flex:1"><label for="jAge">Вік</label><input class="input" id="jAge" type="number" min="50" max="100" data-join="age" value="${esc(J.age||'')}"></div>
+        <div class="field" style="flex:2"><label for="jCity">Місто</label><input class="input" id="jCity" data-join="city" value="${esc(J.city||'')}"></div></div>
+      <div class="field"><span class="lbl">Про що можеш радити</span><div class="chips">${Object.keys(TOPIC_UA).map(t => `<button class="chip ${(J.topics||[]).includes(t)?'on':''}" data-act="joinTopic" data-v="${t}">${TOPIC_UA[t]}</button>`).join('')}</div></div>
+      <div class="field"><label for="jBio">Кілька слів про себе</label><textarea class="input" id="jBio" data-join="bio" maxlength="400" placeholder="Скільки років у шлюбі, діти, онуки, чим займалася">${esc(J.bio||'')}</textarea></div>
+      <div class="field"><label for="jQuote">Твоє життєве правило</label><input class="input" id="jQuote" data-join="quote" maxlength="120" value="${esc(J.quote||'')}" placeholder="Наприклад, Добре слово й кішці приємне"></div>
+      <div class="field"><label for="jPrice">Ціна відеоконсультації, ₴</label><input class="input" id="jPrice" type="number" min="100" max="2000" step="50" data-join="price" value="${esc(J.price||300)}"></div>
+    </div>`,
+    `<button class="btn block" data-act="saveJoin">Створити профіль</button><p class="demo-note" style="margin-top:8px">Демо: профіль зберігається лише в цьому браузері.</p>`);
+}
+
+// ---- запис з мікрофона/камери (з запасним варіантом — файл) ----
+let recTimer = null;
+function recCleanup(){ clearInterval(recTimer); const r = UI.rec; if(r && r.stream){ r.stream.getTracks().forEach(t => t.stop()); r.stream = null; } }
+async function recStart(){
+  const r = UI.rec; if(!r) return;
+  if(!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder)){ r.err = 'Запис у цьому перегляді недоступний. Завантаж готовий файл.'; renderSheet(); return; }
+  try{ r.stream = await navigator.mediaDevices.getUserMedia({audio:true, video: r.kind==='video'}); }
+  catch(e){ r.err = 'Немає доступу до '+(r.kind==='video'?'камери':'мікрофона')+'. Дозволь доступ у браузері або завантаж готовий файл.'; renderSheet(); return; }
+  const chunks = []; const mr = new MediaRecorder(r.stream); r.mr = mr;
+  mr.ondataavailable = e => { if(e.data && e.data.size) chunks.push(e.data); };
+  mr.onstop = () => { const blob = new Blob(chunks, {type: mr.mimeType || (r.kind==='video'?'video/webm':'audio/webm')}); r.url = URL.createObjectURL(blob); r.state = 'done'; recCleanup(); renderSheet(); };
+  mr.start(); r.state = 'rec'; r.secs = 0; renderSheet();
+  const live = $('#recLive'); if(live) live.srcObject = r.stream;
+  recTimer = setInterval(() => { r.secs++; const el = $('#recTime'); if(el) el.textContent = '0:' + String(r.secs).padStart(2,'0'); if(r.secs >= 60) ACTIONS.recStop(); }, 1000);
+}
+
+const GRANNY_ACTIONS = {
+  setRole(v){ S.role = v; save(); render(); },
+  ageQuick(){ const el = $('#ageQuick'); const a = parseInt(el && el.value, 10); if(!(a >= 16 && a <= 110)){ toast('Вкажи вік від 16 років'); return; } S.user.age = String(a); S.topicPick = null; save(); render(); toast('Підібрала бабусь під твій вік'); },
+  pickTopic(v){ S.topicPick = v || null; save(); render(); },
+  toggleHow(){ UI.how = !UI.how; UI.howAge = null; render(); },
+  gTopic(v){ UI.gTopic = v; render(); },
+  openGranny(v){ stopPlay(); openSheet('granny', v); },
+  openAsk(v){ const g = grannyById(v); stopPlay(); UI.askText = ''; UI.askAnon = true; const tt = topTopic(); UI.askTopic = g.topics.includes(tt) ? tt : g.topics[0]; openSheet('ask', v); },
+  askTopic(v){ UI.askTopic = v; renderSheet(); },
+  toggleAnon(){ UI.askAnon = !UI.askAnon; renderSheet(); },
+  sendQuestion(v){ const t = (UI.askText||'').trim(); if(t.length < 10){ toast('Розкажи трохи докладніше (хоча б кілька слів)'); return; }
+    S.questions.unshift({id: uid(), grannyId: v, text: t, topic: UI.askTopic, anon: UI.askAnon, at: Date.now(), status: 'waiting'}); save(); closeSheet(); toast('Питання надіслано. Бабуся відповість '+(grannyById(v).reply)); },
+  aiAnswer(v){ aiGrannyAnswer(v); },
+  openConsult(v){ stopPlay(); UI.cFormat = 'video'; UI.cDate = null; UI.cTime = null; UI.cNote = ''; openSheet('consult', v); },
+  cFormat(v){ UI.cFormat = v; renderSheet(); },
+  cDate(v){ UI.cDate = v; UI.cTime = null; renderSheet(); },
+  cTime(v){ UI.cTime = v; renderSheet(); },
+  playMedia(v){ playMedia(v); },
+  openRecord(v){ recCleanup(); UI.rec = {kind: v, state: 'idle'}; UI.recTitle = ''; const g = grannyById(S.asGranny) || GRANNIES[0]; UI.recTopic = g.topics[0]; openSheet('record'); },
+  recStart(){ recStart(); },
+  recStop(){ const r = UI.rec; clearInterval(recTimer); if(r && r.mr && r.mr.state !== 'inactive') r.mr.stop(); },
+  recReset(){ recCleanup(); UI.rec = {kind: UI.rec.kind, state: 'idle'}; renderSheet(); },
+  recTopic(v){ UI.recTopic = v; renderSheet(); },
+  recSave(){ const r = UI.rec, t = (UI.recTitle||'').trim(); if(!t){ toast('Дай пораді назву'); return; }
+    const g = grannyById(S.asGranny) || GRANNIES[0]; UI.media = UI.media || {}; (UI.media[g.id] = UI.media[g.id] || []).unshift({id: uid(), type: r.kind, title: t, topic: UI.recTopic, url: r.url, dur: r.secs ? '0:'+String(r.secs).padStart(2,'0') : ''});
+    UI.rec = null; closeSheet(); toast('Пораду опубліковано в профілі'); },
+  answerQ(v){ const el = $('#aq-'+v); const t = (el && el.value || '').trim(); if(t.length < 5){ toast('Напиши хоч кілька слів'); return; }
+    if(v.startsWith('ex')) S.exAnswers[v] = t; else { const q = S.questions.find(x => x.id===v); if(q){ q.answer = t; q.status = 'answered'; q.by = 'granny'; q.answeredAt = Date.now(); } }
+    save(); render(); toast('Відповідь надіслано. Дякуємо, що ділишся досвідом!'); },
+  openJoin(){ UI.join = {topics: [], price: 300}; openSheet('join'); },
+  joinTopic(v){ const a = UI.join.topics; const i = a.indexOf(v); i >= 0 ? a.splice(i,1) : a.push(v); renderSheet(); },
+  saveJoin(){ const J = UI.join, age = parseInt(J.age, 10);
+    if(!(J.name||'').trim() || !(age >= 50) || !(J.city||'').trim() || !J.topics.length){ toast('Заповни ім’я, вік (від 50), місто й хоча б одну тему'); return; }
+    const g = {id: 'u'+uid(), name: J.name.trim(), short: J.name.trim().split(' ')[0], age, city: J.city.trim(), years: '', topics: J.topics.slice(), price: Math.max(100, parseInt(J.price,10)||300), reply: 'протягом дня', look: {bg:'card-2', coat:'sage'}, quote: (J.quote||'').trim(), bio: (J.bio||'').trim(), media: [], own: true};
+    S.myGrannies.push(g); S.role = 'granny'; S.asGranny = g.id; save(); closeSheet(); toast('Профіль створено. Запиши першу пораду!'); },
+};
+
+async function aiGrannyAnswer(qid){
+  const q = S.questions.find(x => x.id===qid), g = q && grannyById(q.grannyId);
+  if(!q || !g || AI_STATE!=='ready' || UI.aiQ) return;
+  UI.aiQ = qid; render();
+  const prompt = `Ти — ${g.name}, ${g.age} ${yearsWord(g.age)}, місто ${g.city}. ${g.bio} Твоє життєве правило: «${g.quote}». Ти — порадниця в застосунку «Поради бабусі» (вигаданий демо-персонаж).
+Відповідай українською від першої особи, тепло й по-бабусиному, 4–6 речень. Наприкінці — одна конкретна маленька дія. Можеш спиратися на свою біографію вище, але не вигадуй нових фактів про себе. Не моралізуй, не звинувачуй жодну зі сторін, не став діагнозів.
+Якщо є ознаки насильства, погроз, приниження чи контролю — м’яко, але чітко скажи, що так не має бути, і порадь Національну гарячу лінію 116 123, а при небезпеці зараз — 102.
+Тема: ${TOPIC_UA[q.topic]}. Питання: ${q.text}`;
+  try{
+    const {text} = await SAMPLE(prompt, {modelTier:'quick', cache:false, onText: ({text}) => { const el = $('#ans-'+qid); if(el) el.textContent = text; }});
+    q.answer = text; q.status = 'answered'; q.by = 'ai'; q.answeredAt = Date.now();
+  }catch(e){
+    const c = e && e.code;
+    if(['not_granted','sampling_disabled','not_declared','capability_disabled','capability_removed'].includes(c)){ AI_STATE = 'off'; toast(aiErrText(e, 'ШІ недоступний у цьому перегляді')); }
+    else if(c==='rate_limited') toast('Забагато запитів. Спробуй за кілька хвилин.');
+    else if(c!=='cancelled') toast(aiErrText(e, 'Не вдалося отримати відповідь. Спробуй ще раз.'));
+  }finally{ UI.aiQ = null; save(); render(); }
+}
+
+// ---------- Розумний пошук подарунків, послуг і пропозицій ----------
+// web   — сервер (server.py) шукає в інтернеті: Claude API з вебпошуком або вебпошук Ollama; посилання лише з результатів пошуку.
+// links — без доступу до інтернету: ШІ (або правила) підбирає, ЩО шукати, а кнопки відкривають пошук у магазинах.
+const KIND_UA = {gift:'Подарунок', service:'Послуга', experience:'Враження'};
+const KIND_CHIPS = [['gift','Подарунки'],['service','Послуги'],['experience','Враження']];
+const BUDGETS = ['до 500 ₴','до 1500 ₴','до 3000 ₴','до 10 000 ₴','без меж'];
+const SEARCH_LINES = ['Обходжу магазини…','Порівнюю, що є в наявності…','Думаю, що сподобається {name}…','Ще хвилинку, окуляри шукаю…'];
+let SEARCH_MODE = 'links', SEARCH_HINT = '';
+
+function storeLinks(q, kind, city){
+  const e = encodeURIComponent, words = q.trim().split(/\s+/).map(e).join('-');
+  if(kind === 'gift') return [['Rozetka', 'https://rozetka.com.ua/ua/search/?text=' + e(q)], ['Prom', 'https://prom.ua/ua/search?search_term=' + e(q)],
+    ['OLX', 'https://www.olx.ua/uk/list/q-' + words + '/'], ['Google', 'https://www.google.com/search?q=' + e(q)]];
+  const qq = city ? q + ' ' + city : q;
+  return [['Google', 'https://www.google.com/search?q=' + e(qq)], ['Карти', 'https://www.google.com/maps/search/' + e(qq)]];
+}
+function safeUrl(u){ try{ const x = new URL(u); return /^https?:$/.test(x.protocol) ? x.href : ''; }catch(e){ return ''; } }
+function searchEvent(){ return UI.focus || events().find(e => e.own && e.days <= 30) || null; }
+function searchModeText(){
+  if(SEARCH_MODE === 'claude') return 'Шукаю в інтернеті через Claude: справжні товари й послуги з посиланнями.';
+  if(SEARCH_MODE === 'ollama') return 'Шукаю в інтернеті через Ollama: справжні сторінки магазинів і сервісів.';
+  let tail = '';
+  if(location.protocol === 'file:') tail = ' Щоб шукати прямо в інтернеті, запусти «Запустити з ШІ.bat».';
+  else if(AI_SOURCE === 'local' || AI_SOURCE === 'local-unconfigured') tail = ' ' + (SEARCH_HINT || 'Щоб шукати прямо в інтернеті, додай безкоштовний ключ OLLAMA_API_KEY в ai-settings.txt.');
+  else tail = ' Прямий пошук в інтернеті працює на комп’ютері через «Запустити з ШІ».';
+  return 'Підберу, що саме шукати, і відкрию пошук у магазинах.' + tail;
+}
+function searchTask(more){
+  const p = S.partner, ev = searchEvent(), useProfile = UI.sProfile !== false;
+  const prof = useProfile ? {...profileForAI()['кохана_людина'], ...(ev ? {'привід': `${ev.title}, ${fmtDM(ev.date)} (${whenTxt(ev.days)})`} : {})} : {};
+  return {context: (UI.sq || '').trim(), kinds: UI.sKinds.slice(), budget: UI.sBudget === 'без меж' ? '' : UI.sBudget, city: p.city || '',
+    profile: prof, today: `${WDAYS[today().getDay()]}, ${fmtDM(today())} ${today().getFullYear()}`,
+    exclude: more && S.search ? S.search.items.map(i => i.title) : []};
+}
+function taskText(t){
+  return [t.context ? 'Що шукає користувач: ' + t.context : 'Користувач не уточнив, підбери за профілем.',
+    'Типи: ' + t.kinds.map(k => KIND_UA[k]).join(', '), t.budget ? 'Бюджет: ' + t.budget : 'Бюджет не обмежений',
+    t.city ? 'Місто: ' + t.city : '', Object.keys(t.profile).length ? 'Профіль коханої людини: ' + JSON.stringify(t.profile) : '',
+    t.exclude.length ? 'Не повторюй: ' + t.exclude.join('; ') : ''].filter(Boolean).join('\n');
+}
+async function suggestShopQueries(t){
+  if(AI_STATE === 'ready'){
+    try{
+      const res = await SAMPLE.json(`${AI_RULES}\n\nПідбери 6 конкретних ідей, які можна знайти в українських інтернет-магазинах і сервісах, і для кожної склади короткий пошуковий запит.\n${taskText(t)}\n\nПоверни лише JSON: {"items":[{"title":"до 7 слів","query":"пошуковий запит для магазину, до 6 слів, без ціни","why":"чому підходить, до 20 слів","kind":"gift|service|experience","budget":"орієнтовна ціна, напр. 500–900 ₴"}]}`, {modelTier:'quick', cache:false});
+      const items = (res && res.items || []).filter(x => x && x.title && x.query).slice(0, 8).map(x => ({title:String(x.title), query:String(x.query), why:String(x.why||''),
+        kind: KIND_UA[x.kind] ? x.kind : 'gift', budget:String(x.budget||'')}));
+      if(items.length) return {items, by:'ai'};
+    }catch(e){}
+  }
+  const r = ruleIdeas(UI.focus), out = [];
+  if(t.context) out.push({title:t.context, query:t.context, why:'Твій запит', kind:t.kinds[0] || 'gift', budget:t.budget});
+  if(t.kinds.includes('gift')) r.gifts.slice(0, 4).forEach(g => out.push({title:g.title, query:g.title.replace(/:/g, ''), why:g.why, kind:'gift', budget:g.meta}));
+  if(t.kinds.includes('experience') || t.kinds.includes('service')) r.dates.slice(0, 3).forEach(d => out.push({title:d.title, query:d.title, why:d.why, kind:'experience', budget:d.meta}));
+  return {items: out.filter(x => !t.exclude.includes(x.title)).slice(0, 7), by:'rules'};
+}
+async function runSearch(more){
+  if(UI.sBusy) return;
+  if(!UI.sKinds.length){ toast('Обери, що шукати: подарунки, послуги чи враження'); return; }
+  const t = searchTask(more);
+  UI.sBusy = true; UI.sErr = ''; UI.sLine = 0; const ctl = new AbortController(); UI.sCtl = ctl; render();
+  const tick = setInterval(() => { UI.sLine = (UI.sLine + 1) % SEARCH_LINES.length; const el = $('#sline'); if(el) el.textContent = SEARCH_LINES[UI.sLine].replace('{name}', pName()); }, 2600);
+  try{
+    let res = null;
+    if(SEARCH_MODE === 'claude' || SEARCH_MODE === 'ollama'){
+      const r = await fetch('/api/search', {method:'POST', headers:{'Content-Type':'application/json', 'X-Babusya':'1'}, body:JSON.stringify(t), signal:ctl.signal});
+      const j = await r.json().catch(() => ({}));
+      const items = (j.items || []).map(x => ({...x, url: safeUrl(x.url)})).filter(x => x.url && x.title);
+      if(r.ok && items.length) res = {mode:'web', source:j.source, items};
+      else UI.sErr = r.ok ? 'В інтернеті не знайшлося відповідних сторінок, тож показую, що пошукати в магазинах.' : (j.message || 'Пошук не вдався.') + ' Показую, що пошукати в магазинах.';
+    }
+    if(!res){ const s = await suggestShopQueries(t); res = {mode:'links', by:s.by, items:s.items}; }
+    S.search = {...res, query:t.context, kinds:t.kinds, budget:t.budget, at:Date.now()}; save();
+  }catch(e){ if(!(e && e.name === 'AbortError')) UI.sErr = 'Пошук не вдався. Спробуй ще раз.'; }
+  finally{ clearInterval(tick); UI.sBusy = false; UI.sCtl = null; render(); }
+}
+function shopCard(it, i){
+  const saved = S.savedIdeas.some(s => s.id === hash('shop' + (it.url || it.title)));
+  const save = `<button class="btn sm soft" data-act="saveShop" data-v="${i}" aria-label="${saved?'Прибрати зі збережених':'Зберегти'}">${saved?I.bookmarkF:I.bookmark}</button>`;
+  if(S.search.mode === 'web') return `<article class="idea shop">
+    <div class="row between" style="gap:8px"><span class="tag k-${it.kind}">${KIND_UA[it.kind]||'Подарунок'}</span>${it.price?`<span class="tag price">${esc(it.price)}</span>`:''}</div>
+    <div class="t">${esc(it.title)}</div>${it.why?`<div class="why">${esc(it.why)}</div>`:''}
+    <div class="acts"><span class="small muted store">${esc(it.store||'')}</span><span style="flex:1"></span>${save}<a class="btn sm" href="${esc(it.url)}" target="_blank" rel="noopener noreferrer">Відкрити ${I.ext}</a></div>
+  </article>`;
+  return `<article class="idea shop">
+    <div class="row between" style="gap:8px"><span class="tag k-${it.kind}">${KIND_UA[it.kind]||'Подарунок'}</span>${it.budget?`<span class="tag">${esc(it.budget)}</span>`:''}</div>
+    <div class="t">${esc(it.title)}</div>${it.why?`<div class="why">${esc(it.why)}</div>`:''}
+    <div class="acts">${storeLinks(it.query, it.kind, S.partner.city).map(([n,u]) => `<a class="btn sm soft" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${n}</a>`).join('')}<span style="flex:1"></span>${save}</div>
+  </article>`;
+}
+function searchView(){
+  const ev = searchEvent(), sr = S.search;
+  const panel = `<div class="card stack search-card">
+    <div class="row" style="gap:12px">${avatar(46)}<div style="min-width:0"><div class="h2">Розумний пошук</div><div class="small muted">${esc(searchModeText())}</div></div></div>
+    <div class="field"><label for="sq">Що шукаємо?</label>
+      <div class="row" style="gap:8px"><input class="input" id="sq" data-ui="sq" value="${esc(UI.sq||'')}" placeholder="Наприклад: подарунок на річницю, вона любить каву" style="flex:1;min-width:0">
+      <button class="btn" data-act="runSearch" ${UI.sBusy?'disabled':''}>${I.search}<span class="hide-xs">Шукати</span></button></div>
+      <span class="small muted">Можна лишити порожнім — підберу за профілем коханої людини.</span></div>
+    <div class="fy-grid">
+      <div class="field"><span class="lbl">Що саме</span><div class="chips">${KIND_CHIPS.map(([k,l]) => `<button class="chip ${UI.sKinds.includes(k)?'on':''}" data-act="sKind" data-v="${k}" aria-pressed="${UI.sKinds.includes(k)}">${l}</button>`).join('')}</div></div>
+      <div class="field"><span class="lbl">Бюджет</span><div class="chips">${BUDGETS.map(b => `<button class="chip ${UI.sBudget===b?'on':''}" data-act="sBudget" data-v="${b}">${b}</button>`).join('')}</div></div>
+    </div>
+    <button class="row" style="gap:10px;border:0;background:none;padding:0;text-align:left" data-act="sProfile"><span class="switch ${UI.sProfile!==false?'on':''}" aria-hidden="true"></span><span><b>Враховувати профіль</b><br><span class="small muted">${UI.sProfile!==false ? 'Інтереси, улюблене, алергії' + (ev ? ` і привід: ${esc(ev.title)} (${whenTxt(ev.days)})` : '') : 'Шукаю лише за твоїм запитом'}</span></span></button>
+    ${UI.sErr ? `<p class="small" style="color:var(--rose-deep)">${esc(UI.sErr)}</p>` : ''}
+  </div>`;
+  let results = '';
+  if(UI.sBusy) results = `<div class="say">${avatar(44)}<div class="bubble hand" id="sline">${esc(SEARCH_LINES[UI.sLine||0].replace('{name}', pName()))}</div></div>
+    <div class="grid-cards"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div><button class="btn soft more" data-act="stopSearch">Зупинити</button>`;
+  else if(sr && sr.items && sr.items.length) results = `<div class="row between wrap"><div class="h2">${sr.mode==='web' ? 'Знайдено в інтернеті' : 'Що пошукати в магазинах'}</div>
+      <span class="small muted">${sr.query ? '«' + esc(sr.query) + '» · ' : ''}${sr.mode==='web' ? (sr.source==='claude' ? 'Claude з вебпошуком' : 'вебпошук Ollama') : (sr.by==='ai' ? 'підібрав ШІ' : 'за профілем')}</span></div>
+    <div class="grid-cards">${sr.items.map(shopCard).join('')}</div>
+    <button class="btn soft more" data-act="runSearch" data-v="more">${I.spark}Ще варіанти</button>
+    <p class="small muted">${sr.mode==='web' ? 'Ціни й наявність перевіряй на сайті магазину: вони швидко змінюються.' : 'Кнопки відкривають пошук у магазині в новій вкладці.'}</p>`;
+  else results = `<p class="empty">Опиши, що шукаєш, або просто натисни «Шукати» — бабуся підбере варіанти за профілем.</p>`;
+  return panel + results;
+}
+const SEARCH_ACTIONS = {
+  runSearch(v){ runSearch(v === 'more'); },
+  stopSearch(){ if(UI.sCtl) UI.sCtl.abort(); },
+  sKind(v){ const a = UI.sKinds, i = a.indexOf(v); i >= 0 ? a.splice(i, 1) : a.push(v); render(); },
+  sBudget(v){ UI.sBudget = v; render(); },
+  sProfile(){ UI.sProfile = UI.sProfile === false; render(); },
+  findIdea(v, el){ UI.showSaved = false; UI.ideasTab = 'find'; UI.sq = String(v).replace(/:/g, ''); UI.sKinds = el.dataset.k === 'dates' ? ['experience','service'] : ['gift']; render(); window.scrollTo(0, 0); runSearch(false); },
+  saveShop(v){ const it = S.search && S.search.items[+v]; if(!it) return; const id = hash('shop' + (it.url || it.title)); const i = S.savedIdeas.findIndex(s => s.id === id);
+    if(i >= 0){ S.savedIdeas.splice(i, 1); toast('Прибрано зі збережених'); }
+    else { S.savedIdeas.push({id, title:it.title, why:it.why, meta:it.price || it.budget || it.store || '', kind:'gifts', url:it.url || '', query:it.query || ''}); toast('Збережено: знайдеш у закладках'); }
+    save(); render(); },
+};
+
+// ---------- Аркуші (bottom sheets) ----------
+function sheetWrap(title, body, foot, opts={}){
+  return `<div class="sheet-h"><div class="grab"></div><div class="row between"><div class="h2">${title}</div><button class="icon-btn" data-act="closeSheet" aria-label="Закрити">${I.close}</button></div></div>
+    <div class="sheet-b">${body}</div>${foot?`<div class="sheet-f">${foot}</div>`:''}`;
+}
+function shAdvice(id){
+  const a = ADVICE[+id]; const locked = !isPro() && a.id>=FREE_ADVICE && a.id!==todayAdvice().id;
+  if(locked) return sheetWrap('Порада в скрині', `<div class="stack" style="align-items:center;text-align:center;padding-top:8px">${avatar(90)}
+      <div class="eyebrow">День ${adviceDayNo(a)} · ${CATS[a.c]}</div><div class="h1">${esc(a.t)}</div>
+      <p class="hand">Ця порада лежить у моїй скрині, ${VOC()}. Відкрий її — і всі інші теж.</p></div>`,
+      `<button class="btn block" data-act="openSub">Відкрити Бабусину скриню</button>`);
+  if(!S.readAdvice.includes(a.id)){ S.readAdvice.push(a.id); save(); }
+  const done = Object.values(S.tasksDone).includes(a.id), saved = S.savedAdvice.includes(a.id);
+  return sheetWrap(`День ${adviceDayNo(a)}`, `<article class="page stack" style="gap:10px">
+      <span class="tag cat-${a.c}" style="align-self:flex-start">${CATS[a.c]}</span>
+      <div class="hand title">${esc(a.t)}</div><p>${esc(fillVoc(a.x))}</p>
+      <div class="task ${done?'done':''}" style="cursor:default"><span class="check">${I.check}</span><span><span class="eyebrow">Маленьке завдання</span><br><span class="task-t">${esc(a.k)}</span></span></div>
+    </article>`,
+    `<div class="row" style="gap:8px"><button class="btn soft" data-act="saveAdvice" data-v="${a.id}" style="flex:1">${saved?I.bookmarkF+'Збережено':I.bookmark+'Зберегти'}</button><button class="btn" data-act="openDonate" style="flex:1">${I.cup}Дякую, бабусю</button></div>`);
+}
+const PLANS = { month:{t:'Місяць', price:99, per:'99 ₴ / міс'}, year:{t:'Рік', price:799, per:'≈ 66 ₴ / міс', save:'−33%'} };
+function shSub(arg){
+  if(isPro()){
+    return sheetWrap('Бабусина скриня', `<div class="stack" style="align-items:center;text-align:center">${avatar(90)}<div class="h1">Скриня відкрита</div>
+      <p class="muted">${S.premium==='year'?'Річна підписка, 799 ₴':'Місячна підписка, 99 ₴'} · пробний період до ${fmtDM(new Date(S.premiumSince+7*864e5))}</p>
+      <p class="hand">Дякую, що бережеш бабусю. Пиріжки за мною.</p></div>`,
+      `<button class="btn soft block" data-act="cancelSub">Скасувати підписку</button><p class="demo-note" style="margin-top:8px">Демо: справжніх списань немає.</p>`);
+  }
+  const reason = arg && arg.reason==='ai' ? `<p class="small" style="color:var(--rose-deep);font-weight:800;text-align:center">Безкоштовні підбори на сьогодні скінчилися.</p>`
+    : arg && arg.reason==='chat' ? `<p class="small" style="color:var(--rose-deep);font-weight:800;text-align:center">Безкоштовні запитання на сьогодні скінчилися.</p>`
+    : arg && arg.reason==='lead' ? `<p class="small" style="color:var(--rose-deep);font-weight:800;text-align:center">Нагадування за 7 і 14 днів — у скрині.</p>` : '';
+  const f = (t)=>`<div class="feat">${I.check}<span>${t}</span></div>`;
+  return sheetWrap('Бабусина скриня', `<div class="stack">
+      <div class="say">${avatar(64)}<div class="bubble hand">У моїй скрині все найцінніше, що я за 52 роки зібрала. Відкрию для тебе, ${VOC()}.</div></div>
+      ${reason}
+      <div class="stack" style="gap:8px">${f(`Усі ${ADVICE.length} порад і нові щомісяця`)}${f('Безлімітний підбір подарунків, вчинків і побачень від ШІ')}${f('Розмови з бабусею про будь-яку ситуацію')}${f('Нагадування за 14 і 7 днів, план свята до річниці')}</div>
+      <div class="stack" style="gap:10px">${Object.entries(PLANS).map(([k,pl])=>`<button class="plan ${UI.plan===k?'on':''}" data-act="pickPlan" data-v="${k}"><span class="radio"></span>
+        <span class="grow"><b>${pl.t}</b> ${pl.save?`<span class="tag pro">${pl.save}</span>`:''}<br><span class="small muted">${pl.per}</span></span><span class="price">${pl.price} ₴</span></button>`).join('')}</div>
+      <p class="small muted">Перші 7 днів безкоштовно. Скасувати можна будь-коли в профілі.</p></div>`,
+    `<button class="btn block" data-act="goPay" data-v="sub">Спробувати 7 днів безкоштовно</button><p class="demo-note" style="margin-top:8px">Демо-режим: оплата імітується, гроші не списуються.</p>`);
+}
+const TREATS = [{t:'Пиріжок з вишнями', a:25, em:'пиріжок'}, {t:'Чай з малиновим варенням', a:50, em:'чай'}, {t:'Медовик до свята', a:150, em:'медовик'}, {t:'Своя сума', a:0, em:'від серця'}];
+function shDonate(){
+  const tr = TREATS[UI.treat]; const amt = tr.a || (+UI.custom||0);
+  return sheetWrap('Пригостити бабусю', `<div class="stack">
+      <div class="say">${avatar(64)}<div class="bubble hand">Як порада стала в пригоді, можеш пригостити бабусю. Гроші підуть на нові поради й розвиток застосунку.</div></div>
+      <div class="treats">${TREATS.map((x,i)=>`<button class="treat ${UI.treat===i?'on':''}" data-act="pickTreat" data-v="${i}"><span class="em">${x.em}</span><b>${x.t}</b><span>${x.a?x.a+' ₴':'будь-яка'}</span></button>`).join('')}</div>
+      ${UI.treat===3?`<div class="field"><label for="customAmt">Сума, ₴</label><input class="input" type="number" min="10" step="5" id="customAmt" data-ui="custom" value="${esc(UI.custom)}" placeholder="Від 10 ₴" inputmode="numeric"></div>`:''}
+      ${S.donations.length?`<p class="small muted" style="text-align:center">${G('Ти вже пригощав','Ти вже пригощала')} бабусю на ${S.donations.reduce((s,d)=>s+d.a,0)} ₴. Дякую!</p>`:''}
+    </div>`,
+    `<button class="btn block" data-act="goPay" data-v="donate" id="donateBtn" ${amt>=10?'':'disabled'}>Пригостити${amt>=10?' за '+amt+' ₴':''}</button><p class="demo-note" style="margin-top:8px">Демо-режим: гроші не списуються.</p>`);
+}
+function shPay(){
+  const p = UI.pay;
+  if(UI.payDone){
+    return sheetWrap('Готово', `<div class="stack" style="align-items:center;text-align:center;padding-top:10px">${avatar(110)}
+      <div class="h1">${p.kind==='sub'?'Скриню відкрито!':p.kind==='consult'?'Записано!':'Дякую, '+esc(S.user.name||VOC())+'!'}</div>
+      <p class="hand" style="font-size:25px">${p.kind==='sub'?'Тепер усі мої поради твої. Користуйся на здоров’я, а я ще напишу.':p.kind==='consult'?esc(p.booking.dateLabel)+', '+esc(p.booking.time)+': '+esc((grannyById(p.booking.grannyId)||{}).short||'бабуся')+' чекатиме на тебе. Нагадаю напередодні.':'Ой, '+esc(p.label.toLowerCase())+'! Отак '+G('потішив','потішила')+' стару. Піду чайник поставлю.'}</p></div>`,
+      `<button class="btn block" data-act="closeSheet">Повернутися</button>`);
+  }
+  if(UI.paying) return sheetWrap('Оплата', `<div class="stack" style="align-items:center;padding:40px 0;gap:16px"><div class="spinner"></div><p class="muted">Проводимо оплату…</p></div>`, '');
+  const methods = [['apple','Apple Pay','Pay'],['google','Google Pay','G Pay'],['card','Картка •• 4242','VISA']];
+  return sheetWrap('Оплата', `<div class="stack">
+      <div class="card"><div class="sum"><span>${esc(p.label)}</span><span>${p.amount} ₴</span>
+        ${p.kind==='sub'?`<span class="muted">Пробні 7 днів</span><span class="muted">0 ₴</span><span class="tot">Сьогодні до сплати</span><span class="tot">0 ₴</span>`:`<span class="tot">Разом</span><span class="tot">${p.amount} ₴</span>${p.kind==='consult'?`<span class="muted small">Бабуся отримає</span><span class="muted small">${Math.round(p.amount*GRANNY_SHARE)} ₴</span>`:''}`}</div></div>
+      ${p.kind==='sub'?`<p class="small muted">Після пробного періоду: ${p.amount} ₴ ${p.plan==='year'?'на рік':'на місяць'}, автоматично. Нагадаю за 2 дні до списання.</p>`:''}
+      <div class="lbl">Спосіб оплати</div>
+      <div class="stack" style="gap:8px">${methods.map(([k,l,ic])=>`<button class="pm ${UI.method===k?'on':''}" data-act="pickMethod" data-v="${k}"><span class="ico">${ic}</span>${l}</button>`).join('')}</div>
+    </div>`,
+    `<button class="btn block" data-act="pay">${p.kind==='sub'?'Підтвердити':'Оплатити '+p.amount+' ₴'}</button><p class="demo-note" style="margin-top:8px">Демо-режим: це імітація, гроші не списуються.</p>`);
+}
+function shChat(){
+  const turns = S.chat.turns;
+  const sugg = ['Ми посварилися через дрібницю. Як помиритися?', 'Що подарувати без приводу, щоб влучити?', `Як підтримати, коли в ${S.partner.pron==='he'?'нього':'неї'} важкий період?`, 'Як не забувати про романтику в буденності?'];
+  const left = chatLeft();
+  const body = `<div class="msgs">
+    <div class="msg-row">${avatar(32)}<div class="msg gr">Сідай поруч, ${VOC()}. Розказуй, що на серці. Я вислухаю й підкажу, як зробити тепліше.</div></div>
+    ${turns.map(t=> t.role==='user' ? `<div class="msg me">${esc(t.content)}</div>` : `<div class="msg-row">${avatar(32)}<div class="msg gr" ${t.pending?'id="pending-msg"':''}>${t.pending && !t.content ? '<span class="muted">Бабуся пише…</span>' : esc(t.content)}</div></div>`).join('')}
+    ${!turns.length?`<div class="stack" style="gap:8px;margin-top:6px"><div class="lbl">Можна почати з цього:</div>${sugg.map(s=>`<button class="chip" style="white-space:normal;text-align:left;justify-content:flex-start" data-act="chatSuggest" data-v="${esc(s)}">${esc(s)}</button>`).join('')}</div>`:''}
+  </div>`;
+  const foot = AI_STATE==='off'
+    ? `<p class="small muted" style="text-align:center">Розмова з бабусею потребує ШІ. ${esc(aiHowTo())}</p>`
+    : `<div class="chat-in"><textarea class="input" id="chatInput" rows="1" placeholder="Напиши бабусі…" aria-label="Повідомлення бабусі"></textarea>
+        ${UI.chatBusy?`<button class="btn soft" data-act="chatStop" aria-label="Зупинити">Стоп</button>`:`<button class="btn" data-act="chatSend" aria-label="Надіслати">${I.send}</button>`}</div>
+       <p class="demo-note" style="margin-top:6px">${left===Infinity?'Безліміт у Бабусиній скрині':`Безкоштовно сьогодні: ${left} з ${CHAT_FREE} запитань`} · відповідає ШІ</p>`;
+  return sheetWrap(`<span class="row" style="gap:10px">${avatar(34)}Бабуся Ганна</span>`, body, foot);
+}
+function shEdit(key){
+  const p = S.partner;
+  let title='', body='';
+  if(key==='basic'){ title='Основне'; body = `<div class="stack">
+      <div class="field"><label for="e-name">Ім’я</label><input class="input" id="e-name" data-bind="partner.name" value="${esc(p.name)}"></div>
+      <div class="field"><span class="lbl">Займенник</span><div class="pick"><button class="${p.pron==='she'?'on':''}" data-act="set" data-v="partner.pron=she">вона</button><button class="${p.pron==='he'?'on':''}" data-act="set" data-v="partner.pron=he">він</button></div></div>
+      <div class="field"><label for="e-city">Місто</label><input class="input" id="e-city" data-bind="partner.city" value="${esc(p.city)}"></div></div>`; }
+  else if(key==='interests'){ title='Інтереси'; body = interestsPicker(); }
+  else if(key==='fav'){ title='Улюблене'; body = `<div class="stack">${favField('food','Страва','сирники')}${favField('flowers','Квіти','півонії')}${favField('drink','Напій','какао')}${favField('sweets','Солодке','еклери')}${favField('color','Колір','м’ятний')}${favField('music','Музика','джаз')}${favField('films','Фільми й серіали','«Амелі»')}${favField('books','Книги й автори','Ремарк')}</div>`; }
+  else if(key==='habits'){ title='Звички й деталі'; body = `<div class="stack">
+      <p class="small muted">Дрібниці, які бабуся врахує: що дратує, що тішить, ритуали, розмір одягу.</p>
+      <div class="list">${p.habits.map((h,i)=>`<div class="li"><div class="grow">${esc(h)}</div><button class="icon-btn" style="width:34px;height:34px" data-act="delHabit" data-v="${i}" aria-label="Видалити">${I.trash}</button></div>`).join('')}</div>
+      <div class="row"><input class="input" id="newHabit" placeholder="Наприклад, п’є каву тільки зранку" style="flex:1"><button class="btn soft" data-act="addHabit" aria-label="Додати">${I.plus}</button></div></div>`; }
+  else if(key==='love'){ title='Мова любові'; body = `<div class="ll">${LOVE.map(l=>`<button class="${p.love===l.id?'on':''}" data-act="set" data-v="partner.love=${l.id}"><div><b>${l.t}</b><span>${l.d}</span></div></button>`).join('')}</div>`; }
+  else if(key==='dislikes'){ title='Не любить і алергії'; body = `<div class="field"><label for="e-dis">Що не дарувати й чого уникати</label><textarea class="input" id="e-dis" data-bind="partner.dislikes">${esc(p.dislikes)}</textarea></div>`; }
+  else if(key==='me'){ title='Про тебе'; body = `<div class="stack"><div class="field"><label for="e-uname">Твоє ім’я</label><input class="input" id="e-uname" data-bind="user.name" value="${esc(S.user.name)}"></div>
+      <div class="field"><label for="e-uage">Вік</label><input class="input" id="e-uage" type="number" min="16" max="100" inputmode="numeric" data-bind="user.age" value="${esc(S.user.age||'')}" style="max-width:200px"><span class="small muted">За віком модель підбирає теми й бабусь.</span></div>
+      <div class="field"><span class="lbl">Як бабусі до тебе звертатися?</span><div class="pick"><button class="${S.user.kind==='f'?'on':''}" data-act="set" data-v="user.kind=f">онученько</button><button class="${S.user.kind==='m'?'on':''}" data-act="set" data-v="user.kind=m">онучку</button></div></div></div>`; }
+  return sheetWrap(title, body, `<button class="btn block" data-act="closeSheet">Готово</button>`);
+}
+function shAddDate(){
+  return sheetWrap('Нова дата', `<div class="stack">
+    <div class="field"><span class="lbl">Що за подія?</span><div class="chips">${Object.entries(DATE_TYPES).map(([k,l])=>`<button class="chip ${UI.newType===k?'on':''}" data-act="newType" data-v="${k}">${l}</button>`).join('')}</div></div>
+    <div class="field"><label for="nd-title">Назва</label><input class="input" id="nd-title" value="${esc(UI.newTitle||'')}" data-ui="newTitle" placeholder="Наприклад, День народження мами Олени"></div>
+    <div class="field"><label for="nd-date">Дата</label><input class="input" type="date" id="nd-date" data-ui="newDate" value="${esc(UI.newDate||'')}"></div>
+    <p class="small muted">Рік потрібен, щоб бабуся рахувала «скільки років разом».</p></div>`,
+    `<button class="btn block" data-act="saveDate">Зберегти дату</button>`);
+}
+
+const SHEETS = { granny:shGranny, ask:shAsk, consult:shConsult, record:shRecord, join:shJoin, advice:shAdvice, sub:shSub, donate:shDonate, pay:shPay, chat:shChat, edit:shEdit, addDate:shAddDate };
+function openSheet(name, arg){ UI.sheet=name; UI.arg=arg; syncLock(); const sh=$('#sheet'); sh.className='sheet'+(name==='chat'?' tall':''); renderSheet(); requestAnimationFrame(()=>{ sh.classList.add('on'); $('#scrim').classList.add('on'); }); if(name==='chat') setTimeout(scrollChat, 320); }
+function renderSheet(){ if(!UI.sheet) return; const sh=$('#sheet'); const b=sh.querySelector('.sheet-b'); const st=b?b.scrollTop:0; sh.innerHTML = SHEETS[UI.sheet](UI.arg); const nb=sh.querySelector('.sheet-b'); if(nb) nb.scrollTop=st; }
+function closeSheet(){ if(UI.sheet==='chat' && UI.chatCtl) UI.chatCtl.abort(); stopPlay(); if(UI.rec){ if(UI.rec.mr && UI.rec.mr.state!=='inactive'){ try{ UI.rec.mr.onstop=null; UI.rec.mr.stop(); }catch(e){} } recCleanup(); } $('#sheet').classList.remove('on'); $('#scrim').classList.remove('on'); const was=UI.sheet; UI.sheet=null; UI.payDone=false; UI.paying=false; render(); if(was) setTimeout(()=>{ if(!UI.sheet) $('#sheet').innerHTML=''; }, 320); }
+
+// ---------- Push, toast, системний діалог ----------
+let pushT=null;
+function showPush(t, b, go){
+  const el = $('#push'); el.innerHTML = `${avatar(38)}<span class="grow"><span class="app-n"><span>ПОРАДИ БАБУСІ</span><span>зараз</span></span><span class="pt">${esc(t)}</span><br><span class="pb">${esc(b)}</span></span>`;
+  el.dataset.go = go||''; el.classList.add('on'); clearTimeout(pushT); pushT = setTimeout(()=>el.classList.remove('on'), 6000);
+}
+let pushIdx=0;
+function testPush(){
+  const a=todayAdvice(), ev=events()[0], idea=currentIdeas().dates[0];
+  const list = [
+    ['Порада дня: '+a.t, a.k, 'today'],
+    ev ? [ev.title+' '+whenTxt(ev.days), 'Я вже підібрала кілька ідей. Заглянь, поки є час.', 'ideas:'+ev.id] : null,
+    idea ? ['Ідея на вихідні', idea.title+'. '+(idea.why||''), 'ideas'] : null,
+  ].filter(Boolean);
+  const x = list[pushIdx++ % list.length]; showPush(x[0], x[1], x[2]);
+}
+let toastT=null;
+function toast(t){ const el=$('#toast'); el.textContent=t; el.classList.add('on'); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove('on'), 2600); }
+function askNotif(after){
+  const el=$('#sysalert'); el.hidden=false;
+  el.innerHTML = `<div class="box" role="alertdialog" aria-label="Дозвіл на сповіщення"><div class="tx"><b>«Поради бабусі» хоче надсилати вам сповіщення</b><span class="small">Поради, нагадування про дати й ідеї. Налаштувати можна будь-коли.</span></div>
+    <div class="bt"><button data-act="notifAns" data-v="no">Не дозволяти</button><button data-act="notifAns" data-v="yes">Дозволити</button></div></div>`;
+  UI.afterNotif = after;
+}
+
+// ---------- Головний рендер ----------
+function syncLock(){ document.documentElement.classList.toggle('lock', !S.onboarded || !!UI.sheet); }
+function render(){
+  const onb = $('#onb');
+  if(!S.onboarded){
+    const ob = onb.querySelector('.onb-b'); const keep = ob && UI.obShown===S.obStep ? ob.scrollTop : 0;
+    onb.hidden=false; onb.innerHTML = `<div class="onb-inner">${vOnb()}</div>`; UI.obShown=S.obStep;
+    const nb = onb.querySelector('.onb-b'); if(nb) nb.scrollTop = keep;
+  } else { onb.hidden=true; onb.innerHTML=''; UI.obShown=null; }
+  syncLock();
+  renderTabs(); renderSidebar();
+  const y = window.scrollY;
+  $('#view').innerHTML = ({today:vToday, advice:vAdvice, grannies:vGrannies, ideas:vIdeas, dates:vDates, profile:vProfile}[S.tab]||vToday)();
+  window.scrollTo(0, y);
+  mountChart();
+}
+function renderSidebar(){
+  const sb = $('#sidebar'); if(getComputedStyle(sb).display==='none'){ sb.innerHTML=''; return; }
+  sb.innerHTML = `<div class="brand">${avatar(46)}<div><b>Поради бабусі</b><span class="small muted">від бабусі Ганни</span></div></div>
+    <nav class="snav" aria-label="Розділи">${TABS.map(([id,l,ic])=>`<button class="${S.tab===id?'on':''}" data-act="tab" data-v="${id}" ${S.tab===id?'aria-current="page"':''}>${ic}${l}</button>`).join('')}</nav>
+    <button class="btn soft block" data-act="openChat">${I.chat}Спитати бабусю</button>
+    ${isPro()?`<div class="mini-pro"><span class="tag pro" style="align-self:flex-start">скриня відкрита</span><span class="small">Усі поради, безліміт ідей і розмов з бабусею.</span></div>`
+      :`<div class="mini-pro"><b>Бабусина скриня</b><span class="small">Усі ${ADVICE.length} порад, безліміт ідей від ШІ й розмови з бабусею. 7 днів безкоштовно.</span><button class="btn sm" data-act="openSub">Відкрити скриню</button></div>`}
+    <div class="spacer"></div>
+    <details id="testerBox" ${UI.testerOpen?'open':''}><summary>Для тестувальників</summary><div class="tester">
+      <div class="chips">${[['onb','Онбординг'],['sub','Підписка'],['donate','Донат'],['push','Сповіщення']].map(([k,l])=>`<button class="chip" data-act="${k==='onb'?'jump':k==='sub'?'openSub':k==='donate'?'openDonate':'testPush'}" data-v="${k}">${l}</button>`).join('')}</div>
+      <b>Сценарій тесту</b><ol><li>Пройти онбординг</li><li>Виконати завдання дня</li><li>Підібрати ідеї з ШІ</li><li>Додати дату й ідеї до неї</li><li>Оформити підписку (демо)</li><li>Пригостити бабусю (демо)</li></ol>
+      <b>Що імітовано</b><ul><li>Оплата й донати: гроші не списуються</li><li>Сповіщення: банер у кутку екрана</li><li>Дані лише в цьому браузері</li><li>Пошук: ${SEARCH_MODE==='claude'?'Claude з вебпошуком':SEARCH_MODE==='ollama'?'вебпошук Ollama':'посилання на магазини'}</li><li>ШІ зараз: ${AI_SOURCE==='claude'?'Claude у браузері':AI_SOURCE==='local'?'локальний сервер'+(AI_MODEL?' ('+esc(AI_MODEL)+')':''):AI_STATE==='checking'?'перевіряю…':'вимкнено'}</li></ul>
+      <div class="row wrap" style="gap:6px"><button class="btn sm soft" data-act="fillExample">Заповнити прикладом</button><button class="btn sm soft" data-act="togglePro">${isPro()?'Вимкнути скриню':'Увімкнути скриню'}</button><button class="btn sm soft" data-act="resetAll">Стерти все</button></div>
+    </div></details>`;
+}
+
+// ---------- Дії ----------
+function setPath(path, val){ const ks=path.split('.'); let o=S; for(let i=0;i<ks.length-1;i++) o=o[ks[i]]; o[ks[ks.length-1]]=val; save(); }
+function example(){
+  const t = today(), y = t.getFullYear();
+  const md = (days) => { const d=new Date(t.getFullYear(), t.getMonth(), t.getDate()+days); return [String(d.getMonth()+1).padStart(2,'0'), String(d.getDate()).padStart(2,'0')].join('-'); };
+  S.user = {name:'Андрій', kind:'m', age:'29'}; S.topicPick=null;
+  S.partner = {name:'Олена', pron:'she', city:'Київ', interests:['Книги','Кава','Природа','Кулінарія','Фотографія'],
+    fav:{food:'сирники з родзинками', flowers:'півонії', drink:'флет вайт на вівсяному', sweets:'чорний шоколад', color:'м’ятний', music:'Океан Ельзи, джаз', films:'«Амелі», «Гордість і упередження»', books:'Ремарк, сучасна українська проза'},
+    dates:[{id:uid(), type:'bday', title:'День народження Олени', date:(y-29)+'-'+md(12)}, {id:uid(), type:'anniv', title:'Річниця знайомства', date:(y-4)+'-'+md(47)}, {id:uid(), type:'other', title:'День народження мами Олени', date:(y-56)+'-'+md(83)}],
+    habits:['п’є каву тільки зранку','завжди мерзне — бере плед','по неділях телефонує мамі','не любить гучних вечірок'], love:'time', dislikes:'лілії (алергія), гучна музика'};
+  S.onboarded = true; S.notif.allowed = true; S.ideas = null; UI.focus=null; save();
+}
+const ACTIONS = {
+  ...GRANNY_ACTIONS,
+  ...SEARCH_ACTIONS,
+  tab(v){ S.tab=v; save(); render(); window.scrollTo(0,0); },
+  jump(v){ closeSheetQuiet(); if(v==='onb'){ S.onboarded=false; S.obStep=0; } else { if(!S.onboarded){ if(!S.partner.name) example(); S.onboarded=true; } S.tab=v; } save(); render(); window.scrollTo(0,0); },
+  set(v){ const [p,val]=v.split('='); setPath(p,val); if(p==='partner.pron'||p==='user.kind'||p==='partner.love'){ S.ideas = S.ideas&&S.ideas.src==='ai'?S.ideas:null; } rerender(); },
+  toggleInterest(v){ const a=S.partner.interests; const i=a.indexOf(v); i>=0?a.splice(i,1):a.push(v); save(); rerender(); },
+  addInterest(){ const el=$('#customInterest'); const v=(el&&el.value||'').trim(); if(!v) return; if(!S.partner.interests.includes(v)) S.partner.interests.push(v); save(); rerender(); },
+  obNext(v){
+    if(S.obStep===7 && !S.notif.allowed && v!=='skip'){ askNotif(()=>{ S.obStep++; save(); render(); }); return; }
+    if(S.obStep>=OB_STEPS-1){ S.onboarded=true; S.tab='today'; save(); render(); window.scrollTo(0,0); setTimeout(()=>{ if(!UI.pushed){ UI.pushed=true; const ev=events()[0]; if(ev && ev.own) showPush(ev.title+' '+whenTxt(ev.days), 'Я вже маю кілька ідей. Заглянь, поки є час.', 'ideas:'+ev.id); else testPush(); } }, 3500); return; }
+    S.obStep++; save(); render();
+  },
+  obBack(){ S.obStep=Math.max(0,S.obStep-1); save(); render(); },
+  fillExample(){ example(); S.tab='today'; render(); toast('Профіль заповнено прикладом: Олена з Києва'); },
+  restartOnb(){ S.onboarded=false; S.obStep=0; save(); render(); },
+  resetAll(){ if(UI.confirmReset){ UI.confirmReset=false; S=freshState(); UI.focus=null; save(); closeSheetQuiet(); render(); toast('Усе стерто. Починаємо спочатку.'); } else { UI.confirmReset=true; toast('Натисни «Стерти все» ще раз, щоб підтвердити'); setTimeout(()=>UI.confirmReset=false, 4000); } },
+  togglePro(){ if(isPro()){ S.premium=null; } else { S.premium='year'; S.premiumSince=Date.now(); } save(); render(); renderSheet(); toast(isPro()?'Бабусина скриня увімкнена (тест)':'Скриню вимкнено (тест)'); },
+  taskDone(v){ if(S.tasksDone[TODAY]===+v){ delete S.tasksDone[TODAY]; } else { S.tasksDone[TODAY]=+v; toast(fillVoc(PRAISE[Math.floor(Math.random()*PRAISE.length)])); } save(); render(); },
+  saveAdvice(v){ const i=S.savedAdvice.indexOf(+v); if(i>=0){ S.savedAdvice.splice(i,1); toast('Прибрано зі збережених'); } else { S.savedAdvice.push(+v); toast('Збережено в зошит'); } save(); render(); renderSheet(); },
+  share(v){ const a=ADVICE[+v]; const txt=`${a.t}\n${fillVoc(a.x)}\n— Бабуся Ганна, «Поради бабусі»`;
+    try{ navigator.clipboard.writeText(txt).then(()=>toast('Пораду скопійовано'), ()=>toast('Не вдалося скопіювати')); }catch(e){ toast('Не вдалося скопіювати'); } },
+  adviceCat(v){ UI.adviceCat=v; render(); },
+  openAdvice(v){ openSheet('advice', v); render(); },
+  openSub(){ openSheet('sub', {}); },
+  openDonate(){ UI.treat=1; UI.custom=''; openSheet('donate'); },
+  openChat(){ openSheet('chat'); },
+  pickPlan(v){ UI.plan=v; renderSheet(); },
+  pickTreat(v){ UI.treat=+v; renderSheet(); },
+  pickMethod(v){ UI.method=v; renderSheet(); },
+  goPay(v){
+    if(v==='sub'){ const pl=PLANS[UI.plan]; UI.pay={kind:'sub', plan:UI.plan, amount:pl.price, label:'Бабусина скриня · '+pl.t.toLowerCase()}; }
+    else if(v==='consult'){ const g=grannyById(UI.arg); const f=UI.cFormat||'video';
+      if(!UI.cDate){ toast('Обери день'); return; } if(f!=='chat' && !UI.cTime){ toast('Обери час'); return; }
+      const fm=C_FORMATS.find(x=>x.id===f), d=nextDays(7).find(x=>x.iso===UI.cDate), price=cPrice(g,f);
+      UI.pay={kind:'consult', amount:price, label:fm.t+' · '+g.short, booking:{grannyId:g.id, format:f, formatLabel:fm.t, date:UI.cDate, dateLabel:d?d.label:UI.cDate, time:f==='chat'?'з цього дня':UI.cTime, price, note:(UI.cNote||'').trim()}}; }
+    else { const tr=TREATS[UI.treat]; const a=tr.a||(+UI.custom||0); if(a<10) return; UI.pay={kind:'donate', amount:a, label:tr.a?tr.t:'Частування від серця'}; }
+    UI.payDone=false; UI.paying=false; UI.sheet='pay'; renderSheet();
+  },
+  pay(){ UI.paying=true; renderSheet(); setTimeout(()=>{ const p=UI.pay; if(p.kind==='sub'){ S.premium=p.plan; S.premiumSince=Date.now(); } else if(p.kind==='consult'){ S.bookings.unshift({...p.booking, id:uid(), at:Date.now()}); } else { S.donations.push({a:p.amount, at:Date.now()}); } save(); UI.paying=false; UI.payDone=true; renderSheet(); render(); }, 1400); },
+  cancelSub(){ S.premium=null; save(); closeSheet(); toast('Підписку скасовано. Бабуся не ображається.'); },
+  closeSheet(){ closeSheet(); },
+  runAI(){ runAI(); },
+  stopAI(){ if(UI.ctl) UI.ctl.abort(); },
+  moreIdeas(){ const k=UI.ideasTab;
+    if(AI_STATE==='ready'){ if(aiLeft()<=0){ openSheet('sub',{reason:'ai'}); return; } runAI(k); return; }
+    const cur = (currentIdeas()[k]||[]).map(x=>x.title); const r = freshRules(k, cur);
+    S.ideas[k] = r.items; save(); render();
+    toast(r.exhausted ? 'Нових ідей за профілем поки немає. Додай більше інтересів у профілі.' : 'Ось нові ідеї'); },
+  ideasTab(v){ UI.ideasTab=v; render(); },
+  toggleSaved(){ UI.showSaved=!UI.showSaved; render(); },
+  saveIdea(v, el){ const i=S.savedIdeas.findIndex(s=>s.id===v); if(i>=0){ S.savedIdeas.splice(i,1); toast('Прибрано зі збережених'); } else { const k=el.dataset.k; const all=[...(currentIdeas()[k]||[])]; const it=all.find(x=>hash(k+x.title)===v); if(it){ S.savedIdeas.push({...it, id:v, kind:k}); toast('Ідею відкладено на потім'); } } save(); render(); },
+  doneIdea(v, el){ const i=S.doneIdeas.findIndex(d=>d.id===v);
+    if(i>=0) S.doneIdeas.splice(i,1);
+    else { const k=el.dataset.k; const it=[...(currentIdeas()[k]||[]), ...S.savedIdeas].find(x=>hash(k+x.title)===v) || {};
+      S.doneIdeas.push({id:v, kind:k, title:it.title||'', why:it.why||'', meta:it.meta||'', at:Date.now()}); toast(fillVoc(PRAISE[Math.floor(Math.random()*PRAISE.length)])); }
+    save(); render(); },
+  focusEvent(v){ const e=events().find(x=>String(x.id)===String(v)); if(e){ UI.focus=e; UI.ideasTab = e.type==='anniv'?'dates':'gifts'; if(!(S.ideas&&S.ideas.src==='ai')) S.ideas=null; } S.tab='ideas'; UI.showSaved=false; save(); render(); window.scrollTo(0,0); },
+  clearFocus(){ UI.focus=null; if(!(S.ideas&&S.ideas.src==='ai')) S.ideas=null; render(); },
+  chatSend(){ const el=$('#chatInput'); const t=el?el.value:''; if(el) el.value=''; sendChat(t); },
+  chatSuggest(v){ sendChat(v); },
+  chatStop(){ if(UI.chatCtl) UI.chatCtl.abort(); },
+  edit(v){ openSheet('edit', v); },
+  openAddDate(){ UI.newType='bday'; UI.newTitle=''; UI.newDate=''; openSheet('addDate'); },
+  newType(v){ UI.newType=v; if(!UI.newTitle || Object.values(DATE_TYPES).some(x=>UI.newTitle.startsWith(x))) UI.newTitle = DATE_TYPES[v]==='Інша подія' ? '' : DATE_TYPES[v]; renderSheet(); },
+  saveDate(){ const t=(UI.newTitle||'').trim()||DATE_TYPES[UI.newType||'other'], d=UI.newDate; if(!d){ toast('Вкажи дату'); return; } S.partner.dates.push({id:uid(), type:UI.newType||'other', title:t, date:d}); save(); closeSheet(); toast('Дату додано. Бабуся нагадає.'); },
+  delDate(v){ S.partner.dates=S.partner.dates.filter(d=>d.id!==v); save(); render(); toast('Дату видалено'); },
+  addHabit(){ const el=$('#newHabit'); const v=(el&&el.value||'').trim(); if(!v) return; S.partner.habits.push(v); save(); renderSheet(); render(); },
+  delHabit(v){ S.partner.habits.splice(+v,1); save(); renderSheet(); render(); },
+  toggleNotif(v){ S.notif[v]=!S.notif[v]; if(v!=='holidays' && S.notif[v] && !S.notif.allowed){ askNotif(()=>render()); } save(); render(); },
+  setLead(v){ if(!isPro() && +v>3){ openSheet('sub',{reason:'lead'}); return; } S.notif.lead=+v; save(); render(); },
+  askNotif(){ askNotif(()=>render()); },
+  notifAns(v){ $('#sysalert').hidden=true; S.notif.allowed = v==='yes'; save(); if(v!=='yes') toast('Добре. Увімкнути можна у розділі «Дати».'); const f=UI.afterNotif; UI.afterNotif=null; if(f) f(); else render(); },
+  testPush(){ testPush(); },
+  photoPick(){ $('#photoInput').click(); },
+  photoReset(){ S.photo=''; save(); render(); },
+};
+function closeSheetQuiet(){ stopPlay(); recCleanup(); $('#sheet').classList.remove('on'); $('#scrim').classList.remove('on'); UI.sheet=null; syncLock(); }
+function rerender(){ if(UI.sheet) renderSheet(); render(); }
+
+document.addEventListener('click', e=>{
+  const pushEl = e.target.closest('#push');
+  if(pushEl){ pushEl.classList.remove('on'); const go=pushEl.dataset.go||''; if(!S.onboarded) return; closeSheetQuiet();
+    if(go.startsWith('ideas:')) ACTIONS.focusEvent(go.slice(6)); else if(go) ACTIONS.tab(go); return; }
+  const el = e.target.closest('[data-act]'); if(!el || el.disabled) return;
+  const fn = ACTIONS[el.dataset.act]; if(fn){ e.preventDefault(); fn(el.dataset.v, el, e); }
+});
+document.addEventListener('input', e=>{
+  const t = e.target;
+  if(t.dataset.bind){ setPath(t.dataset.bind, t.value); if(S.ideas && S.ideas.src!=='ai') S.ideas=null; if(t.dataset.bind.startsWith('notif.')) render(); }
+  if(t.dataset.ui){ UI[t.dataset.ui]=t.value; if(t.dataset.ui==='custom'){ const b=$('#donateBtn'); const a=+t.value||0; if(b){ b.disabled=a<10; b.textContent='Пригостити'+(a>=10?' за '+a+' ₴':''); } } }
+  if(t.dataset.join && UI.join){ UI.join[t.dataset.join]=t.value; }
+  if(t.id==='howAge'){ UI.howAge=+t.value; const l=$('#howAgeV'); if(l) l.textContent=t.value+' '+yearsWord(+t.value); mountChart(); }
+  if(t.dataset.bind==='user.age'){ S.topicPick=null; }
+  if(t.dataset.obdate){ const type=t.dataset.obdate; const ps=S.partner; const ex=ps.dates.find(d=>d.type===type);
+    if(t.value){ if(ex) ex.date=t.value; else ps.dates.push({id:uid(), type, title: type==='bday' ? 'День народження'+(ps.name?' · '+ps.name:'') : 'Річниця стосунків', date:t.value}); }
+    else if(ex){ ps.dates=ps.dates.filter(d=>d!==ex); } save(); }
+});
+document.addEventListener('keydown', e=>{
+  if(e.target.id==='chatInput' && e.key==='Enter' && !e.shiftKey){ e.preventDefault(); ACTIONS.chatSend(); }
+  if(e.target.id==='customInterest' && e.key==='Enter'){ e.preventDefault(); ACTIONS.addInterest(); }
+  if(e.target.id==='sq' && e.key==='Enter'){ e.preventDefault(); runSearch(false); }
+  if(e.target.id==='newHabit' && e.key==='Enter'){ e.preventDefault(); ACTIONS.addHabit(); }
+  if(e.key==='Escape' && UI.sheet) closeSheet();
+});
+document.addEventListener('change', e=>{
+  const t=e.target;
+  if(t.id==='asGranny'){ S.asGranny=t.value; save(); render(); }
+  if(t.id==='recFile' && t.files && t.files[0] && UI.rec){ const f=t.files[0]; UI.rec.url=URL.createObjectURL(f); UI.rec.kind=f.type.startsWith('video')?'video':'audio'; UI.rec.state='done'; UI.rec.secs=0; if(!UI.recTitle) UI.recTitle=f.name.replace(/\.[^.]+$/,''); renderSheet(); }
+  if(t.dataset.bind==='user.age' && S.onboarded && S.tab==='grannies') render();
+});
+$('#photoInput').addEventListener('change', e=>{
+  const f = e.target.files && e.target.files[0]; if(!f) return;
+  const r = new FileReader();
+  r.onload = () => { const img = new Image(); img.onload = () => {
+      const s = 320, c = document.createElement('canvas'); c.width = s; c.height = s; const ctx = c.getContext('2d');
+      const m = Math.min(img.width, img.height); ctx.drawImage(img, (img.width-m)/2, (img.height-m)/2, m, m, 0, 0, s, s);
+      try{ S.photo = c.toDataURL('image/jpeg', .85); save(); render(); toast('Фото бабусі оновлено'); }catch(err){ toast('Не вдалося обробити фото'); }
+    }; img.onerror = () => toast('Це не схоже на зображення'); img.src = r.result; };
+  r.readAsDataURL(f); e.target.value='';
+});
+let rsT=null; window.addEventListener('resize', ()=>{ clearTimeout(rsT); rsT=setTimeout(()=>{ renderSidebar(); mountChart(); }, 150); });
+document.addEventListener('toggle', e=>{ if(e.target && e.target.id==='testerBox') UI.testerOpen = e.target.open; }, true);
+
+render();
+</script>
+
+</body>
+</html>
